@@ -6,19 +6,34 @@ A premium personal portfolio website for NSENGIMANA Olivier, built with React, V
 
 ## Deployment (GitHub Pages)
 
-Every push to `main` runs `.github/workflows/deploy.yml`, which installs
-dependencies, runs the unit tests, builds the Vite bundle, and publishes `dist/`
-to GitHub Pages.
+The site is served by GitHub Pages from the **`docs/` folder on `main`**, and
+`docs/` is a committed build artifact. `npm run build` regenerates it.
 
-- **Pages source** must be set to **GitHub Actions** (Settings → Pages → Build
-  and deployment → Source). The workflow cannot publish while the source is set
-  to "Deploy from a branch".
-- **Custom domain**: `public/CNAME` holds `nsolivier.me`, so the domain survives
-  every rebuild. Vite copies `public/` verbatim into `dist/`, which is what gets
-  published — editing the domain in the GitHub UI alone would be undone by the
-  next deploy, so change it in `public/CNAME` instead.
-- **Deep links**: the workflow copies `dist/index.html` to `dist/404.html` so
+```bash
+npm run build     # rebuilds docs/ (and docs/404.html via postbuild)
+git add docs && git commit -m "Rebuild site" && git push
+```
+
+Pages picks up the new commit and republishes within a minute or so.
+
+- **Pages source**: Settings → Pages → Build and deployment → *Deploy from a
+  branch*, branch `main`, folder `/docs`.
+- **Why the build is committed**: GitHub Actions does not currently run on this
+  account — every workflow run across this repo and `Portifolio` fails at
+  startup without reaching a runner, billing zero minutes. A CI-built deploy
+  would never publish, so the build output is committed instead. If Actions
+  starts working, this can be swapped back for a workflow that builds and
+  deploys on each push.
+- **Custom domain**: `public/CNAME` holds `nsolivier.me`. Vite copies `public/`
+  verbatim into the output, so the domain is reproduced on every build. Change
+  it there, not in the GitHub UI, or the next build will drop it.
+- **`.nojekyll`**: `public/.nojekyll` stops Pages from running the output
+  through Jekyll.
+- **Deep links**: the `postbuild` script copies `index.html` to `404.html`, so
   unknown paths still render the app (Pages has no redirect rules).
+
+> Rebuild before committing content changes — editing `src/` alone changes
+> nothing on the live site until `docs/` is regenerated.
 
 ## Overview
 
@@ -124,7 +139,11 @@ message is delivered.
 
 - **Unit tests** (Vitest): `npm test` — covers the chatbot responses, terminal
   command processor, and portfolio data integrity.
-- **CI** (`.github/workflows/ci.yml`): every push/PR runs install → test → build.
+- **CI** (`.github/workflows/ci.yml`): declares install → test → build on every
+  push/PR. Kept from the source repo, but note that Actions is not currently
+  running on this account (see [Deployment](#deployment-github-pages)), so this
+  workflow fails at startup rather than executing. Run `npm test` locally
+  instead until that is resolved.
 
 ## Getting Started
 
@@ -145,7 +164,7 @@ Open the local URL printed in the terminal (typically `http://localhost:5173`).
 ## Available Scripts
 
 - `npm run dev`: Start local development server
-- `npm run build`: Create production build in `dist/`
+- `npm run build`: Rebuild the published site into `docs/` (commit it to deploy)
 - `npm run preview`: Preview production build locally
 
 ## Project Structure
@@ -173,9 +192,9 @@ portfolio_N/
 npm run build
 ```
 
-The generated static files will be in `dist/`. On this repo that build runs in
-CI and publishes to GitHub Pages automatically — see
-[Deployment](#deployment-github-pages) above.
+The generated static files land in `docs/`, which is committed and served
+directly by GitHub Pages — see [Deployment](#deployment-github-pages) above for
+the rebuild-and-push flow.
 
 ## License
 

@@ -1,0 +1,17 @@
+{
+  "name": "NSENGIMANA Olivier | Portfolio",
+  "short_name": "Olivier",
+  "description": "Software Engineer and Intelligent Systems Builder based in Kigali, Rwanda.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
