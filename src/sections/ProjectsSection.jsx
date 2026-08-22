@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FiCpu, FiGithub, FiGlobe, FiArrowUpRight } from 'react-icons/fi'
@@ -6,7 +6,7 @@ import { HiXMark } from 'react-icons/hi2'
 import SectionReveal from '../components/SectionReveal'
 import SectionHeader from '../components/SectionHeader'
 import TiltCard from '../components/TiltCard'
-import { projects } from '../assets/data'
+import { projectPath, routedProjects } from '../lib/projectRoutes'
 
 function SpotlightCard({ children, className }) {
   const cardRef = useRef(null)
@@ -44,10 +44,38 @@ function SpotlightCard({ children, className }) {
   )
 }
 
-export default function ProjectsSection({ navLabels, language, sectionText }) {
-  const [activeProject, setActiveProject] = useState(null)
+export default function ProjectsSection({
+  navLabels,
+  language,
+  sectionText,
+  activeProject,
+  onOpenProject,
+  onCloseProject,
+}) {
   const text = sectionText.projects
   const categoryIcon = (category) => (category === 'AI' ? <FiCpu size={13} /> : <FiGlobe size={13} />)
+
+  /* Escape closes the case study, and the page behind it should not scroll. */
+  useEffect(() => {
+    if (!activeProject) return
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') onCloseProject()
+    }
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [activeProject, onCloseProject])
+
+  /* Plain left-clicks open the modal; modified clicks keep native link behaviour. */
+  const handleCaseStudyClick = (event, project) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return
+    event.preventDefault()
+    onOpenProject(project)
+  }
 
   return (
     <>
@@ -58,7 +86,7 @@ export default function ProjectsSection({ navLabels, language, sectionText }) {
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => (
+          {routedProjects.map((project, index) => (
             <motion.article
               key={project.name}
               initial={{ opacity: 0, y: 28 }}
@@ -135,14 +163,16 @@ export default function ProjectsSection({ navLabels, language, sectionText }) {
                     ))}
                   </div>
 
-                  {/* Case study button */}
-                  <button
-                    onClick={() => setActiveProject(project)}
+                  {/* Case study link — a real URL so it can be crawled and shared */}
+                  <a
+                    href={projectPath(project)}
+                    onClick={(event) => handleCaseStudyClick(event, project)}
+                    aria-label={`${text.viewCaseStudy}: ${project.name}`}
                     className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--border)] py-2.5 text-xs font-semibold text-[var(--text-muted)] transition hover:border-[var(--accent)] hover:bg-[color:color-mix(in_srgb,var(--accent)_8%,transparent)] hover:text-[var(--text)]"
                   >
                     {text.viewCaseStudy}
                     <FiArrowUpRight size={13} />
-                  </button>
+                  </a>
 
                   {/* Bottom glow line on hover */}
                   <div
@@ -168,7 +198,10 @@ export default function ProjectsSection({ navLabels, language, sectionText }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-[90] flex items-start justify-center bg-black/75 p-2 pt-3 backdrop-blur-sm sm:p-4 sm:pt-6"
-            onClick={() => setActiveProject(null)}
+            onClick={onCloseProject}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="case-study-title"
           >
             <motion.article
               initial={{ opacity: 0, y: 24, scale: 0.97 }}
@@ -180,13 +213,13 @@ export default function ProjectsSection({ navLabels, language, sectionText }) {
             >
               <div className="mb-6 flex items-start justify-between gap-3">
                 <div>
-                  <h3 className="text-2xl font-bold">{activeProject.name}</h3>
+                  <h2 id="case-study-title" className="text-2xl font-bold">{activeProject.name}</h2>
                   <p className="mt-2 text-sm text-[var(--text-muted)]">
                     {activeProject.description[language]}
                   </p>
                 </div>
                 <button
-                  onClick={() => setActiveProject(null)}
+                  onClick={onCloseProject}
                   aria-label="Close case study"
                   className="rounded-full border border-[var(--border)] p-2 text-lg transition hover:border-[var(--accent)]"
                 >
@@ -239,7 +272,7 @@ export default function ProjectsSection({ navLabels, language, sectionText }) {
                   {text.github}
                 </a>
                 <button
-                  onClick={() => setActiveProject(null)}
+                  onClick={onCloseProject}
                   className="rounded-full border border-[var(--border)] px-5 py-2.5 text-sm transition hover:border-[var(--accent)]"
                 >
                   {text.close}

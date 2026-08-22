@@ -1,4 +1,23 @@
+# https://nsolivier.me/robots.txt
+# NSENGIMANA Olivier — personal portfolio
+
 User-agent: *
+Allow: /
+
+# Let AI assistants read and cite the site (remove any you object to)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://nsolivier.me/sitemap.xml

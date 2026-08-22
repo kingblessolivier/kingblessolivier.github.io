@@ -923,7 +923,7 @@ export const portfolioData = {
         KINY: 'Igihe cy Impamyabushobozi ya I Star Hackathon',
         FR: 'Moment du Certificat Hackathon I Star',
       },
-      image: '/Olivier_istar_hackton_cerificate.jpeg',
+      image: '/Olivier_istar_hackton_cerificate.webp',
       category: 'Hackathons',
     },
     {
@@ -932,7 +932,7 @@ export const portfolioData = {
         KINY: 'Igihe cyo Gukora Code hamwe n Itsinda',
         FR: 'Session de Codage en Equipe',
       },
-      image: '/coding_session.jpeg',
+      image: '/coding_session.webp',
       category: 'Projects',
     },
     {
@@ -941,7 +941,7 @@ export const portfolioData = {
         KINY: 'Ifoto yo mu Birori bya Portfolio',
         FR: 'Photo lors d un Evenement Portfolio',
       },
-      image: '/olivier_image.jpeg',
+      image: '/olivier_image.webp',
       category: 'Events',
     },
   ],

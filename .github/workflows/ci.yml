@@ -25,5 +25,10 @@ jobs:
       - name: Run unit tests
         run: npm test
 
+      # `npm run build` prerenders every route in a headless browser, so the
+      # build needs Chromium available.
+      - name: Install Chromium for prerendering
+        run: npx playwright install --with-deps chromium
+
       - name: Build production bundle
         run: npm run build

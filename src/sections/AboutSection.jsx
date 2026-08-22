@@ -110,7 +110,7 @@ export default function AboutSection({ language, navLabels, sectionText }) {
                   style={{ border: '1px solid color-mix(in srgb,var(--accent) 30%,var(--border))' }}
                 >
                   <img
-                    src="/olivier_avatar.jpeg"
+                    src="/olivier_avatar.webp"
                     alt="NSENGIMANA Olivier"
                     className="h-full w-full object-cover"
                     loading="lazy"
