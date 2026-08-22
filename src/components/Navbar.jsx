@@ -121,7 +121,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                 }}
               >
                 <img
-                  src="/olivier_avatar.jpeg"
+                  src="/olivier_avatar.webp"
                   alt="NSENGIMANA Olivier"
                   className="h-full w-full object-cover"
                   loading="eager"
@@ -313,7 +313,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                       }}
                     >
                       <img
-                        src="/olivier_avatar.jpeg"
+                        src="/olivier_avatar.webp"
                         alt="NSENGIMANA Olivier"
                         className="h-full w-full object-cover"
                         loading="lazy"

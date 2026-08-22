@@ -52,7 +52,7 @@ function StatItem({ target, label, suffix = '+', delay = 0 }) {
 
 /* ── Main component ─────────────────────────────────── */
 export default function HeroSection({ labels }) {
-  const heroPhoto = '/olivier_hero.jpeg'
+  const heroPhoto = '/olivier_hero.webp'
   const [typedRole, setTypedRole] = useState('')
 
   useEffect(() => {
@@ -124,10 +124,13 @@ export default function HeroSection({ labels }) {
           >
             <span className="block text-[clamp(2.1rem,8.5vw,6.5rem)] text-[var(--text)]">
               NSENGIMANA
-            </span>
+            </span>{' '}
             <span className="block text-[clamp(2.1rem,8.5vw,6.5rem)] gradient-text">
               Olivier
             </span>
+            {/* Keeps the page's single h1 readable as one descriptive line for
+                crawlers and screen readers, without changing the visual design. */}
+            <span className="sr-only"> — Software Engineer in Kigali, Rwanda</span>
           </motion.h1>
 
           {/* Animated role */}

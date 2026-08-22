@@ -5,14 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "postbuild": "node -e \"require('fs').copyFileSync('docs/index.html','docs/404.html')\"",
+    "build": "vite build && node prerender.mjs docs",
     "preview": "vite preview",
     "test": "vitest run"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.2",
     "@vitejs/plugin-react": "^4.7.0",
+    "playwright": "^1.62.1",
+    "sirv": "^3.0.2",
     "tailwindcss": "^4.2.2",
     "vite": "^6.4.2",
     "vitest": "^3.0.0"

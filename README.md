@@ -10,7 +10,7 @@ The site is served by GitHub Pages from the **`docs/` folder on `main`**, and
 `docs/` is a committed build artifact. `npm run build` regenerates it.
 
 ```bash
-npm run build     # rebuilds docs/ (and docs/404.html via postbuild)
+npm run build     # rebuilds docs/, including a prerendered file per route
 git add docs && git commit -m "Rebuild site" && git push
 ```
 
@@ -29,8 +29,16 @@ Pages picks up the new commit and republishes within a minute or so.
   it there, not in the GitHub UI, or the next build will drop it.
 - **`.nojekyll`**: `public/.nojekyll` stops Pages from running the output
   through Jekyll.
-- **Deep links**: the `postbuild` script copies `index.html` to `404.html`, so
-  unknown paths still render the app (Pages has no redirect rules).
+- **Deep links**: every route is prerendered to its own file
+  (`docs/projects/<slug>/index.html`), so Pages serves real pages instead of
+  rewriting unknown paths to the app. `public/404.html` is a genuine not-found
+  page — it used to be a copy of `index.html`, which returned a full page of
+  content under a 404 status and read as a soft 404 to search engines.
+- **Prerendering**: `npm run build` runs `prerender.mjs` after Vite, which loads
+  each route in headless Chromium and writes the rendered HTML back over the
+  output. Without it the site ships as an empty `<div id="root">`, which
+  crawlers that do not run JavaScript (Bing, LinkedIn, Slack, X) see as a blank
+  page. Requires Chromium once: `npx playwright install --with-deps chromium`.
 
 > Rebuild before committing content changes — editing `src/` alone changes
 > nothing on the live site until `docs/` is regenerated.
@@ -60,8 +68,14 @@ This project showcases:
 - **Code splitting**: third-party libraries (React, Framer Motion, React Icons) are
   emitted as separate cacheable chunks via Vite `manualChunks`, keeping the main
   bundle small for returning visitors.
-- **SEO**: `Person` JSON-LD structured data, canonical URL, `robots.txt`, and
-  `sitemap.xml` are included for richer search-engine indexing.
+- **SEO**: every route is prerendered to static HTML, and each of the eight case
+  studies has its own indexable URL (`/projects/<slug>/`) with a route-specific
+  title, description, canonical and `CreativeWork` structured data. The home page
+  carries a `Person` / `WebSite` / `ProfilePage` / `ItemList` JSON-LD graph, and
+  `robots.txt` and `sitemap.xml` are generated to match the route list.
+- **Images**: photos are served as WebP sized to how large they actually render
+  (the hero drops 137 kB to 40 kB); the JPEGs stay for `og:image`, which social
+  platforms prefer.
 - **PWA polish**: SVG favicon, `site.webmanifest`, and light/dark `theme-color`.
 - **Resilience**: the language switcher falls back to emoji flags if the external
   flag CDN is unavailable, so the UI never shows broken images.
@@ -139,8 +153,8 @@ message is delivered.
 
 - **Unit tests** (Vitest): `npm test` — covers the chatbot responses, terminal
   command processor, and portfolio data integrity.
-- **CI** (`.github/workflows/ci.yml`): declares install → test → build on every
-  push/PR. Kept from the source repo, but note that Actions is not currently
+- **CI** (`.github/workflows/ci.yml`): declares install → test → install
+  Chromium → build on every push/PR. Kept from the source repo, but note that Actions is not currently
   running on this account (see [Deployment](#deployment-github-pages)), so this
   workflow fails at startup rather than executing. Run `npm test` locally
   instead until that is resolved.
@@ -164,7 +178,7 @@ Open the local URL printed in the terminal (typically `http://localhost:5173`).
 ## Available Scripts
 
 - `npm run dev`: Start local development server
-- `npm run build`: Rebuild the published site into `docs/` (commit it to deploy)
+- `npm run build`: Rebuild and prerender the published site into `docs/` (commit it to deploy)
 - `npm run preview`: Preview production build locally
 
 ## Project Structure
@@ -174,9 +188,11 @@ portfolio_N/
 	src/
 		assets/        # Images and portfolio data
 		components/    # Reusable UI components
+		lib/           # Route slugs and per-route document metadata
 		sections/      # Page sections (Hero, Skills, Projects, etc.)
 		App.jsx        # Main page composition
 	index.html
+	prerender.mjs    # Post-build static rendering of every route
 	vite.config.js
 ```
 

@@ -17,6 +17,8 @@ import Footer from './sections/Footer'
 import { labels, uiContent } from './assets/data'
 import CursorTrail from './components/CursorTrail'
 import WhatsAppFloat from './components/WhatsAppFloat'
+import { projectBySlug, projectPath, slugFromPath } from './lib/projectRoutes'
+import { useDocumentMeta } from './lib/seo'
 
 function getInitialTheme() {
   const stored = localStorage.getItem('theme')
@@ -42,6 +44,41 @@ export default function App() {
   const [theme, setTheme] = useState(getInitialTheme)
   const [language, setLanguage] = useState('EN')
   const [terminalOpen, setTerminalOpen] = useState(false)
+
+  /* ── Routing: each case study lives at /projects/<slug> ── */
+  const [projectSlug, setProjectSlug] = useState(() => slugFromPath(window.location.pathname))
+  const activeProject = useMemo(() => projectBySlug(projectSlug), [projectSlug])
+
+  useDocumentMeta(activeProject, language)
+
+  /* Back/forward should close or reopen the case study, not leave the page. */
+  useEffect(() => {
+    const onPopState = () => setProjectSlug(slugFromPath(window.location.pathname))
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
+
+  /* Landing straight on a case-study URL should show it in context. */
+  useEffect(() => {
+    if (!slugFromPath(window.location.pathname)) return
+    document.getElementById('projects')?.scrollIntoView({ block: 'start' })
+  }, [])
+
+  const openProject = useCallback((project) => {
+    window.history.pushState({ caseStudy: true }, '', projectPath(project))
+    setProjectSlug(slugFromPath(window.location.pathname))
+  }, [])
+
+  const closeProject = useCallback(() => {
+    if (window.history.state?.caseStudy) {
+      /* We pushed this entry, so stepping back returns to whatever was open before. */
+      window.history.back()
+    } else {
+      /* Landed here directly — replace the entry so Back still leaves the site. */
+      window.history.replaceState({}, '', '/')
+      setProjectSlug(null)
+    }
+  }, [])
 
   const navLabels = useMemo(() => labels[language], [language])
   const sectionText = useMemo(() => uiContent[language], [language])
@@ -111,7 +148,14 @@ export default function App() {
         <SectionConnector to="about"    label="About" index={1} />
         <AboutSection language={language} navLabels={navLabels} sectionText={sectionText} />
         <SectionConnector to="projects" label="Projects" index={2} />
-        <ProjectsSection navLabels={navLabels} language={language} sectionText={sectionText} />
+        <ProjectsSection
+          navLabels={navLabels}
+          language={language}
+          sectionText={sectionText}
+          activeProject={activeProject}
+          onOpenProject={openProject}
+          onCloseProject={closeProject}
+        />
         <SectionConnector to="systems"  label="Systems" index={3} />
         <SystemDesignSection sectionText={sectionText} language={language} />
         <SectionConnector to="skills"   label="Skills" index={4} />
