@@ -45,53 +45,67 @@
         "@context": "https://schema.org",
         "@graph": [
           {
-            "@type": "Person",
-            "@id": "https://nsolivier.me/#person",
-            "name": "NSENGIMANA Olivier",
-            "alternateName": [
-              "Olivier NSENGIMANA",
-              "NSENGIMANA Olivier Kingbless"
-            ],
-            "jobTitle": "Software Engineer",
-            "description": "Software engineer in Kigali, Rwanda, building intelligent, scalable systems with React, Django, Next.js and machine learning.",
+            "@type": "ProfilePage",
+            "@id": "https://nsolivier.me/#profilepage",
             "url": "https://nsolivier.me/",
-            "image": "https://nsolivier.me/olivier_hero.jpeg",
-            "email": "mailto:nsengimanaolivier100@gmail.com",
-            "telephone": "+250786856578",
-            "homeLocation": {
-              "@type": "Place",
-              "name": "Kigali, Rwanda"
+            "name": "NSENGIMANA Olivier — Software Engineer in Kigali, Rwanda | React, Django, AI Systems",
+            "isPartOf": {
+              "@id": "https://nsolivier.me/#website"
             },
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Kigali",
-              "addressCountry": "RW"
-            },
-            "alumniOf": {
-              "@type": "CollegeOrUniversity",
-              "name": "University of Rwanda"
-            },
-            "knowsAbout": [
-              "Software Engineering",
-              "Intelligent Systems",
-              "React",
-              "Django",
-              "Next.js",
-              "Machine Learning",
-              "System Design",
-              "PostgreSQL"
-            ],
-            "knowsLanguage": [
-              "English",
-              "Kinyarwanda",
-              "French"
-            ],
-            "sameAs": [
-              "https://github.com/kingblessolivier",
-              "https://www.linkedin.com/in/nsengimana-olivier-a6bb21408/",
-              "https://x.com/NSENGIMANAOLIV4",
-              "https://www.instagram.com/blessking_/"
-            ]
+            "primaryImageOfPage": "https://nsolivier.me/olivier_hero.jpeg",
+            "mainEntity": {
+              "@type": "Person",
+              "@id": "https://nsolivier.me/#person",
+              "name": "NSENGIMANA Olivier",
+              "alternateName": [
+                "Olivier NSENGIMANA",
+                "NSENGIMANA Olivier Kingbless"
+              ],
+              "identifier": "https://nsolivier.me/#person",
+              "jobTitle": "Software Engineer",
+              "description": "Software engineer in Kigali, Rwanda, building intelligent, scalable systems with React, Django, Next.js and machine learning.",
+              "url": "https://nsolivier.me/",
+              "mainEntityOfPage": {
+                "@id": "https://nsolivier.me/#profilepage"
+              },
+              "image": "https://nsolivier.me/olivier_hero.jpeg",
+              "email": "mailto:nsengimanaolivier100@gmail.com",
+              "telephone": "+250786856578",
+              "homeLocation": {
+                "@type": "Place",
+                "name": "Kigali, Rwanda"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Kigali",
+                "addressCountry": "RW"
+              },
+              "alumniOf": {
+                "@type": "CollegeOrUniversity",
+                "name": "University of Rwanda"
+              },
+              "knowsAbout": [
+                "Software Engineering",
+                "Intelligent Systems",
+                "React",
+                "Django",
+                "Next.js",
+                "Machine Learning",
+                "System Design",
+                "PostgreSQL"
+              ],
+              "knowsLanguage": [
+                "English",
+                "Kinyarwanda",
+                "French"
+              ],
+              "sameAs": [
+                "https://github.com/kingblessolivier",
+                "https://www.linkedin.com/in/nsengimana-olivier-a6bb21408/",
+                "https://x.com/NSENGIMANAOLIV4",
+                "https://www.instagram.com/blessking_/"
+              ]
+            }
           },
           {
             "@type": "WebSite",
@@ -103,19 +117,6 @@
             "publisher": {
               "@id": "https://nsolivier.me/#person"
             }
-          },
-          {
-            "@type": "ProfilePage",
-            "@id": "https://nsolivier.me/#profilepage",
-            "url": "https://nsolivier.me/",
-            "name": "NSENGIMANA Olivier — Software Engineer in Kigali, Rwanda | React, Django, AI Systems",
-            "isPartOf": {
-              "@id": "https://nsolivier.me/#website"
-            },
-            "about": {
-              "@id": "https://nsolivier.me/#person"
-            },
-            "primaryImageOfPage": "https://nsolivier.me/olivier_hero.jpeg"
           },
           {
             "@type": "ItemList",
