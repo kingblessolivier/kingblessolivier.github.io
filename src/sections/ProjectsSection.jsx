@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { FiCpu, FiGithub, FiGlobe, FiArrowUpRight } from 'react-icons/fi'
+import { FiCpu, FiGithub, FiGlobe, FiArrowUpRight, FiExternalLink } from 'react-icons/fi'
 import { HiXMark } from 'react-icons/hi2'
 import SectionReveal from '../components/SectionReveal'
 import SectionHeader from '../components/SectionHeader'
@@ -137,16 +137,32 @@ export default function ProjectsSection({
                       )}
                     </div>
 
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={`${project.name} on GitHub`}
-                      title={`${project.name} on GitHub`}
-                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                    >
-                      <FiGithub size={13} />
-                    </a>
+                    <div className="flex shrink-0 items-center gap-1.5">
+                      {/* A running app is stronger evidence than a repository,
+                          so it sits first where the project has one. */}
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`${project.name} live demo`}
+                          title={`${project.name} live demo`}
+                          className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                        >
+                          <FiExternalLink size={13} />
+                        </a>
+                      )}
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${project.name} on GitHub`}
+                        title={`${project.name} on GitHub`}
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                      >
+                        <FiGithub size={13} />
+                      </a>
+                    </div>
                   </div>
 
                   {/* Title */}
@@ -267,12 +283,27 @@ export default function ProjectsSection({
                 </div>
               </div>
 
-              <div className="mt-7 flex items-center gap-3">
+              <div className="mt-7 flex flex-wrap items-center gap-3">
+                {activeProject.demo && (
+                  <a
+                    href={activeProject.demo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="glow-btn inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition hover:scale-105"
+                  >
+                    <FiExternalLink size={13} />
+                    {text.liveDemo}
+                  </a>
+                )}
                 <a
                   href={activeProject.link}
                   target="_blank"
                   rel="noreferrer"
-                  className="glow-btn inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition hover:scale-105"
+                  className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition hover:scale-105 ${
+                    activeProject.demo
+                      ? 'border border-[var(--border)] hover:border-[var(--accent)]'
+                      : 'glow-btn'
+                  }`}
                 >
                   <FiGithub size={13} />
                   {text.github}

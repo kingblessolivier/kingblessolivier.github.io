@@ -54,6 +54,7 @@ const i18n = {
       challenges: 'Challenges',
       impact: 'Impact',
       github: 'GitHub',
+      liveDemo: 'Live Demo',
     },
     systems: {
       title: 'System Design Thinking',
@@ -172,6 +173,7 @@ const i18n = {
       challenges: 'Imbogamizi',
       impact: 'Ingaruka',
       github: 'GitHub',
+      liveDemo: 'Reba Urubuga',
     },
     systems: {
       title: 'Uko Ntekereza Sisitemu',
@@ -290,6 +292,7 @@ const i18n = {
       challenges: 'Defis',
       impact: 'Impact',
       github: 'GitHub',
+      liveDemo: 'Démo en ligne',
     },
     systems: {
       title: 'Vision System Design',
@@ -616,6 +619,46 @@ export const portfolioData = {
   ],
   projects: [
     {
+      name: 'TalentAI',
+      category: 'AI',
+      tech: ['Next.js', 'TypeScript', 'Node.js', 'MongoDB', 'Google Gemini'],
+      link: 'https://github.com/kingblessolivier/Umurava-candidate-screening-system',
+      demo: 'https://umurava-candidate-screening-system.vercel.app/',
+      description: {
+        EN: 'An AI hiring platform that screens, ranks and answers candidates with a Gemini pipeline â built for the Umurava AI Hackathon.',
+        KINY: 'Urubuga rukoresha AI mu gushaka abakozi: rusuzuma, rushyira ku rutonde kandi rusubiza abasaba, rwubatswe muri Umurava AI Hackathon.',
+        FR: 'Une plateforme de recrutement par IA qui filtre, classe et rÃ©pond aux candidats via un pipeline Gemini â construite pour l’Umurava AI Hackathon.',
+      },
+      caseStudy: {
+        problem: {
+          EN: 'Recruiters lose hours to manual resume screening, and the judgement that comes out of it is inconsistent between reviewers and hard to defend.',
+          KINY: 'Abashaka abakozi bamara amasaha menshi basuzuma CV intoki, kandi ibyemezo bavamo ntibihuye hagati y’abasuzuma kandi biragoye kubisobanura.',
+          FR: 'Les recruteurs perdent des heures Ã  filtrer les CV manuellement, et le jugement qui en sort varie d’un Ã©valuateur Ã  l’autre et se dÃ©fend mal.',
+        },
+        solution: {
+          EN: 'A multi-stage Gemini pipeline: candidates arrive by form, CSV, Excel or PDF, are scored in parallel batches, then globally re-ranked so scores stay comparable across batches. Every score carries the reasoning behind it.',
+          KINY: 'Sisitemu ikoresha Gemini mu byiciro: abasaba binjizwa banyuze ku ifishi, CSV, Excel cyangwa PDF, bagahabwa amanota mu matsinda icyarimwe, hanyuma bagashyirwa ku rutonde rusange kugira ngo amanota ahuze. Buri nota iza n’impamvu yayo.',
+          FR: 'Un pipeline Gemini en plusieurs Ã©tapes : les candidats arrivent par formulaire, CSV, Excel ou PDF, sont notÃ©s par lots parallÃ¨les, puis reclassÃ©s globalement pour que les notes restent comparables. Chaque note est accompagnÃ©e de son raisonnement.',
+        },
+        role: {
+          EN: 'Built the platform end to end â the Next.js and TypeScript frontend on Vercel, the Node service on Render, the MongoDB models, the Gemini screening pipeline and the per-candidate email system.',
+          KINY: 'Nubatse urubuga rwose â frontend ya Next.js na TypeScript kuri Vercel, serivisi ya Node kuri Render, imiterere ya MongoDB, sisitemu ya Gemini isuzuma, na sisitemu yohereza imeyili kuri buri musaba.',
+          FR: 'Construction de bout en bout â le frontend Next.js et TypeScript sur Vercel, le service Node sur Render, les modÃ¨les MongoDB, le pipeline de filtrage Gemini et le systÃ¨me d’e-mails par candidat.',
+        },
+        architecture: ['Next.js on Vercel', 'Node + TypeScript on Render', 'MongoDB', 'Gemini screening pipeline', 'Batch scoring + global re-rank'],
+        challenges: {
+          EN: 'Keeping scores fair across batches, and keeping the model honest: the pipeline flags gender language, age indicators, institution prestige and name bias inside its own output, and surfaces unverified skills and employment gaps as explicit risks.',
+          KINY: 'Kugumana amanota angana hagati y’amatsinda, no gutuma moderi iba indakemwa: sisitemu yerekana aho hari uburyo bubogamye ku gitsina, ku myaka, ku ishuri cyangwa ku mazina, kandi ikagaragaza ubumenyi butemejwe n’ibihe by’ubusa mu kazi.',
+          FR: 'Garder des notes Ã©quitables entre les lots, et garder le modÃ¨le honnÃªte : le pipeline signale le langage genrÃ©, les indices d’Ã¢ge, le prestige des Ã©tablissements et le biais de nom dans sa propre sortie, et fait remonter les compÃ©tences non vÃ©rifiÃ©es et les trous de parcours comme des risques explicites.',
+        },
+        impact: {
+          EN: 'Screening that took hours returns a ranked shortlist in minutes, with strengths, gaps and interview questions per candidate â and a reasoning log a recruiter can audit rather than take on trust.',
+          KINY: 'Isuzuma ryafataga amasaha ubu ritanga urutonde mu minota mike, hamwe n’imbaraga, icyuho n’ibibazo by’ikiganiro kuri buri musaba, n’inyandiko isobanura icyemezo ushobora kugenzura.',
+          FR: 'Un filtrage qui prenait des heures rend une liste classÃ©e en quelques minutes, avec forces, lacunes et questions d’entretien par candidat â et un journal de raisonnement que le recruteur peut auditer plutÃ´t que croire sur parole.',
+        },
+      },
+    },
+    {
       name: 'FrameAfrica',
       category: 'Web',
       tech: ['Next.js', 'NestJS', 'PostgreSQL', 'Redis', 'Kubernetes'],
@@ -658,7 +701,7 @@ export const portfolioData = {
       name: 'MedLink System',
       category: 'HealthTech',
       tech: ['React', 'Django', 'PostgreSQL', 'Maps API'],
-      link: 'https://github.com/kingblessolivier/medlink-system',
+      link: 'https://github.com/kingblessolivier/Medilink',
       description: {
         EN: 'A platform that helps patients book doctor appointments and find nearby hospitals without waiting in long queues.',
         KINY: 'Urubuga rufasha abantu gufata rendez-vous kwa muganga no kubona ibitaro bibari hafi batarinze gutonda imirongo miremire.',
@@ -815,6 +858,7 @@ export const portfolioData = {
       category: 'Web',
       tech: ['Django', 'PostgreSQL'],
       link: 'https://github.com/kingblessolivier/Property_management',
+      demo: 'https://afrimaster.pythonanywhere.com/',
       description: {
         EN: 'System for managing tenants, rent, and property records.',
         KINY: 'Sisitemu yo gucunga abakodesha, ubwishyu, n amakuru y inzu.',
@@ -854,6 +898,7 @@ export const portfolioData = {
       category: 'Web',
       tech: ['Django', 'REST API'],
       link: 'https://github.com/kingblessolivier/citizen_engagement_system',
+      demo: 'https://citizenmanagement.pythonanywhere.com/',
       description: {
         EN: 'Platform connecting citizens with public services and feedback systems.',
         KINY: 'Urubuga ruhuza abaturage na serivisi za leta n uburyo bwo gutanga ibitekerezo.',
