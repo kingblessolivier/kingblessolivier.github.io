@@ -114,16 +114,22 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
               <motion.div
                 whileHover={{ scale: 1.06 }}
                 whileTap={{ scale: 0.94 }}
-                className="relative h-8 w-8 overflow-hidden rounded-lg"
+                className="relative h-9 w-9 overflow-hidden rounded-xl"
                 style={{
-                  border: '1px solid color-mix(in srgb,var(--accent) 30%,var(--border))',
-                  boxShadow: '0 4px 14px -4px color-mix(in srgb,var(--accent) 45%,transparent)',
+                  border: '1px solid color-mix(in srgb,var(--brand-blue) 34%,var(--border))',
+                  boxShadow: '0 4px 16px -5px color-mix(in srgb,var(--brand-blue) 55%,transparent)',
                 }}
               >
+                {/* The brand mark, not the portrait: a logo belongs in the chrome,
+                    the photograph belongs in the content. The artwork carries its
+                    own dark field, so it is set as a tile rather than a free
+                    glyph — that way it reads on the light theme too. */}
                 <img
-                  src="/olivier_avatar.webp"
-                  alt="NSENGIMANA Olivier"
+                  src="/logo-128.webp"
+                  alt="Nsengimana Olivier"
                   className="h-full w-full object-cover"
+                  width="36"
+                  height="36"
                   loading="eager"
                   decoding="async"
                 />
