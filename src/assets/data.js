@@ -369,12 +369,12 @@ export const portfolioData = {
     story: {
       EN: 'I started with curiosity, moved through consistent practice, and became an engineer focused on intelligent systems that create measurable everyday value. Before full-time software focus, I also gained frontline service experience through the Equity Leaders Program.',
       KINY: 'Natangiriye ku matsiko, nkomeza kwitoza buri munsi, maze mpinduka injeniyeri wibanda ku kubaka sisitemu zifite ubwenge zifasha abantu buri munsi. Mbere yo kwibanda cyane kuri software, nabanje no kugira ubunararibonye mu gutanga serivisi z imbere ku bakiliya binyuze muri Equity Leaders Program.',
-      FR: 'J ai commence par la curiosite, puis par la discipline, pour devenir un ingenieur qui construit des systemes intelligents utiles au quotidien. Avant de me concentrer pleinement sur le logiciel, j ai aussi acquis une experience terrain en service client via le programme Equity Leaders.',
+      FR: 'J’ai commencé par la curiosité, puis par la discipline, pour devenir un ingénieur qui construit des systèmes intelligents utiles au quotidien. Avant de me concentrer pleinement sur le logiciel, j’ai aussi acquis une expérience terrain en service client via le programme Equity Leaders.',
     },
     philosophy: {
       EN: 'Build products that are technically reliable, emotionally clear, and operationally scalable.',
       KINY: 'Kubaka ibicuruzwa byizewe mu ikoranabuhanga, bisobanutse ku mukoresha, kandi bishobora kwaguka.',
-      FR: 'Construire des produits fiables techniquement, clairs pour l utilisateur et evolutifs dans l operation.',
+      FR: 'Construire des produits fiables techniquement, clairs pour l’utilisateur et évolutifs dans l’opération.',
     },
     journey: {
       EN: [
@@ -417,7 +417,7 @@ export const portfolioData = {
       details: {
         EN: 'Provided endpoint and infrastructure support across the bank: installed and configured Windows on staff computers, diagnosed and fixed hardware and software faults, set up and connected users to network printers, and handled day-to-day end-user IT support.',
         KINY: 'Natanze ubufasha bwa endpoint na infrastructure muri banki: nashyizeho kandi ndinganiza Windows kuri mudasobwa z abakozi, nsuzuma kandi nkemura ibibazo bya hardware na software, nshyiraho kandi nhuza abakoresha na printers zo ku rusobe, kandi ntanga ubufasha bwa buri munsi ku bakoresha.',
-        FR: 'Support endpoint et infrastructure au sein de la banque : installation et configuration de Windows sur les postes du personnel, diagnostic et resolution des pannes materielles et logicielles, configuration et connexion des utilisateurs aux imprimantes reseau, et support informatique quotidien aux utilisateurs.',
+        FR: 'Support endpoint et infrastructure au sein de la banque : installation et configuration de Windows sur les postes du personnel, diagnostic et résolution des pannes matérielles et logicielles, configuration et connexion des utilisateurs aux imprimantes réseau, et support informatique quotidien aux utilisateurs.',
       },
     },
     {
@@ -435,7 +435,7 @@ export const portfolioData = {
       details: {
         EN: 'Handled transactions, cash balancing, and frontline customer operations with high accuracy during internship.',
         KINY: 'Nakiriye transactions, mbara amafaranga neza, kandi ntanga serivisi ku bakiliya ku rwego rwo hejuru mu gihe cya internship.',
-        FR: 'Gestion des transactions, equilibrage de caisse et operations client avec grande precision pendant le stage.',
+        FR: 'Gestion des transactions, équilibrage de caisse et opérations client avec grande précision pendant le stage.',
       },
     },
     {
@@ -453,7 +453,7 @@ export const portfolioData = {
       details: {
         EN: 'Supported customer issue resolution, service communication, and branch experience quality.',
         KINY: 'Nafashije gukemura ibibazo by abakiliya, gutanga amakuru ya serivisi, no kuzamura quality ya branch experience.',
-        FR: 'Appui a la resolution des demandes client, communication de service et qualite de l experience agence.',
+        FR: 'Appui à la résolution des demandes client, communication de service et qualité de l’expérience agence.',
       },
     },
   ],
@@ -462,7 +462,7 @@ export const portfolioData = {
       institution: {
         EN: 'University of Rwanda',
         KINY: 'Kaminuza y u Rwanda',
-        FR: 'Universite du Rwanda',
+        FR: 'Université du Rwanda',
       },
       degree: {
         EN: 'Bachelor Degree in Information Technology',
@@ -473,7 +473,7 @@ export const portfolioData = {
       details: {
         EN: 'Currently pursuing core studies in software engineering, systems design, and applied computing.',
         KINY: 'Ndi gukomeza amasomo y ibanze muri software engineering, systems design, na applied computing.',
-        FR: 'Actuellement en formation sur l ingenierie logicielle, la conception de systemes et l informatique appliquee.',
+        FR: 'Actuellement en formation sur l’ingénierie logicielle, la conception de systèmes et l’informatique appliquée.',
       },
     },
   ],
@@ -533,12 +533,12 @@ export const portfolioData = {
       title: {
         EN: 'HATANA Hackathon - University of Rwanda',
         KINY: 'HATANA Hackathon - Kaminuza y u Rwanda',
-        FR: 'Hackathon HATANA - Universite du Rwanda',
+        FR: 'Hackathon HATANA - Université du Rwanda',
       },
       description: {
         EN: 'Participated with team in HATANA hackathon organized by Mastercard and won a prize with MedLink.',
         KINY: 'Twafatanije muri HATANA hackathon yateguwe na Mastercard twigezeho igihembo hamwe na MedLink.',
-        FR: 'Participation en equipe au hackathon HATANA organise par Mastercard et gain d un prix avec MedLink.',
+        FR: 'Participation en équipe au hackathon HATANA organisé par Mastercard et gain d’un prix avec MedLink.',
       },
       issuer: 'Mastercard / University of Rwanda',
       year: '2025',
@@ -552,7 +552,7 @@ export const portfolioData = {
       description: {
         EN: 'Participated in I Star Hackathon and received certificate',
         KINY: 'Natanye muri I Star Hackathon maze nkagenerwa impamyabushobozi',
-        FR: 'Participation au Hackathon I Star avec obtention d un certificat',
+        FR: 'Participation au Hackathon I Star avec obtention d’un certificat',
       },
       issuer: 'I Star Hackathon',
       year: '2024',
@@ -561,12 +561,12 @@ export const portfolioData = {
       title: {
         EN: 'Cisco Cybersecurity Certificate',
         KINY: 'Impamyabushobozi ya Cisco mu Cyber Security',
-        FR: 'Certificat Cisco en Cybersecurite',
+        FR: 'Certificat Cisco en Cybersécurité',
       },
       description: {
         EN: 'Introduction to Cybersecurity - Cisco',
         KINY: 'Intangiriro ya Cyber Security - Cisco',
-        FR: 'Introduction a la Cybersecurite - Cisco',
+        FR: 'Introduction à la Cybersécurité - Cisco',
       },
       issuer: 'Cisco',
       year: '2024',
@@ -580,7 +580,7 @@ export const portfolioData = {
       description: {
         EN: 'Certified in responsive web design',
         KINY: 'Negukanye impamyabushobozi mu responsive web design',
-        FR: 'Certifie en conception web responsive',
+        FR: 'Certifié en conception web responsive',
       },
       issuer: 'freeCodeCamp',
       year: '2023',
@@ -623,34 +623,34 @@ export const portfolioData = {
       description: {
         EN: 'A digital newspaper platform delivering AI-assisted news coverage across Rwanda and Africa — "News. Views. Africa."',
         KINY: 'Urubuga rw ikinyamakuru cya digitale rutanga amakuru afashijwe na AI mu Rwanda no muri Afurika — "News. Views. Africa."',
-        FR: 'Une plateforme de journal numerique diffusant une actualite assistee par IA au Rwanda et en Afrique — « News. Views. Africa. »',
+        FR: 'Une plateforme de journal numérique diffusant une actualité assistée par IA au Rwanda et en Afrique — « News. Views. Africa. »',
       },
       caseStudy: {
         problem: {
           EN: 'African audiences lacked a modern, fast news platform with local payment options and reliable content delivery at scale.',
           KINY: 'Abasomyi bo muri Afurika baburaga urubuga rugezweho rw amakuru rwihuta rufite uburyo bwo kwishyura bwo mu karere kandi rutanga ibintu ku rwego rwo hejuru.',
-          FR: 'Le public africain manquait d une plateforme d actualite moderne et rapide, avec des paiements locaux et une diffusion de contenu fiable a grande echelle.',
+          FR: 'Le public africain manquait d’une plateforme d’actualité moderne et rapide, avec des paiements locaux et une diffusion de contenu fiable à grande échelle.',
         },
         solution: {
           EN: 'Built a scalable news platform with AI-assisted curation, editorial dashboards, full-text search, and mobile-money plus card payments.',
           KINY: 'Twubatse urubuga rw amakuru rwaguka rufite AI ifasha guhitamo, dashboards z abanditsi, ubushakashatsi bwuzuye, no kwishyura na mobile money na cards.',
-          FR: 'Creation d une plateforme d actualite evolutive avec curation assistee par IA, tableaux de bord editoriaux, recherche plein texte et paiements mobile money et carte.',
+          FR: 'Création d’une plateforme d’actualité évolutive avec curation assistée par IA, tableaux de bord éditoriaux, recherche plein texte et paiements mobile money et carte.',
         },
         role: {
           EN: 'Worked on the full-stack build — Next.js frontend, NestJS services, data modeling, and the containerized deployment setup.',
           KINY: 'Nakoze ku bwubatsi bwa full-stack — frontend ya Next.js, serivisi za NestJS, gukora data modeling, no gushyiraho deployment ikoresha containers.',
-          FR: 'Participation au developpement full-stack — frontend Next.js, services NestJS, modelisation des donnees et deploiement conteneurise.',
+          FR: 'Participation au développement full-stack — frontend Next.js, services NestJS, modélisation des données et déploiement conteneurisé.',
         },
         architecture: ['Next.js Frontend', 'NestJS Services', 'PostgreSQL + Redis', 'Search (OpenSearch)', 'Kubernetes + CDN'],
         challenges: {
           EN: 'Integrating multiple local payment providers and keeping search and content delivery fast under a microservice architecture.',
           KINY: 'Guhuza abatanga uburyo bwo kwishyura benshi bo mu karere no kugumana ubushakashatsi n itangwa ry ibintu byihuta muri microservice architecture.',
-          FR: 'Integration de plusieurs fournisseurs de paiement locaux et maintien d une recherche et d une diffusion rapides sous une architecture microservices.',
+          FR: 'Intégration de plusieurs fournisseurs de paiement locaux et maintien d’une recherche et d’une diffusion rapides sous une architecture microservices.',
         },
         impact: {
           EN: 'Delivered a production-grade, cloud-native foundation for regional news distribution with secure auth and multi-payment support.',
           KINY: 'Yatanze urwego rukomeye, rwa cloud-native rwo gukwirakwiza amakuru mu karere rufite umutekano wo kwinjira no kwishyura mu buryo bwinshi.',
-          FR: 'Livraison d une base cloud-native de niveau production pour la distribution d actualite regionale, avec authentification securisee et paiements multiples.',
+          FR: 'Livraison d’une base cloud-native de niveau production pour la distribution d’actualité régionale, avec authentification sécurisée et paiements multiples.',
         },
       },
     },
@@ -662,34 +662,34 @@ export const portfolioData = {
       description: {
         EN: 'A platform that helps patients book doctor appointments and find nearby hospitals without waiting in long queues.',
         KINY: 'Urubuga rufasha abantu gufata rendez-vous kwa muganga no kubona ibitaro bibari hafi batarinze gutonda imirongo miremire.',
-        FR: 'Une plateforme qui aide les patients a reserver des rendez-vous medicaux et trouver les hopitaux proches sans longues files d attente.',
+        FR: 'Une plateforme qui aide les patients à réserver des rendez-vous médicaux et trouver les hôpitaux proches sans longues files d’attente.',
       },
       caseStudy: {
         problem: {
           EN: 'Patients were spending too much time in hospital queues just to secure appointments or basic guidance.',
           KINY: 'Abarwayi batakarizaga igihe kinini mu mirongo y ibitaro bashaka appointment cyangwa amakuru y ibanze.',
-          FR: 'Les patients perdaient beaucoup de temps dans les files d hopitaux pour obtenir un rendez-vous ou des informations de base.',
+          FR: 'Les patients perdaient beaucoup de temps dans les files d’hôpitaux pour obtenir un rendez-vous ou des informations de base.',
         },
         solution: {
           EN: 'Built MedLink to support appointment booking, hospital discovery by proximity, and faster navigation to care services.',
           KINY: 'Twubatse MedLink ifasha gufata appointment, kubona ibitaro byegereye umuntu, no kugera kuri serivisi z ubuvuzi byihuse.',
-          FR: 'Creation de MedLink pour la reservation de rendez-vous, la recherche d hopitaux proches et un acces plus rapide aux soins.',
+          FR: 'Création de MedLink pour la réservation de rendez-vous, la recherche d’hôpitaux proches et un accès plus rapide aux soins.',
         },
         role: {
           EN: 'Contributed to product design, backend API flows, and end-to-end user journey optimization with my team.',
           KINY: 'Natanze uruhare muri product design, backend API flows, no kunoza urugendo rw umukoresha hamwe n itsinda ryanjye.',
-          FR: 'Contribution au design produit, aux flux API backend et a l optimisation du parcours utilisateur avec mon equipe.',
+          FR: 'Contribution au design produit, aux flux API backend et à l’optimisation du parcours utilisateur avec mon équipe.',
         },
         architecture: ['Client App', 'Appointment API', 'Hospital Locator Service', 'PostgreSQL'],
         challenges: {
           EN: 'Ensuring reliable booking flow while keeping location-based results fast and accurate.',
           KINY: 'Kugira booking flow yizewe no gutanga ibisubizo by aho ibitaro biri vuba kandi neza.',
-          FR: 'Assurer un flux de reservation fiable tout en gardant des resultats geolocalises rapides et precis.',
+          FR: 'Assurer un flux de réservation fiable tout en gardant des résultats géolocalisés rapides et précis.',
         },
         impact: {
           EN: 'The project won a prize and demonstrated a practical path to reducing wait-time pressure in healthcare access.',
           KINY: 'Uyu mushinga wegukanye igihembo kandi werekanye uburyo bufatika bwo kugabanya igihe cyo gutegereza muri serivisi z ubuvuzi.',
-          FR: 'Le projet a remporte un prix et a demontre une voie concrete pour reduire l attente dans l acces aux soins.',
+          FR: 'Le projet a remporté un prix et a démontré une voie concrète pour réduire l’attente dans l’accès aux soins.',
         },
       },
     },
@@ -701,34 +701,34 @@ export const portfolioData = {
       description: {
         EN: 'AI-powered system for HR recruitment automation and candidate evaluation.',
         KINY: 'Sisitemu ifashwa na AI yihutisha kwakira no gusuzuma abakandida.',
-        FR: 'Systeme base sur IA pour automatiser le tri des candidats en recrutement.',
+        FR: 'Système basé sur IA pour automatiser le tri des candidats en recrutement.',
       },
       caseStudy: {
         problem: {
           EN: 'Manual CV review was slow and inconsistent for recruitment teams.',
           KINY: 'Gusoma CV intoki byafataga igihe kinini kandi bitangira ibisubizo bitandukana.',
-          FR: 'La revue manuelle des CV etait lente et peu coherente.',
+          FR: 'La revue manuelle des CV était lente et peu cohérente.',
         },
         solution: {
           EN: 'Built a scoring pipeline that extracts profile signals and ranks candidates by fit.',
           KINY: 'Nubatse pipeline isuzuma amakuru yingenzi maze ikagena urutonde rw abakandida.',
-          FR: 'Creation d un pipeline de scoring qui extrait les signaux et classe les profils.',
+          FR: 'Création d’un pipeline de scoring qui extrait les signaux et classe les profils.',
         },
         role: {
           EN: 'Designed backend logic, ranking API, and recruiter dashboard integration.',
           KINY: 'Nateguye logic ya backend, ranking API, no guhuza dashboard y abashaka abakozi.',
-          FR: 'Conception de la logique backend, API de classement et integration dashboard.',
+          FR: 'Conception de la logique backend, API de classement et intégration dashboard.',
         },
         architecture: ['Django API', 'Scoring Service', 'PostgreSQL', 'Dashboard Client'],
         challenges: {
           EN: 'Balancing fairness, explainability, and ranking speed.',
           KINY: 'Guhuza ubutabera, gusobanurira neza ibisubizo, n umuvuduko.',
-          FR: 'Equilibrer equite, explicabilite et rapidite du classement.',
+          FR: 'Équilibrer équité, explicabilité et rapidité du classement.',
         },
         impact: {
           EN: 'Improved recruiter workflow consistency and reduced repetitive screening effort.',
           KINY: 'Yongereye consistency mu kazi k abashaka abakozi kandi igabanya imirimo yisubiramo.',
-          FR: 'Amelioration de la coherence du workflow et reduction du tri repetitif.',
+          FR: 'Amélioration de la cohérence du workflow et réduction du tri répétitif.',
         },
       },
     },
@@ -740,34 +740,34 @@ export const portfolioData = {
       description: {
         EN: 'Machine learning system for analyzing and ranking candidate profiles.',
         KINY: 'Sisitemu ya ML isesengura profile z abakandida ikazishyira ku rutonde.',
-        FR: 'Systeme ML pour analyser et classer les profils candidats.',
+        FR: 'Système ML pour analyser et classer les profils candidats.',
       },
       caseStudy: {
         problem: {
           EN: 'Recruiters needed structured profile comparison rather than subjective sorting.',
           KINY: 'Abashaka abakozi bakeneye uburyo bushingiye ku bipimo aho guhitamo ku marangamutima.',
-          FR: 'Besoin d une comparaison structuree des profils au lieu d un tri subjectif.',
+          FR: 'Besoin d’une comparaison structurée des profils au lieu d’un tri subjectif.',
         },
         solution: {
           EN: 'Implemented feature extraction and weighted ranking based on role requirements.',
           KINY: 'Nashyizeho extraction y ibimenyetso no ranking ishingiye ku bisabwa n akazi.',
-          FR: 'Mise en place d extraction de features et de classement pondere par role.',
+          FR: 'Mise en place d’extraction de features et de classement pondéré par rôle.',
         },
         role: {
           EN: 'Owned data preparation, model experimentation, and API output format.',
           KINY: 'Nari nshinzwe gutegura data, kugerageza model, no gutunganya output ya API.',
-          FR: 'Responsable preparation des donnees, experimentation modele et format API.',
+          FR: 'Responsable préparation des données, expérimentation modèle et format API.',
         },
         architecture: ['Data Preprocessor', 'ML Ranker', 'Inference API', 'Result Renderer'],
         challenges: {
           EN: 'Handling incomplete resumes and ensuring stable ranking behavior.',
           KINY: 'Gucunga CV zituzuye no gutanga ranking ihamye.',
-          FR: 'Gestion de CV incomplets et stabilite du classement.',
+          FR: 'Gestion de CV incomplets et stabilité du classement.',
         },
         impact: {
           EN: 'Provided clearer candidate prioritization for interview decisions.',
           KINY: 'Yatanze uburyo busobanutse bwo gushyira imbere abakandida mu guhamagara interviews.',
-          FR: 'A fourni une priorisation plus claire pour les decisions d entretien.',
+          FR: 'A fourni une priorisation plus claire pour les décisions d’entretien.',
         },
       },
     },
@@ -779,34 +779,34 @@ export const portfolioData = {
       description: {
         EN: 'Movie recommendation system using machine learning with dashboards.',
         KINY: 'Sisitemu itanga inama za filime hifashishijwe machine learning na dashboards.',
-        FR: 'Systeme de recommandation de films avec machine learning et tableaux de bord.',
+        FR: 'Système de recommandation de films avec machine learning et tableaux de bord.',
       },
       caseStudy: {
         problem: {
           EN: 'Users struggled to discover relevant movies quickly.',
           KINY: 'Abakoresha bagiraga ikibazo cyo kubona filime zijyanye n ibyo bakunda vuba.',
-          FR: 'Les utilisateurs trouvaient difficile de decouvrir rapidement les films pertinents.',
+          FR: 'Les utilisateurs trouvaient difficile de découvrir rapidement les films pertinents.',
         },
         solution: {
           EN: 'Built a recommendation engine with preference signals and trend-aware suggestions.',
           KINY: 'Nubatse recommendation engine ikoresha preferences n ibigezweho.',
-          FR: 'Moteur de recommandation base sur preferences et tendances.',
+          FR: 'Moteur de recommandation basé sur préférences et tendances.',
         },
         role: {
           EN: 'Developed recommendation logic, API, and performance dashboard.',
           KINY: 'Nakoze logic ya recommendation, API, na dashboard y imikorere.',
-          FR: 'Developpement logique recommandation, API et dashboard de performance.',
+          FR: 'Développement logique recommandation, API et dashboard de performance.',
         },
         architecture: ['User Signal Collector', 'Recommendation Engine', 'Django API', 'Analytics Dashboard'],
         challenges: {
           EN: 'Cold-start recommendations and balancing relevance with diversity.',
           KINY: 'Cold-start no guhuza relevance n diversity.',
-          FR: 'Probleme de cold start et equilibre pertinence/diversite.',
+          FR: 'Problème de cold start et équilibre pertinence/diversité.',
         },
         impact: {
           EN: 'Improved navigation confidence and reduced random browsing behavior.',
           KINY: 'Yafashije abakoresha gufata ibyemezo vuba no kugabanya gutembera nta ntego.',
-          FR: 'Amelioration de la confiance de navigation et reduction du parcours aleatoire.',
+          FR: 'Amélioration de la confiance de navigation et réduction du parcours aléatoire.',
         },
       },
     },
@@ -818,34 +818,34 @@ export const portfolioData = {
       description: {
         EN: 'System for managing tenants, rent, and property records.',
         KINY: 'Sisitemu yo gucunga abakodesha, ubwishyu, n amakuru y inzu.',
-        FR: 'Systeme de gestion des locataires, loyers et biens immobiliers.',
+        FR: 'Système de gestion des locataires, loyers et biens immobiliers.',
       },
       caseStudy: {
         problem: {
           EN: 'Landlords tracked payments and tenant records manually.',
           KINY: 'Abafite inzu bakoreshaga uburyo bw intoki mu gukurikirana ubwishyu n amakuru y abakodesha.',
-          FR: 'Les proprietaires suivaient paiements et dossiers locataires manuellement.',
+          FR: 'Les propriétaires suivaient paiements et dossiers locataires manuellement.',
         },
         solution: {
           EN: 'Created a centralized dashboard for rents, tenant profiles, and property history.',
           KINY: 'Nashyizeho dashboard imwe ihuza ubwishyu, profile z abakodesha, n amateka y inzu.',
-          FR: 'Tableau centralise pour loyers, profils locataires et historique immobilier.',
+          FR: 'Tableau centralisé pour loyers, profils locataires et historique immobilier.',
         },
         role: {
           EN: 'Led backend models, auth rules, and payment tracking workflows.',
           KINY: 'Nari nshinzwe models za backend, amategeko ya authentication, na workflows zo gukurikirana ubwishyu.',
-          FR: 'Conduite des modeles backend, regles d authentification et suivi des paiements.',
+          FR: 'Conduite des modèles backend, règles d’authentification et suivi des paiements.',
         },
         architecture: ['Tenant UI', 'Django Services', 'PostgreSQL', 'Notification Jobs'],
         challenges: {
           EN: 'Maintaining data consistency across tenant and billing updates.',
           KINY: 'Kubungabunga consistency y amakuru hagati y abakodesha n ubwishyu.',
-          FR: 'Maintenir la coherence des donnees entre locataires et facturation.',
+          FR: 'Maintenir la cohérence des données entre locataires et facturation.',
         },
         impact: {
           EN: 'Improved clarity of rent status and reduced missed follow-ups.',
           KINY: 'Yorohereje kumenya status y ubwishyu no kugabanya follow-ups zibura.',
-          FR: 'Amelioration de la visibilite des loyers et reduction des suivis manques.',
+          FR: 'Amélioration de la visibilité des loyers et réduction des suivis manques.',
         },
       },
     },
@@ -857,34 +857,34 @@ export const portfolioData = {
       description: {
         EN: 'Platform connecting citizens with public services and feedback systems.',
         KINY: 'Urubuga ruhuza abaturage na serivisi za leta n uburyo bwo gutanga ibitekerezo.',
-        FR: 'Plateforme reliant citoyens, services publics et systeme de feedback.',
+        FR: 'Plateforme reliant citoyens, services publics et système de feedback.',
       },
       caseStudy: {
         problem: {
           EN: 'Citizen feedback channels were fragmented and hard to track.',
           KINY: 'Inzira zo gutanga ibitekerezo zari zitandukanye kandi bigoye gukurikirana.',
-          FR: 'Les canaux de feedback citoyen etaient fragmentes et difficiles a suivre.',
+          FR: 'Les canaux de feedback citoyen étaient fragmentés et difficiles a suivre.',
         },
         solution: {
           EN: 'Built a unified ticket and response workflow between citizens and service teams.',
           KINY: 'Nubatse workflow imwe ya tickets n ibisubizo hagati y abaturage n amakipe ya serivisi.',
-          FR: 'Workflow unique de tickets et reponses entre citoyens et services.',
+          FR: 'Workflow unique de tickets et réponses entre citoyens et services.',
         },
         role: {
           EN: 'Designed APIs, case lifecycle rules, and role-based access controls.',
           KINY: 'Nateguye APIs, amategeko y ubuzima bwa case, na role-based access.',
-          FR: 'Conception APIs, cycle de vie des cas et controle d acces par role.',
+          FR: 'Conception APIs, cycle de vie des cas et contrôle d’accès par rôle.',
         },
         architecture: ['Citizen Portal', 'Case API', 'Workflow Engine', 'Admin Resolution Panel'],
         challenges: {
           EN: 'Designing transparent status updates for different user groups.',
           KINY: 'Gutegura updates za status zisobanutse ku byiciro bitandukanye by abakoresha.',
-          FR: 'Concevoir des mises a jour de statut transparentes pour differents profils.',
+          FR: 'Concevoir des mises à jour de statut transparentes pour differents profils.',
         },
         impact: {
           EN: 'Enabled clearer communication between citizens and service operators.',
           KINY: 'Yafashije itumanaho risobanutse hagati y abaturage n abatanga serivisi.',
-          FR: 'A permis une communication plus claire entre citoyens et operateurs publics.',
+          FR: 'A permis une communication plus claire entre citoyens et opérateurs publics.',
         },
       },
     },
@@ -896,34 +896,34 @@ export const portfolioData = {
       description: {
         EN: 'Student assignment submission and academic management system.',
         KINY: 'Sisitemu yohereza assignments no gucunga ibikorwa by amashuri.',
-        FR: 'Systeme de soumission des devoirs et gestion academique.',
+        FR: 'Système de soumission des devoirs et gestion académique.',
       },
       caseStudy: {
         problem: {
           EN: 'Assignment workflows were inconsistent across classes.',
           KINY: 'Uburyo bwo kohereza assignments bwari butandukanye mu masomo atandukanye.',
-          FR: 'Les workflows de devoirs etaient incoherents entre classes.',
+          FR: 'Les workflows de devoirs étaient incohérents entre classes.',
         },
         solution: {
           EN: 'Developed a unified submission, grading, and feedback workflow.',
           KINY: 'Nubatse uburyo bumwe bwo kohereza, gutanga amanota, no gutanga feedback.',
-          FR: 'Workflow unifie de soumission, notation et feedback.',
+          FR: 'Workflow unifié de soumission, notation et feedback.',
         },
         role: {
           EN: 'Implemented data model, instructor tools, and student assignment flow.',
           KINY: 'Nashyize mu bikorwa data model, ibikoresho by abarimu, n uburyo bw abanyeshuri.',
-          FR: 'Implementation du modele de donnees, outils enseignants et parcours etudiant.',
+          FR: 'Implémentation du modèle de données, outils enseignants et parcours étudiant.',
         },
         architecture: ['Student Interface', 'Assignment Service', 'MySQL Storage', 'Instructor Dashboard'],
         challenges: {
           EN: 'Handling deadlines, versioning, and feedback history cleanly.',
           KINY: 'Gucunga deadlines, versions, n amateka ya feedback neza.',
-          FR: 'Gerer echeances, versions et historique de feedback proprement.',
+          FR: 'Gérer échéances, versions et historique de feedback proprement.',
         },
         impact: {
           EN: 'Improved assignment visibility for both students and instructors.',
           KINY: 'Yongereye kugaragara kw ibikorwa ku banyeshuri n abarimu.',
-          FR: 'Amelioration de la visibilite des devoirs pour etudiants et enseignants.',
+          FR: 'Amélioration de la visibilité des devoirs pour étudiants et enseignants.',
         },
       },
     },
@@ -942,7 +942,7 @@ export const portfolioData = {
       title: {
         EN: 'Coding Session with Team',
         KINY: 'Igihe cyo Gukora Code hamwe n Itsinda',
-        FR: 'Session de Codage en Equipe',
+        FR: 'Session de Codage en Équipe',
       },
       image: '/coding_session.webp',
       category: 'Projects',
@@ -951,7 +951,7 @@ export const portfolioData = {
       title: {
         EN: 'Portfolio Profile Event Shot',
         KINY: 'Ifoto yo mu Birori bya Portfolio',
-        FR: 'Photo lors d un Evenement Portfolio',
+        FR: 'Photo lors d’un Événement Portfolio',
       },
       image: '/olivier_image.webp',
       category: 'Events',
@@ -966,7 +966,7 @@ export const portfolioData = {
     statement: {
       EN: 'My vision is to build intelligent and scalable systems that transform industries in Africa and beyond.',
       KINY: 'Intego yanjye ni ukubaka sisitemu zifite ubwenge, zishobora kwaguka, kandi zihinduye ubukungu bwa Afrika n isi yose.',
-      FR: 'Ma vision est de construire des systemes intelligents et evolutifs qui transforment les industries en Afrique et au-dela.',
+      FR: 'Ma vision est de construire des systèmes intelligents et évolutifs qui transforment les industries en Afrique et au-delà.',
     },
   },
 }
