@@ -14,15 +14,25 @@ import { projectPath } from './projectRoutes'
  * content, so it points here too rather than competing with it in search.
  */
 export const SITE_ORIGIN = 'https://nsolivier.me'
-export const SITE_NAME = 'NSENGIMANA Olivier'
+export const SITE_NAME = 'Nsengimana Olivier'
 export const DEFAULT_IMAGE = `${SITE_ORIGIN}/olivier_hero.jpeg`
 
+/**
+ * The name leads every title. People searching "Nsengimana Olivier" are looking
+ * for a person, not a technology, so the name comes before the role and the
+ * stack — and it is written in title case, matching how the query is typed and
+ * how the rest of the web spells it, rather than the all-caps form the hero
+ * uses as a piece of type design.
+ *
+ * These strings are duplicated in index.html's <head>, which is what a crawler
+ * that does not run JavaScript reads. `src/__tests__/seo-metadata.test.js`
+ * fails if the two ever drift.
+ */
 export const DEFAULT_TITLE =
-  'NSENGIMANA Olivier — Software Engineer in Kigali, Rwanda | React, Django, AI Systems'
+  'Nsengimana Olivier — Full-Stack & AI Engineer in Kigali, Rwanda'
 export const DEFAULT_DESCRIPTION =
-  'NSENGIMANA Olivier is a software engineer in Kigali, Rwanda, building intelligent, ' +
-  'scalable systems with React, Django, Next.js and machine learning. Case studies, ' +
-  'skills and contact details.'
+  'Nsengimana Olivier is a full-stack software engineer in Kigali, Rwanda, ' +
+  'building AI systems with React, Django and Next.js. Case studies, skills and contact.'
 
 const absolute = (path) => `${SITE_ORIGIN}${path === '/' ? '/' : path}`
 
@@ -39,8 +49,8 @@ export function metaForRoute(project, language = 'EN') {
 
   const summary = project.description[language] ?? project.description.EN
   return {
-    title: `${project.name} — case study by NSENGIMANA Olivier`,
-    description: `${summary} Architecture, engineering role and impact, built by NSENGIMANA Olivier in Kigali, Rwanda.`,
+    title: `${project.name} — case study by ${SITE_NAME}`,
+    description: `${summary} Architecture, engineering role and impact, built by ${SITE_NAME}, full-stack software engineer in Kigali, Rwanda.`,
     canonical: absolute(projectPath(project)),
     image: DEFAULT_IMAGE,
   }
@@ -72,7 +82,10 @@ function projectJsonLd(project, language) {
     inLanguage: 'en',
     author: {
       '@type': 'Person',
-      name: 'NSENGIMANA Olivier',
+      /* Same @id as the home page's Person node, so a crawler reads the case
+         studies as work by that one entity rather than a namesake. */
+      '@id': `${SITE_ORIGIN}/#person`,
+      name: SITE_NAME,
       url: `${SITE_ORIGIN}/`,
     },
     isPartOf: {

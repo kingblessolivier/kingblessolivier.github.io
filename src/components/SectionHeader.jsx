@@ -1,6 +1,19 @@
 import { motion } from 'framer-motion'
 
-export default function SectionHeader({ tag, title, subtitle, align = 'left', number, children }) {
+export default function SectionHeader({
+  tag,
+  title,
+  /**
+   * Read out after the visible title but not drawn: a bare "About" or
+   * "Projects" heading leaves both assistive tech and crawlers without the
+   * subject of the section. Pass the rest of the phrase here.
+   */
+  titleContext,
+  subtitle,
+  align = 'left',
+  number,
+  children,
+}) {
   const centered = align === 'center'
   return (
     <div className={`mb-14 ${centered ? 'text-center' : ''} relative`}>
@@ -24,6 +37,7 @@ export default function SectionHeader({ tag, title, subtitle, align = 'left', nu
         className="section-header-title"
       >
         {title}
+        {titleContext && <span className="sr-only">{titleContext}</span>}
       </motion.h2>
 
       {/* Accent rule */}

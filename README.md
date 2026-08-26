@@ -1,8 +1,40 @@
-# kingblessolivier.github.io
+# Nsengimana Olivier — personal site (nsolivier.me)
 
-Source for my personal site, live at **[nsolivier.me](https://nsolivier.me/)**.
+Source for my personal site, live at **[nsolivier.me](https://nsolivier.me/)**,
+built with React, Vite, Tailwind CSS and Framer Motion.
 
-A premium personal portfolio website for NSENGIMANA Olivier, built with React, Vite, Tailwind CSS, and Framer Motion.
+**Nsengimana Olivier** (written *NSENGIMANA Olivier* surname-first, and
+*Olivier Nsengimana* given-name-first) is a full-stack software engineer based in
+Kigali, Rwanda, building intelligent, scalable AI systems with React, Next.js,
+Django and machine learning.
+
+- Portfolio: **[nsolivier.me](https://nsolivier.me/)**
+- GitHub: **[@kingblessolivier](https://github.com/kingblessolivier)**
+- LinkedIn: **[nsengimana-olivier](https://www.linkedin.com/in/nsengimana-olivier-a6bb21408/)**
+
+## Case studies
+
+Every project below has its own page on the portfolio, with the problem,
+architecture, engineering role, challenges and impact written out.
+
+| Project | What it does | Stack |
+| --- | --- | --- |
+| [FrameAfrica](https://nsolivier.me/projects/frameafrica/) | Digital newspaper platform delivering AI-assisted news coverage across Rwanda and Africa | Next.js, NestJS, PostgreSQL, Redis, Kubernetes |
+| [MedLink System](https://nsolivier.me/projects/medlink-system/) | Lets patients book doctor appointments and find nearby hospitals without queueing | React, Django, PostgreSQL, Maps API |
+| [Candidate Screening System](https://nsolivier.me/projects/candidate-screening-system/) | AI-powered HR recruitment automation and candidate evaluation | Python, Django, AI/ML |
+| [AI Profile Screening System](https://nsolivier.me/projects/ai-profile-screening-system/) | Machine learning system that analyses and ranks candidate profiles | Python, Machine Learning |
+| [CineRec](https://nsolivier.me/projects/cinerec/) | Movie recommendation system with machine learning and dashboards | Python, Django, ML |
+| [Property Management System](https://nsolivier.me/projects/property-management-system/) | Manages tenants, rent and property records | Django, PostgreSQL |
+| [Citizen Engagement System](https://nsolivier.me/projects/citizen-engagement-system/) | Connects citizens with public services and feedback channels | Django, REST API |
+| [ClassHub](https://nsolivier.me/projects/classhub/) | Student assignment submission and academic management | Django, MySQL |
+
+## Personal-brand SEO
+
+The goal is that a search for **"Nsengimana Olivier"** returns this site and the
+GitHub profile, alongside the better-known people who share the name.
+[`seo/playbook.md`](seo/playbook.md) records the strategy, what is already
+shipped here, and the steps that have to be done by hand (GitHub bio and topics,
+backlinks, Search Console).
 
 ## Deployment (GitHub Pages)
 
