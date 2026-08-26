@@ -4,8 +4,8 @@
   "description": "Nsengimana Olivier, full-stack software engineer and AI systems builder based in Kigali, Rwanda.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#05070E",
+  "theme_color": "#05070E",
   "icons": [
     {
       "src": "/favicon.svg",

@@ -7,7 +7,7 @@
    Measured contrast on --bg (#FFFFFF):
      --text        #171717 → 17.4:1  (AAA)
      --text-muted  #595959 →  7.0:1  (AAA large / AA body)
-     --accent      #171717 → 17.4:1  (AAA) — ink, monochrome
+     --accent      #0B4FD6 →  6.8:1  (AA)  — brand blue
    ═══════════════════════════════════════════════════════ */
 :root {
   --bg:           #FFFFFF;   /* Pure white */
@@ -16,8 +16,8 @@
   --text:         #171717;   /* Near-black ink — 17.4:1 on white */
   --text-muted:   #595959;   /* Neutral gray — 7.0:1 on white */
   --border:       #E6E6E6;   /* Hairline neutral border */
-  --accent:       #171717;   /* Ink — monochrome system accent (17.4:1 on white) */
-  --accent-purple:#6B7280;   /* Graphite — second gradient stop for subtle sheen */
+  --accent:       #0B4FD6;   /* Brand blue, darkened for white — 6.8:1 (AA body) */
+  --accent-purple:#0059F9;   /* The mark's own blue — second gradient stop */
   --accent-contrast:#FFFFFF; /* Foreground on a solid accent surface */
   --success:      #059669;   /* Emerald-600 */
   --shadow:       0 16px 42px -26px rgba(0, 0, 0, 0.14);
@@ -48,7 +48,7 @@
    Measured contrast on --bg (#000000):
      --text        #F5F5F5 → 19.3:1  (AAA)
      --text-muted  #A3A3A3 →  8.5:1  (AAA large / AA body)
-     --accent      #EDEDED → 18.3:1  (AAA) — silver, monochrome
+     --accent      #3E9BFF →  7.2:1  (AA)  — brand blue
    ═══════════════════════════════════════════════════════ */
 :root.dark {
   --bg:           #000000;   /* Pure black */
@@ -57,9 +57,9 @@
   --text:         #F5F5F5;   /* Near-white ink — 19.3:1 on black, avoids halation */
   --text-muted:   #A3A3A3;   /* Neutral gray — 8.5:1 on black */
   --border:       #262626;   /* Visible hairline edge on black */
-  --accent:       #EDEDED;   /* Silver — monochrome system accent (18.3:1 on black) */
-  --accent-purple:#9CA3AF;   /* Gray — second gradient stop for subtle sheen */
-  --accent-contrast:#0A0A0A; /* Foreground on a solid accent surface */
+  --accent:       #3E9BFF;   /* Brand blue, lifted for the ink ground — 7.2:1 (AA body) */
+  --accent-purple:#019EFC;   /* The sphere's blue — second gradient stop */
+  --accent-contrast:#00040D; /* Foreground on a solid accent surface */
   --success:      #34D399;   /* Emerald-400 */
   --shadow:       0 8px 24px -12px rgba(0, 0, 0, 0.7);
 
@@ -80,6 +80,26 @@
   --terminal-muted:  #2D2B4E;
   --terminal-border: #1E1C34;
   --terminal-footer: #0D0B1A;
+}
+
+/* ═══════════════════════════════════════════════════════
+   BRAND — the logo's own colours.
+   These are constants: the mark is drawn in them at every
+   size and on every ground, so they never change per theme.
+   The theme-facing --accent below is a contrast-tuned
+   variant of --brand-blue, not the same value: #0059F9 is
+   5.5:1 on white and 3.7:1 on the ink ground — fine for a
+   graphic, short of AA for small text — so each theme takes
+   the variant that clears it.
+
+   Sampled directly from Nsolivier.png rather than eyeballed.
+   ═══════════════════════════════════════════════════════ */
+:root {
+  --brand-blue:       #0059F9;  /* the diagonal of the N */
+  --brand-blue-light: #019EFC;  /* the sphere, and the diagonal's highlight */
+  --brand-blue-deep:  #0047E4;  /* the diagonal's shadow */
+  --brand-silver:     #E1E5ED;  /* the stems */
+  --brand-ink:        #00040D;  /* the field the mark sits on */
 }
 
 /* ─── @property for animated conic border ─── */
@@ -1262,4 +1282,29 @@ h1, h2, h3 {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ─── Hero brand backdrop ───────────────────────────────
+   Dark theme only: the source art is a near-black space
+   scene, and on the white theme it reads as a hole in the
+   page. Kept well under the text it sits behind, and faded
+   out toward the left where the headline lives.
+   ─────────────────────────────────────────────────────── */
+.hero-backdrop { display: none; }
+:root.dark .hero-backdrop {
+  display: block;
+  overflow: hidden;
+  z-index: 0;
+}
+:root.dark .hero-backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 50%;
+  opacity: 0.5;
+  -webkit-mask-image: linear-gradient(100deg, transparent 8%, #000 58%, #000 82%, transparent 100%);
+          mask-image: linear-gradient(100deg, transparent 8%, #000 58%, #000 82%, transparent 100%);
+}
+@media (max-width: 800px) {
+  :root.dark .hero-backdrop img { opacity: 0.32; object-position: 62% 42%; }
 }

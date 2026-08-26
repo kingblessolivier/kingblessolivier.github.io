@@ -89,6 +89,16 @@ export default function HeroSection({ labels }) {
   return (
     <section id="home" className="hero-noir relative flex min-h-screen items-center overflow-hidden pt-14">
 
+      {/* ── Brand backdrop ──
+           The artwork is built on a near-black field, so it only belongs on the
+           dark theme; on light it would fight the ground rather than sit under
+           it. CSS hides it outside .dark, and the two widths keep the mobile
+           payload at 16 kB. */}
+      <picture className="hero-backdrop pointer-events-none absolute inset-0" aria-hidden="true">
+        <source media="(max-width: 800px)" srcSet="/hero-bg-768.webp" />
+        <img src="/hero-bg-1536.webp" alt="" width="1536" height="1024" loading="eager" decoding="async" />
+      </picture>
+
       {/* ── Subtle dot grid ── */}
       <div className="hero-dot-grid pointer-events-none absolute inset-0" />
       {/* ── Bottom fade into next section ── */}

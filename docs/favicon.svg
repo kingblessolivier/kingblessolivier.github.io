@@ -1,13 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Nsengimana Olivier">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#1A1A1A"/>
-      <stop offset="1" stop-color="#000000"/>
+    <linearGradient id="fv-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A1428"/><stop offset="1" stop-color="#00040D"/>
+    </linearGradient>
+    <linearGradient id="fv-blue" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#019EFC"/><stop offset="1" stop-color="#0059F9"/>
+    </linearGradient>
+    <linearGradient id="fv-silver" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#C9D0DB"/>
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="16" fill="url(#g)"/>
-  <rect x="0.5" y="0.5" width="63" height="63" rx="15.5" fill="none" stroke="#3A3A3A" stroke-width="1"/>
-  <text x="50%" y="50%" dy="0.07em" text-anchor="middle" dominant-baseline="central"
-        font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="800" fill="#FFFFFF"
-        letter-spacing="-1">NO</text>
+  <rect width="64" height="64" rx="15" fill="url(#fv-bg)"/>
+  <!-- No orbit or sphere: at 16px they collapse into noise. The monogram alone reads. -->
+  <g transform="skewX(-9) translate(6.2 0)">
+    <path d="M17 15 h8 v34 h-8 Z" fill="url(#fv-silver)"/>
+    <path d="M37 15 h8 v34 h-8 Z" fill="url(#fv-silver)"/>
+    <path d="M17 15 h10 L45 41.5 V49 H35 L17 22.5 Z" fill="url(#fv-blue)"/>
+  </g>
 </svg>
