@@ -60,21 +60,23 @@ function TypingDots() {
 
 /* ── Bot avatar ─────────────────────────────────────── */
 function BotAvatar({ size = 28 }) {
+  /* The mark, not an initial. The artwork carries its own dark field, so it is
+     clipped to a disc rather than drawn on a tinted one. */
   return (
-    <div
-      className="flex shrink-0 items-center justify-center rounded-full"
+    <img
+      src="/logo-128.webp"
+      alt=""
+      width={size}
+      height={size}
+      loading="lazy"
+      decoding="async"
+      className="shrink-0 rounded-full object-cover"
       style={{
         width: size,
         height: size,
-        background: 'linear-gradient(135deg, var(--accent), var(--accent-purple))',
-        color: 'var(--accent-contrast)',
-        boxShadow: '0 2px 10px -3px color-mix(in srgb,var(--accent) 60%,transparent)',
-        fontSize: size * 0.45,
-        fontWeight: 700,
+        border: '1px solid color-mix(in srgb,var(--brand-blue) 28%,var(--border))',
       }}
-    >
-      O
-    </div>
+    />
   )
 }
 

@@ -41,7 +41,7 @@ function StatItem({ target, label, suffix = '+', delay = 0 }) {
         className="text-xl font-black tracking-tight text-[var(--text)] sm:text-3xl"
         style={{ fontFamily: "Arial, 'Helvetica Neue', Helvetica, sans-serif", letterSpacing: '-0.03em' }}
       >
-        {count}<span className="text-base text-[var(--accent)]">{suffix}</span>
+        {count}<span className="text-base text-[var(--text-muted)]">{suffix}</span>
       </span>
       <span className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">
         {label}
@@ -119,7 +119,7 @@ export default function HeroSection({ labels }) {
           >
             <span className="section-tag">Hello, I'm</span>
             <span className="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
-              <FiMapPin size={11} className="text-[var(--accent)]" />
+              <FiMapPin size={11} className="text-[var(--text-muted)]" />
               Kigali, Rwanda
             </span>
           </motion.div>
@@ -154,7 +154,7 @@ export default function HeroSection({ labels }) {
               ~/dev<span className="text-[var(--accent)]">$</span>
             </span>
             <span
-              className="font-mono text-sm font-semibold text-[var(--accent)] sm:text-base"
+              className="font-mono text-sm font-semibold text-[var(--text)] sm:text-base"
               style={{ fontFamily: "'JetBrains Mono', 'Fira Code', monospace" }}
             >
               {typedRole}
