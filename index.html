@@ -22,8 +22,14 @@
     <!-- The hero portrait is the Largest Contentful Paint; fetch it early. -->
     <link rel="preload" as="image" href="/olivier_hero.webp" fetchpriority="high" />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!-- iOS ignores SVG icons, so the home-screen icon is the real artwork. -->
+    <!-- The real artwork, cropped to the mark: the source file spends about 40%
+         of its area on empty field, so an uncropped downscale left the N too
+         small to read in a tab. Three sizes rather than one scalable file,
+         because the orbit and the sphere need the pixels at 32 and up. -->
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
