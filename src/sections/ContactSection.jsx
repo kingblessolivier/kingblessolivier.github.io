@@ -126,7 +126,10 @@ export default function ContactSection({ navLabels, sectionText }) {
             09
           </span>
           <span className="section-tag mb-4 block w-fit">{text.sectionTag ?? 'Contact'}</span>
-          <h2 className="section-header-title">{navLabels.contact}</h2>
+          <h2 className="section-header-title">
+            {navLabels.contact}
+            <span className="sr-only"> Nsengimana Olivier</span>
+          </h2>
           <div className="mt-4 h-[3px] w-12 rounded-full" style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent-purple))' }} />
         </div>
 

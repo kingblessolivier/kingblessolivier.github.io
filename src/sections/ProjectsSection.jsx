@@ -82,7 +82,13 @@ export default function ProjectsSection({
     <SectionReveal id="projects" className="section-gap">
       <div className="container-shell">
         <div className="mb-2 flex flex-wrap items-start justify-between gap-6">
-          <SectionHeader tag={text.sectionTag} title={navLabels.projects} subtitle={text.intro} number="03" />
+          <SectionHeader
+            tag={text.sectionTag}
+            title={navLabels.projects}
+            titleContext=" built by Nsengimana Olivier"
+            subtitle={text.intro}
+            number="03"
+          />
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

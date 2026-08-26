@@ -176,6 +176,7 @@ export default function SkillsSection({ navLabels, sectionText }) {
         <SectionHeader
           tag={sectionText.skills.sectionTag}
           title={navLabels.skills}
+          titleContext=" of Nsengimana Olivier"
           number="05"
         />
 

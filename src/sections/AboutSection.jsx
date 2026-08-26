@@ -21,7 +21,12 @@ export default function AboutSection({ language, navLabels, sectionText }) {
 
         {/* ── Header ── */}
         <div className="mb-10">
-          <SectionHeader tag={aboutText.sectionTag} title={navLabels.about} number="02" />
+          <SectionHeader
+            tag={aboutText.sectionTag}
+            title={navLabels.about}
+            titleContext=" Nsengimana Olivier, full-stack software engineer in Kigali, Rwanda"
+            number="02"
+          />
         </div>
 
         {/* ── Main grid ── */}

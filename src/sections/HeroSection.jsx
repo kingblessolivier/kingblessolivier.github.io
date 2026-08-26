@@ -130,7 +130,7 @@ export default function HeroSection({ labels }) {
             </span>
             {/* Keeps the page's single h1 readable as one descriptive line for
                 crawlers and screen readers, without changing the visual design. */}
-            <span className="sr-only"> — Software Engineer in Kigali, Rwanda</span>
+            <span className="sr-only"> — Full-Stack Software Engineer in Kigali, Rwanda, building AI systems</span>
           </motion.h1>
 
           {/* Animated role */}
