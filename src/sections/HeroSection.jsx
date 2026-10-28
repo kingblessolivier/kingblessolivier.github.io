@@ -1,77 +1,47 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiArrowRight, FiMapPin, FiDownload } from 'react-icons/fi'
+import { FiArrowRight, FiArrowUpRight, FiGithub, FiLinkedin, FiInstagram, FiMapPin, FiMoon, FiSun, FiTerminal } from 'react-icons/fi'
+import { SiX } from 'react-icons/si'
 import { portfolioData } from '../assets/data'
-import MagneticButton from '../components/MagneticButton'
-import TerminalWidget from '../components/TerminalWidget'
-import TechMarquee from '../components/TechMarquee'
-import LiveClock from '../components/LiveClock'
+import LanguageSwitcher from '../components/LanguageSwitcher'
 
-/* ── Count-up hook ──────────────────────────────────── */
-function useCountUp(target, duration = 1100, start = false) {
-  const [value, setValue] = useState(0)
+/* Every section the panel can jump to, in page order */
+const SECTIONS = [
+  { id: 'about',    label: 'About' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'systems',  label: 'Systems' },
+  { id: 'skills',   label: 'Skills' },
+  { id: 'awards',   label: 'Awards' },
+  { id: 'gallery',  label: 'Gallery' },
+  { id: 'work',     label: 'Experience' },
+  { id: 'contact',  label: 'Contact' },
+]
+
+const SOCIALS = [
+  { icon: FiGithub,    label: 'GitHub',    href: portfolioData.social.github },
+  { icon: FiLinkedin,  label: 'LinkedIn',  href: portfolioData.social.linkedin },
+  { icon: SiX,         label: 'X',         href: portfolioData.social.twitter },
+  { icon: FiInstagram, label: 'Instagram', href: portfolioData.social.instagram },
+].filter((s) => s.href)
+
+function useTypedRole(lines) {
+  const [typed, setTyped] = useState('')
   useEffect(() => {
-    if (!start) return
-    let raf
-    const t0 = performance.now()
-    const tick = (now) => {
-      const p = Math.min((now - t0) / duration, 1)
-      setValue(Math.round((1 - Math.pow(1 - p, 3)) * target))
-      if (p < 1) raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [target, duration, start])
-  return value
-}
-
-/* ── Inline stat item (no card box) ────────────────── */
-function StatItem({ target, label, suffix = '+', delay = 0 }) {
-  const [started, setStarted] = useState(false)
-  const count = useCountUp(target, 1000, started)
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay }}
-      onAnimationComplete={() => setStarted(true)}
-      className="flex flex-col gap-1"
-    >
-      <span
-        className="text-xl font-black tracking-tight text-[var(--text)] sm:text-3xl"
-        style={{ fontFamily: "Arial, 'Helvetica Neue', Helvetica, sans-serif", letterSpacing: '-0.03em' }}
-      >
-        {count}<span className="text-base text-[var(--text-muted)]">{suffix}</span>
-      </span>
-      <span className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">
-        {label}
-      </span>
-    </motion.div>
-  )
-}
-
-/* ── Main component ─────────────────────────────────── */
-export default function HeroSection({ labels }) {
-  const heroPhoto = '/olivier_hero.webp'
-  const [typedRole, setTypedRole] = useState('')
-
-  useEffect(() => {
-    const phases = labels.roleLines
     let timeoutId, phaseIdx = 0, cursor = 0, mode = 'type'
     const tick = () => {
-      const phase = phases[phaseIdx]
+      const phase = lines[phaseIdx]
       if (mode === 'type') {
-        setTypedRole(phase.slice(0, ++cursor))
+        setTyped(phase.slice(0, ++cursor))
         if (cursor >= phase.length) {
-          mode = 'pause'
-          timeoutId = setTimeout(() => { mode = 'delete'; tick() }, 1800)
+          mode = 'delete'
+          timeoutId = setTimeout(tick, 1800)
           return
         }
         timeoutId = setTimeout(tick, 80)
-      } else if (mode === 'delete') {
-        setTypedRole(phase.slice(0, --cursor))
+      } else {
+        setTyped(phase.slice(0, --cursor))
         if (cursor <= 0) {
-          phaseIdx = (phaseIdx + 1) % phases.length
+          phaseIdx = (phaseIdx + 1) % lines.length
           mode = 'type'
           timeoutId = setTimeout(tick, 500)
           return
@@ -79,239 +49,168 @@ export default function HeroSection({ labels }) {
         timeoutId = setTimeout(tick, 42)
       }
     }
-    setTypedRole('')
+    setTyped('')
     timeoutId = setTimeout(tick, 400)
     return () => clearTimeout(timeoutId)
-  }, [labels.roleLines])
+  }, [lines])
+  return typed
+}
 
+/* The section currently under the reading line, for the panel's nav */
+function useActiveSection() {
+  const [active, setActive] = useState('about')
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => entry.isIntersecting && setActive(entry.target.id)),
+      { rootMargin: '-35% 0px -60% 0px' },
+    )
+    SECTIONS.forEach(({ id }) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+    return () => observer.disconnect()
+  }, [])
+  return active
+}
+
+const fade = (delay) => ({
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] },
+})
+
+/**
+ * The identity panel. On large screens it is the fixed left column of the
+ * split layout; on small screens it is the intro at the top of the page.
+ */
+export default function HeroSection({ labels, language, setLanguage, theme, toggleTheme, onOpenTerminal }) {
+  const typedRole = useTypedRole(labels.roleLines)
+  const active = useActiveSection()
   const jumpTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
   return (
-    <section id="home" className="hero-noir relative flex min-h-screen items-center overflow-hidden pt-14">
+    <section
+      id="home"
+      className="flex flex-col pt-28 pb-12 lg:sticky lg:top-0 lg:h-screen lg:justify-between lg:overflow-y-auto lg:py-12"
+    >
+      <div>
+        {/* Availability */}
+        <motion.div {...fade(0)} className="flex items-center gap-4">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-3 py-1.5 text-xs font-medium text-[var(--text)]">
+            <span className="pulse-dot h-2 w-2 rounded-full bg-[var(--success)]" />
+            {labels.availableForWork}
+          </span>
+        </motion.div>
 
-      {/* ── Brand backdrop ──
-           The artwork is built on a near-black field, so it only belongs on the
-           dark theme; on light it would fight the ground rather than sit under
-           it. CSS hides it outside .dark, and the two widths keep the mobile
-           payload at 16 kB. */}
-      <picture className="hero-backdrop pointer-events-none absolute inset-0" aria-hidden="true">
-        <source media="(max-width: 800px)" srcSet="/hero-bg-768.webp" />
-        <img src="/hero-bg-1536.webp" alt="" width="1536" height="1024" loading="eager" decoding="async" />
-      </picture>
+        {/* Name — the page's only h1 */}
+        <motion.h1 {...fade(0.08)} className="mt-6 font-extrabold leading-[0.92] tracking-[-0.045em]">
+          <span className="block text-[clamp(2.4rem,10vw,3.6rem)] text-[var(--text)] lg:text-[2.6rem] xl:text-[3rem]">NSENGIMANA</span>
+          <span className="block text-[clamp(2.4rem,10vw,3.6rem)] text-[var(--text-muted)] lg:text-[2.6rem] xl:text-[3rem]">Olivier</span>
+          <span className="sr-only"> — Full-Stack Software Engineer in Kigali, Rwanda, building AI systems</span>
+        </motion.h1>
 
-      {/* ── Subtle dot grid ── */}
-      <div className="hero-dot-grid pointer-events-none absolute inset-0" />
-      {/* ── Bottom fade into next section ── */}
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[var(--bg)] to-transparent" />
+        <motion.p {...fade(0.16)} className="mt-5 flex min-h-6 items-center gap-2 font-mono text-sm">
+          <span className="text-[var(--accent)]">$</span>
+          <span className="text-[var(--text)]">{typedRole}</span>
+          <span className="typing-caret" aria-hidden="true" />
+        </motion.p>
 
-      {/* ══ CONTENT ══ */}
-      <div className="container-shell relative z-10 grid w-full items-center gap-10 pt-6 pb-14 sm:pt-8 sm:pb-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 lg:pt-12 lg:pb-20">
+        <motion.p {...fade(0.22)} className="mt-5 max-w-sm text-base leading-relaxed text-[var(--text-muted)]">
+          {labels.heroHeadline}
+        </motion.p>
 
-        {/* ─── LEFT COLUMN ─── */}
-        <div className="flex flex-col">
+        <motion.p {...fade(0.26)} className="mt-3 flex items-center gap-1.5 font-mono text-xs text-[var(--text-muted)]">
+          <FiMapPin size={12} className="text-[var(--accent)]" />
+          Kigali, Rwanda
+        </motion.p>
 
-          {/* Greeting pill + location */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.05 }}
-            className="mb-7 flex flex-wrap items-center gap-3"
+        {/* Actions */}
+        <motion.div {...fade(0.3)} className="mt-7 flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => jumpTo('projects')}
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--text)] px-5 text-sm font-semibold text-[var(--bg)] transition hover:opacity-85"
           >
-            <span className="section-tag">Hello, I'm</span>
-            <span className="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
-              <FiMapPin size={11} className="text-[var(--text-muted)]" />
-              Kigali, Rwanda
-            </span>
-          </motion.div>
-
-          {/* Name */}
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.72, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-            className="font-black leading-[0.9] tracking-[-0.04em]"
-            style={{ fontFamily: "Arial, 'Helvetica Neue', Helvetica, sans-serif" }}
+            {labels.viewProjects}
+            <FiArrowRight size={15} />
+          </button>
+          <button
+            type="button"
+            onClick={() => jumpTo('contact')}
+            className="inline-flex min-h-11 items-center rounded-full border border-[var(--border)] px-5 text-sm font-semibold text-[var(--text)] transition hover:border-[var(--text-muted)]"
           >
-            <span className="block text-[clamp(2.1rem,8.5vw,6.5rem)] text-[var(--text)]">
-              NSENGIMANA
-            </span>{' '}
-            <span className="block text-[clamp(2.1rem,8.5vw,6.5rem)] gradient-text">
-              Olivier
-            </span>
-            {/* Keeps the page's single h1 readable as one descriptive line for
-                crawlers and screen readers, without changing the visual design. */}
-            <span className="sr-only"> — Full-Stack Software Engineer in Kigali, Rwanda, building AI systems</span>
-          </motion.h1>
-
-          {/* Animated role */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.38 }}
-            className="mt-5 flex items-center gap-2"
+            {labels.contactMe}
+          </button>
+          <a
+            href={portfolioData.social.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-11 items-center gap-1 px-3 text-sm font-medium text-[var(--text-muted)] transition hover:text-[var(--text)]"
           >
-            <span className="select-none font-mono text-sm text-[var(--text-muted)]">
-              ~/dev<span className="text-[var(--accent)]">$</span>
-            </span>
-            <span
-              className="font-mono text-sm font-semibold text-[var(--text)] sm:text-base"
-              style={{ fontFamily: "'JetBrains Mono', 'Fira Code', monospace" }}
-            >
-              {typedRole}
-            </span>
-            <span className="typing-caret" aria-hidden="true" />
-          </motion.div>
+            Resume
+            <FiArrowUpRight size={14} />
+          </a>
+        </motion.div>
 
-          {/* Bio */}
-          <motion.p
-            key={labels.heroHeadline}
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.48 }}
-            className="mt-6 max-w-[52ch] text-[15px] leading-[1.95] text-[var(--text-muted)]"
-          >
-            {labels.heroHeadline}
-          </motion.p>
-
-          {/* CTA buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.58 }}
-            className="mt-8 flex flex-wrap items-center gap-3"
-          >
-            <MagneticButton
-              onClick={() => jumpTo('projects')}
-              className="glow-btn flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold active:scale-95"
-            >
-              {labels.viewProjects}
-              <FiArrowRight size={14} />
-            </MagneticButton>
-
-            <MagneticButton
-              onClick={() => jumpTo('contact')}
-              className="card-surface flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold active:scale-95 hover:border-[var(--accent)]"
-            >
-              {labels.contactMe}
-            </MagneticButton>
-
-            <a
-              href={portfolioData.social.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-1.5 px-2 py-3.5 text-xs font-medium text-[var(--text-muted)] transition hover:text-[var(--accent)]"
-            >
-              <FiDownload size={13} />
-              Resume
-            </a>
-          </motion.div>
-
-          {/* Mobile photo */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.52 }}
-            className="mt-8 block w-fit lg:hidden"
-          >
-            <div className="profile-ring">
-              <div className="h-44 w-36 overflow-hidden rounded-[2rem] sm:h-52 sm:w-40">
-                <img
-                  src={heroPhoto}
-                  alt="NSENGIMANA Olivier"
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                  className="hero-clean-image h-full w-full object-cover"
-                />
-              </div>
-            </div>
-          </motion.div>
-
-          {/* ── Stats — inline row with dividers ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.68 }}
-            className="mt-10 flex items-center gap-0 border-t border-[var(--border)] pt-8"
-          >
-            <StatItem
-              target={portfolioData.stats.projects}
-              label={labels.projectsLabel}
-              delay={0.72}
-            />
-            <div className="mx-4 h-10 w-px bg-[var(--border)] sm:mx-8" />
-            <StatItem
-              target={portfolioData.stats.systemsBuilt}
-              label={labels.systemsLabel}
-              delay={0.82}
-            />
-            <div className="mx-4 h-10 w-px bg-[var(--border)] sm:mx-8" />
-            <StatItem
-              target={portfolioData.stats.certificates}
-              label={labels.certificatesLabel}
-              delay={0.92}
-            />
-          </motion.div>
-        </div>
-
-        {/* ─── RIGHT COLUMN ─── */}
-        <div className="relative hidden lg:flex lg:flex-col lg:items-center lg:gap-4">
-
-          {/* ── Clock + Weather — above photo ── */}
-          <LiveClock />
-
-          {/* ── Profile photo ── */}
-          <div className="relative">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.93, y: 18 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.72, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="profile-ring relative z-10"
-            >
-              <div className="relative h-[20rem] w-[15.5rem] overflow-hidden rounded-[2.3rem]">
-                <img
-                  src={heroPhoto}
-                  alt="NSENGIMANA Olivier"
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                  sizes="248px"
-                  className="hero-clean-image h-full w-full object-cover"
-                />
-                <div
-                  className="pointer-events-none absolute inset-0 rounded-[inherit]"
-                  style={{ background: 'linear-gradient(180deg, transparent 55%, color-mix(in srgb, var(--bg) 45%, transparent) 100%)' }}
-                />
-              </div>
-            </motion.div>
-
-            {/* ── Available badge — right of photo ── */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 1.1, type: 'spring', stiffness: 300 }}
-              className="absolute -right-4 bottom-16 z-20 flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-3.5 py-1.5 text-xs font-semibold text-[var(--text)] shadow-md backdrop-blur"
-            >
-              <span className="pulse-dot h-2 w-2 rounded-full bg-[var(--success)]" style={{ boxShadow: '0 0 8px var(--success)' }} />
-              {labels.availableForWork}
-            </motion.div>
-          </div>
-
-          {/* ── Terminal widget ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.62, delay: 0.58, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full"
-          >
-            <TerminalWidget />
-          </motion.div>
-        </div>
+        {/* Section nav — wide screens only; small screens use the top bar */}
+        <nav aria-label="Sections" className="mt-10 hidden lg:block">
+          <ul>
+            {SECTIONS.map(({ id, label }, i) => {
+              const isActive = active === id
+              return (
+                <li key={id}>
+                  <a
+                    href={`#${id}`}
+                    onClick={(event) => { event.preventDefault(); jumpTo(id) }}
+                    aria-current={isActive ? 'true' : undefined}
+                    className="group flex min-h-8 items-center gap-4 text-sm"
+                  >
+                    <span className="w-5 font-mono text-xs text-[var(--text-muted)]">{String(i + 1).padStart(2, '0')}</span>
+                    <span
+                      className={`h-px transition-all duration-300 ${
+                        isActive ? 'w-14 bg-[var(--text)]' : 'w-7 bg-[var(--border)] group-hover:w-12 group-hover:bg-[var(--text-muted)]'
+                      }`}
+                    />
+                    <span
+                      className={`font-medium transition-colors ${
+                        isActive ? 'text-[var(--text)]' : 'text-[var(--text-muted)] group-hover:text-[var(--text)]'
+                      }`}
+                    >
+                      {labels[id] ?? label}
+                    </span>
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        </nav>
       </div>
 
-      {/* ── Tech marquee ── */}
-      <div className="absolute bottom-4 left-0 right-0">
-        <TechMarquee />
+      {/* Socials + controls */}
+      <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-1">
+          {SOCIALS.map(({ icon: Icon, label, href }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={label}
+              className="flex h-10 w-10 items-center justify-center rounded-full text-[var(--text-muted)] transition hover:bg-[var(--surface)] hover:text-[var(--text)]"
+            >
+              <Icon size={17} />
+            </a>
+          ))}
+        </div>
+        <div className="hidden items-center gap-1.5 lg:flex">
+          <LanguageSwitcher language={language} setLanguage={setLanguage} upward />
+          <button type="button" onClick={onOpenTerminal} aria-label="Open portfolio terminal" title="Portfolio terminal (Ctrl + `)" className="navbar-theme-btn">
+            <FiTerminal size={14} />
+          </button>
+          <button type="button" onClick={toggleTheme} aria-label="Toggle theme" className="navbar-theme-btn">
+            {theme === 'dark' ? <FiSun size={14} /> : <FiMoon size={14} />}
+          </button>
+        </div>
       </div>
     </section>
   )

@@ -267,7 +267,7 @@ function Entry({ prompt, command, lines }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.14 }}
       className="space-y-0.5 text-sm"
-      style={{ fontFamily: "'JetBrains Mono', 'Fira Code', monospace" }}
+      style={{ fontFamily: 'var(--font-mono)' }}
     >
       {/* Echoed command */}
       <div className="flex items-center gap-2">
@@ -418,11 +418,11 @@ function Terminal({ onClose, theme, toggleTheme }) {
             style={{ background: 'rgba(199,199,210,0.1)', border: '1px solid rgba(199,199,210,0.16)' }}
           >
             <FiTerminal size={11} className="text-[#C7C7D2]" />
-            <span className="text-[11px] font-medium text-[#C8C7E8]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+            <span className="text-[11px] font-medium text-[#C8C7E8]" style={{ fontFamily: 'var(--font-mono)' }}>
               olivier@portfolio
             </span>
           </div>
-          <span className="hidden text-[11px] text-[#4B4B70] md:inline" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+          <span className="hidden text-[11px] text-[#4B4B70] md:inline" style={{ fontFamily: 'var(--font-mono)' }}>
             — zsh — 80×24
           </span>
         </div>
@@ -439,7 +439,7 @@ function Terminal({ onClose, theme, toggleTheme }) {
       <div
         className="scrollbar-thin flex-1 space-y-3 overflow-y-auto px-5 py-4"
         onClick={() => inputRef.current?.focus()}
-        style={{ fontFamily: "'JetBrains Mono', 'Fira Code', monospace" }}
+        style={{ fontFamily: 'var(--font-mono)' }}
       >
         {entries.map((entry, i) => (
           <Entry key={i} prompt={entry.prompt} command={entry.command} lines={entry.lines} />
@@ -452,7 +452,7 @@ function Terminal({ onClose, theme, toggleTheme }) {
         className="flex items-center gap-1.5 overflow-x-auto border-t px-5 py-2.5 scrollbar-hidden"
         style={{ borderColor: '#1E1D35', background: '#0B0A1B' }}
       >
-        <span className="shrink-0 text-[9px] font-bold uppercase tracking-[0.2em] text-[#4B4B70]">Try</span>
+        <span className="shrink-0 text-[11px] font-bold uppercase tracking-[0.2em] text-[#4B4B70]">Try</span>
         {QUICK_CMDS.map((cmd) => (
           <button
             key={cmd}
@@ -461,7 +461,7 @@ function Terminal({ onClose, theme, toggleTheme }) {
             style={{
               background: 'rgba(199,199,210,0.07)',
               border: '1px solid rgba(199,199,210,0.16)',
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: 'var(--font-mono)',
             }}
             onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(199,199,210,0.18)'; e.currentTarget.style.color = '#E4E4F0' }}
             onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(199,199,210,0.07)'; e.currentTarget.style.color = '#B4B4BC' }}
@@ -476,7 +476,7 @@ function Terminal({ onClose, theme, toggleTheme }) {
         className="flex items-center gap-2 border-t px-5 py-3.5"
         style={{ borderColor: '#1E1D35', background: '#0D0C1F' }}
       >
-        <span className="shrink-0 text-sm font-medium text-[#C7C7D2]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+        <span className="shrink-0 text-sm font-medium text-[#C7C7D2]" style={{ fontFamily: 'var(--font-mono)' }}>
           <span className="text-[#86EFAC]">➜</span> ~ <span className="text-[#6B6B72]">$</span>
         </span>
         <input
@@ -490,7 +490,7 @@ function Terminal({ onClose, theme, toggleTheme }) {
           spellCheck={false}
           className="flex-1 bg-transparent text-sm text-[#E4E4F0] placeholder:text-[#3A3A42] caret-[#C7C7D2]"
           placeholder="type a command…  (Tab ⇥ to autocomplete)"
-          style={{ fontFamily: "'JetBrains Mono', 'Fira Code', monospace", outline: 'none', boxShadow: 'none' }}
+          style={{ fontFamily: 'var(--font-mono)', outline: 'none', boxShadow: 'none' }}
         />
       </div>
     </motion.div>
@@ -516,35 +516,5 @@ export function TerminalModal({ isOpen, onClose, theme, toggleTheme }) {
       )}
     </AnimatePresence>,
     document.body
-  )
-}
-
-/* ── Floating trigger button ── */
-export function TerminalTrigger({ onClick }) {
-  return (
-    <motion.button
-      onClick={onClick}
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 1.5, duration: 0.4, type: 'spring', stiffness: 300 }}
-      whileHover={{ scale: 1.06, y: -2 }}
-      whileTap={{ scale: 0.94 }}
-      aria-label="Open portfolio terminal"
-      title="Portfolio Terminal  (Ctrl + `)"
-      className="group fixed bottom-6 left-6 z-50 flex h-12 w-12 items-center justify-center rounded-2xl transition-shadow"
-      style={{
-        background: 'radial-gradient(120% 120% at 30% 20%, #1A1838, #0A0A1B)',
-        border: '1px solid #2A2750',
-        boxShadow: '0 8px 26px -6px rgba(199,199,210,0.4), inset 0 1px 0 rgba(255,255,255,0.06)',
-        color: '#A5B4FC',
-      }}
-    >
-      {/* top accent hairline */}
-      <span
-        className="pointer-events-none absolute inset-x-2 top-0 h-px rounded-full"
-        style={{ background: 'linear-gradient(90deg, transparent, rgba(199,199,210,0.8), transparent)' }}
-      />
-      <FiTerminal size={18} className="transition-transform group-hover:scale-110" />
-    </motion.button>
   )
 }

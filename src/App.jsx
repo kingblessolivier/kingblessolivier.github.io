@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState, useCallback } from 'react'
 import Navbar from './components/Navbar'
 import ChatbotWidget from './components/ChatbotWidget'
-import SectionConnector from './components/SectionConnector'
 import ScrollProgress from './components/ScrollProgress'
-import { TerminalModal, TerminalTrigger } from './components/InteractiveTerminal'
+import { TerminalModal } from './components/InteractiveTerminal'
 import HeroSection from './sections/HeroSection'
 import AboutSection from './sections/AboutSection'
 import WorkExperienceSection from './sections/WorkExperienceSection'
@@ -15,8 +14,6 @@ import GallerySection from './sections/GallerySection'
 import ContactSection from './sections/ContactSection'
 import Footer from './sections/Footer'
 import { labels, uiContent } from './assets/data'
-import CursorTrail from './components/CursorTrail'
-import WhatsAppFloat from './components/WhatsAppFloat'
 import { projectBySlug, projectPath, slugFromPath } from './lib/projectRoutes'
 import { useDocumentMeta } from './lib/seo'
 
@@ -25,20 +22,6 @@ function getInitialTheme() {
   if (stored === 'light' || stored === 'dark') return stored
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
-
-/* Soft rounded background shapes, distributed down both sides of the page */
-const PAGE_SHAPES = [
-  { top: '3%',  side: 'left',  size: 440, radius: 96,  rot: 12 },
-  { top: '11%', side: 'right', size: 360, radius: 999, rot: -8 },
-  { top: '21%', side: 'left',  size: 320, radius: 80,  rot: 8 },
-  { top: '31%', side: 'right', size: 420, radius: 96,  rot: -6 },
-  { top: '41%', side: 'left',  size: 340, radius: 999, rot: 10 },
-  { top: '51%', side: 'right', size: 380, radius: 84,  rot: -10 },
-  { top: '61%', side: 'left',  size: 320, radius: 96,  rot: 6 },
-  { top: '71%', side: 'right', size: 420, radius: 999, rot: -6 },
-  { top: '81%', side: 'left',  size: 340, radius: 80,  rot: 8 },
-  { top: '90%', side: 'right', size: 360, radius: 96,  rot: -8 },
-]
 
 export default function App() {
   const [theme, setTheme] = useState(getInitialTheme)
@@ -96,6 +79,19 @@ export default function App() {
 
   const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
 
+  /* ── Cursor spotlight: one listener feeds --mx/--my to whichever card is hovered ── */
+  useEffect(() => {
+    const onMove = (event) => {
+      const card = event.target.closest?.('.bento-card')
+      if (!card) return
+      const rect = card.getBoundingClientRect()
+      card.style.setProperty('--mx', `${event.clientX - rect.left}px`)
+      card.style.setProperty('--my', `${event.clientY - rect.top}px`)
+    }
+    window.addEventListener('pointermove', onMove, { passive: true })
+    return () => window.removeEventListener('pointermove', onMove)
+  }, [])
+
   /* ── Keyboard shortcut: Ctrl+` to open terminal ── */
   useEffect(() => {
     const handler = (e) => {
@@ -112,68 +108,57 @@ export default function App() {
     <div className="relative isolate min-h-screen bg-[var(--bg)] text-[var(--text)]">
       <a href="#main-content" className="skip-link">Skip to content</a>
 
-      {/* ── Soft rounded background shapes down both sides of the page ── */}
-      <div className="page-shapes" aria-hidden="true">
-        {PAGE_SHAPES.map((s, i) => (
-          <span
-            key={i}
-            style={{
-              top: s.top,
-              [s.side]: `${-Math.round(s.size * 0.55)}px`,
-              width: s.size,
-              height: s.size,
-              borderRadius: s.radius,
-              transform: `rotate(${s.rot}deg)`,
-            }}
-          />
-        ))}
-      </div>
-
-      <CursorTrail />
       <ScrollProgress />
 
-      {/* ── Fluent system grid — Microsoft-style line mesh ── */}
-      <div className="fluent-grid" aria-hidden="true" />
-
-      <Navbar
-        navLabels={navLabels}
-        language={language}
-        setLanguage={setLanguage}
-        theme={theme}
-        toggleTheme={toggleTheme}
-      />
-
-      <main id="main-content">
-        <HeroSection labels={navLabels} />
-        <SectionConnector to="about"    label="About" index={1} />
-        <AboutSection language={language} navLabels={navLabels} sectionText={sectionText} />
-        <SectionConnector to="projects" label="Projects" index={2} />
-        <ProjectsSection
+      {/* Top bar and drawer are for small screens; on large ones the left panel navigates */}
+      <div className="lg:hidden">
+        <Navbar
           navLabels={navLabels}
           language={language}
-          sectionText={sectionText}
-          activeProject={activeProject}
-          onOpenProject={openProject}
-          onCloseProject={closeProject}
+          setLanguage={setLanguage}
+          theme={theme}
+          toggleTheme={toggleTheme}
+          onOpenTerminal={() => setTerminalOpen(true)}
         />
-        <SectionConnector to="systems"  label="Systems" index={3} />
-        <SystemDesignSection sectionText={sectionText} language={language} />
-        <SectionConnector to="skills"   label="Skills" index={4} />
-        <SkillsSection navLabels={navLabels} sectionText={sectionText} />
-        <SectionConnector to="awards"   label="Awards" index={5} />
-        <AwardsSection navLabels={navLabels} sectionText={sectionText} language={language} />
-        <SectionConnector to="gallery"  label="Gallery" index={6} />
-        <GallerySection navLabels={navLabels} sectionText={sectionText} language={language} />
-        <SectionConnector to="work"     label="Experience" index={7} />
-        <WorkExperienceSection language={language} sectionText={sectionText} />
-        <SectionConnector to="contact"  label="Contact" index={8} />
-        <ContactSection navLabels={navLabels} sectionText={sectionText} />
-      </main>
+      </div>
 
-      <Footer visitorsLabel={navLabels.visitors} />
-      <WhatsAppFloat />
+      {/* ── Split layout: fixed identity panel left, work scrolling right ── */}
+      <div className="split-shell lg:grid lg:grid-cols-[21rem_minmax(0,1fr)] lg:gap-16 xl:grid-cols-[24rem_minmax(0,1fr)] xl:gap-24">
+        <HeroSection
+          labels={navLabels}
+          language={language}
+          setLanguage={setLanguage}
+          theme={theme}
+          toggleTheme={toggleTheme}
+          onOpenTerminal={() => setTerminalOpen(true)}
+        />
+
+        <div className="split-main @container min-w-0">
+          <main id="main-content">
+            <AboutSection language={language} navLabels={navLabels} sectionText={sectionText} />
+            <ProjectsSection
+              navLabels={navLabels}
+              language={language}
+              sectionText={sectionText}
+              activeProject={activeProject}
+              onOpenProject={openProject}
+              onCloseProject={closeProject}
+            />
+            <SystemDesignSection sectionText={sectionText} language={language} />
+            <SkillsSection navLabels={navLabels} sectionText={sectionText} />
+            <AwardsSection navLabels={navLabels} sectionText={sectionText} language={language} onOpenProject={openProject} />
+            <GallerySection navLabels={navLabels} sectionText={sectionText} language={language} />
+            <WorkExperienceSection language={language} sectionText={sectionText} />
+            <ContactSection navLabels={navLabels} sectionText={sectionText} />
+          </main>
+
+          <Footer />
+        </div>
+      </div>
+
+      {/* One floating action: the assistant. WhatsApp lives in Contact and the
+          terminal in the left panel / top bar, so nothing else hovers over the content. */}
       <ChatbotWidget />
-      <TerminalTrigger onClick={() => setTerminalOpen(true)} />
       <TerminalModal
         isOpen={terminalOpen}
         onClose={() => setTerminalOpen(false)}

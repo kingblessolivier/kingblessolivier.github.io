@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FiMail, FiMessageCircle, FiPhone, FiCheckCircle, FiCopy } from 'react-icons/fi'
+import { FiMail, FiPhone, FiCheckCircle, FiCopy, FiArrowUpRight } from 'react-icons/fi'
+import { FaWhatsapp } from 'react-icons/fa'
 import SectionReveal from '../components/SectionReveal'
+import SectionHeader from '../components/SectionHeader'
 import { contactInfo, portfolioData } from '../assets/data'
 
 export default function ContactSection({ navLabels, sectionText }) {
@@ -112,46 +114,28 @@ export default function ContactSection({ navLabels, sectionText }) {
   return (
     <SectionReveal id="contact" className="section-gap">
       <div className="container-shell">
-        <div className="relative mb-14">
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-8 right-0 select-none font-black text-[var(--text)] opacity-[0.03]"
-            style={{
-              fontFamily: "Arial, 'Helvetica Neue', Helvetica, sans-serif",
-              fontSize: 'clamp(6rem, 14vw, 10rem)',
-              lineHeight: 1,
-              letterSpacing: '-0.06em',
-            }}
-          >
-            09
-          </span>
-          <span className="section-tag mb-4 block w-fit">{text.sectionTag ?? 'Contact'}</span>
-          <h2 className="section-header-title">
-            {navLabels.contact}
-            <span className="sr-only"> Nsengimana Olivier</span>
-          </h2>
-          <div className="mt-4 h-[3px] w-12 rounded-full" style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent-purple))' }} />
-        </div>
+        <SectionHeader
+          tag={text.sectionTag ?? 'Contact'}
+          title={navLabels.contact}
+          titleContext=" Nsengimana Olivier"
+          subtitle="Hiring, collaborating or just curious — a message here reaches me directly."
+          number="08"
+        />
 
-        <div className="grid gap-6 lg:grid-cols-5">
+        <div className="grid gap-6 @3xl:grid-cols-5">
           {/* Info panel */}
-          <div className="card-surface relative overflow-hidden rounded-2xl p-6 lg:col-span-2">
-            {/* Background glow */}
-            <div
-              className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full blur-2xl"
-              style={{ background: 'color-mix(in srgb, var(--accent) 15%, transparent)' }}
-            />
-
+          <div className="bento-card group relative overflow-hidden rounded-3xl p-7 @3xl:col-span-2">
             <h3 className="relative mb-5 text-xl font-semibold">{text.directTitle}</h3>
 
             <div className="relative space-y-4 text-sm text-[var(--text-muted)]">
               {/* Email — clickable copy */}
               <button
                 onClick={copyEmail}
-                className="group flex w-full items-center gap-3 rounded-xl p-1 text-left transition hover:text-[var(--text)]"
+                aria-label={`Copy email address ${contactInfo.email}`}
+                className="group flex min-h-11 w-full items-center gap-3 rounded-xl p-1 text-left transition hover:text-[var(--text)]"
               >
                 <span
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
                   style={{
                     background: 'color-mix(in srgb, var(--accent) 10%, var(--surface))',
                     color: 'var(--accent)',
@@ -168,13 +152,20 @@ export default function ContactSection({ navLabels, sectionText }) {
                 </span>
               </button>
 
+              {/* Real actions, not two copies of the same number */}
               {[
-                { icon: FiPhone, value: contactInfo.phone },
-                { icon: FiMessageCircle, value: contactInfo.whatsapp },
-              ].map(({ icon: Icon, value }) => (
-                <p key={value} className="flex items-center gap-3">
+                { key: 'phone', icon: FiPhone, label: contactInfo.phone, href: `tel:${contactInfo.phone.replace(/\s/g, '')}` },
+                { key: 'whatsapp', icon: FaWhatsapp, label: 'Chat on WhatsApp', href: `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, '')}` },
+              ].map(({ key, icon: Icon, label, href }) => (
+                <a
+                  key={key}
+                  href={href}
+                  target={key === 'whatsapp' ? '_blank' : undefined}
+                  rel={key === 'whatsapp' ? 'noreferrer' : undefined}
+                  className="flex min-h-11 items-center gap-3 rounded-xl p-1 transition hover:text-[var(--text)]"
+                >
                   <span
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl"
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
                     style={{
                       background: 'color-mix(in srgb, var(--accent) 10%, var(--surface))',
                       color: 'var(--accent)',
@@ -183,24 +174,27 @@ export default function ContactSection({ navLabels, sectionText }) {
                   >
                     <Icon size={14} />
                   </span>
-                  {value}
-                </p>
+                  {label}
+                </a>
               ))}
             </div>
 
             <div className="relative mt-6 border-t border-[var(--border)] pt-5">
               <p className="mb-3 text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]">{text.profilesLabel}</p>
-              <div className="space-y-2 text-sm">
-                {portfolioData.professionalLinks.map((item) => (
+              <div className="flex flex-wrap gap-2 text-sm">
+                {/* One chip per destination — the CV entry points at LinkedIn too */}
+                {portfolioData.professionalLinks
+                  .filter((item, i, all) => all.findIndex((o) => o.url === item.url) === i)
+                  .map((item) => (
                   <a
                     key={item.label}
                     href={item.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 text-[var(--text-muted)] transition hover:text-[var(--accent)]"
+                    className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[var(--border)] px-4 font-medium text-[var(--text)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                   >
-                    <span className="h-px flex-1 bg-[var(--border)]" />
                     {item.label}
+                    <FiArrowUpRight size={14} />
                   </a>
                 ))}
               </div>
@@ -208,8 +202,8 @@ export default function ContactSection({ navLabels, sectionText }) {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} noValidate className="card-surface rounded-2xl p-6 lg:col-span-3">
-            <div className="grid gap-4">
+          <form onSubmit={handleSubmit} noValidate className="bento-card beam rounded-3xl p-7 @3xl:col-span-3">
+            <div className="relative grid gap-4">
               {[
                 { field: 'name', label: text.name, type: 'text', placeholder: text.namePlaceholder },
                 { field: 'email', label: text.email, type: 'email', placeholder: text.emailPlaceholder },
@@ -243,7 +237,7 @@ export default function ContactSection({ navLabels, sectionText }) {
               <label className="text-sm font-medium">
                 {text.message}
                 <textarea
-                  rows="5"
+                  rows="4"
                   value={form.message}
                   onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}
                   onFocus={() => setFocusedField('message')}
@@ -269,7 +263,7 @@ export default function ContactSection({ navLabels, sectionText }) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="glow-btn mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition hover:scale-105 disabled:cursor-not-allowed disabled:opacity-75 active:scale-95 sm:w-auto sm:justify-start"
+              className="glow-btn relative mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-75 @xl:w-auto @xl:justify-start"
             >
               {isSubmitting && (
                 <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/90 border-t-transparent" />

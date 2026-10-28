@@ -5,29 +5,6 @@ const GITHUB_USERNAME = 'kingblessolivier'
 const WEEKS = 52
 const DAYS = 7
 
-/* ── Seeded PRNG so fallback data looks the same every render ── */
-function seededRand(seed) {
-  const x = Math.sin(seed + 1) * 10000
-  return x - Math.floor(x)
-}
-
-function buildFallback() {
-  const cells = []
-  const now = new Date()
-  for (let i = WEEKS * DAYS - 1; i >= 0; i--) {
-    const d = new Date(now)
-    d.setDate(d.getDate() - i)
-    const r = seededRand(d.getTime() / 86400000)
-    let level = 0
-    if (r > 0.55) level = 1
-    if (r > 0.70) level = 2
-    if (r > 0.82) level = 3
-    if (r > 0.92) level = 4
-    cells.push({ date: d.toISOString().slice(0, 10), level })
-  }
-  return cells
-}
-
 /* ── Map level → CSS opacity class ── */
 const LEVEL_STYLE = {
   0: 'bg-[var(--heatmap-0)]',
@@ -59,12 +36,14 @@ export default function GitHubHeatmap() {
         setTotal(json.total?.lastYear ?? list.reduce((s, c) => s + (c.count ?? 0), 0))
         setLive(true)
       } catch {
-        if (!cancelled) setCells(buildFallback())
+        /* No made-up squares: if the real data can't load, the card stays hidden. */
       }
     }
     load()
     return () => { cancelled = true }
   }, [])
+
+  if (!live) return null
 
   /* split flat list into weeks (columns) */
   const weeks = []
@@ -97,13 +76,9 @@ export default function GitHubHeatmap() {
           href={`https://github.com/${GITHUB_USERNAME}`}
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1 text-[10px] font-medium text-[var(--text-muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          className="flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1 text-xs font-medium text-[var(--text-muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
         >
-          {live ? (
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--success)]" style={{ boxShadow: '0 0 6px var(--success)' }} />
-          ) : (
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--text-muted)]" />
-          )}
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--success)]" style={{ boxShadow: '0 0 6px var(--success)' }} />
           @{GITHUB_USERNAME}
         </a>
       </div>
@@ -129,7 +104,7 @@ export default function GitHubHeatmap() {
 
         {/* Tooltip */}
         {hovered && (
-          <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 text-[10px] text-[var(--text-muted)] shadow-lg">
+          <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 text-xs text-[var(--text-muted)] shadow-lg">
             {hovered.date}
             {hovered.level > 0 && (
               <span className="ml-1 font-semibold text-[var(--accent)]">
@@ -141,7 +116,7 @@ export default function GitHubHeatmap() {
       </div>
 
       {/* Legend */}
-      <div className="mt-3 flex items-center gap-1.5 text-[10px] text-[var(--text-muted)]">
+      <div className="mt-3 flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
         <span>Less</span>
         {[0, 1, 2, 3, 4].map((l) => (
           <div key={l} className={`h-[10px] w-[10px] rounded-[2px] ${LEVEL_STYLE[l]}`} />

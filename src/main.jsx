@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { MotionConfig } from 'framer-motion'
 import App from './App'
 import './index.css'
 
@@ -13,6 +14,9 @@ for (const node of document.querySelectorAll('[data-prerendered]')) node.remove(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    {/* Framer animations follow the visitor's reduced-motion setting, like the CSS ones */}
+    <MotionConfig reducedMotion="user">
+      <App />
+    </MotionConfig>
   </React.StrictMode>,
 )

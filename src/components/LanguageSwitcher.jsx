@@ -74,7 +74,7 @@ export default function LanguageSwitcher({ language, setLanguage, upward = false
       >
         <Flag alt={current.flagAlt} emoji={current.emoji} />
         <span
-          className="text-[11px] font-bold tracking-wide"
+          className="text-xs font-bold tracking-wide"
           style={{ color: 'var(--text)' }}
         >
           {current.code}
@@ -115,7 +115,7 @@ export default function LanguageSwitcher({ language, setLanguage, upward = false
             />
 
             <div className="px-2 pb-1 pt-2">
-              <p className="px-2 text-[9px] font-bold uppercase tracking-[0.22em]" style={{ color: 'var(--text-muted)' }}>
+              <p className="px-2 text-xs font-bold uppercase tracking-[0.22em]" style={{ color: 'var(--text-muted)' }}>
                 Language
               </p>
             </div>
@@ -169,7 +169,7 @@ export default function LanguageSwitcher({ language, setLanguage, upward = false
                       >
                         {lang.native}
                       </p>
-                      <p className="text-[10px] truncate" style={{ color: 'var(--text-muted)' }}>
+                      <p className="text-xs truncate" style={{ color: 'var(--text-muted)' }}>
                         {lang.country}
                       </p>
                     </div>
@@ -195,7 +195,7 @@ export default function LanguageSwitcher({ language, setLanguage, upward = false
             })}
 
             <div className="mt-1 border-t px-4 pb-2 pt-2" style={{ borderColor: 'var(--border)' }}>
-              <p className="text-[9px]" style={{ color: 'var(--text-muted)' }}>
+              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
                 Portfolio supports 3 languages
               </p>
             </div>

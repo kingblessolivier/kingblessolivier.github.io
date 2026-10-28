@@ -1,6 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { FiMaximize2 } from 'react-icons/fi'
 import { HiXMark } from 'react-icons/hi2'
 import SectionReveal from '../components/SectionReveal'
 import SectionHeader from '../components/SectionHeader'
@@ -8,12 +7,16 @@ import { galleryImages } from '../assets/data'
 
 export default function GallerySection({ navLabels, sectionText, language }) {
   const [activeImage, setActiveImage] = useState(null)
-  const [activeCategory, setActiveCategory] = useState('All')
 
   const categoryLabels = sectionText.gallery.categories
-  const categories = ['All', ...Object.keys(categoryLabels)]
-  const visibleImages =
-    activeCategory === 'All' ? galleryImages : galleryImages.filter((item) => item.category === activeCategory)
+
+  /* Escape closes the viewer */
+  useEffect(() => {
+    if (!activeImage) return
+    const onKey = (event) => { if (event.key === 'Escape') setActiveImage(null) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [activeImage])
 
   return (
     <SectionReveal id="gallery" className="section-gap">
@@ -22,55 +25,40 @@ export default function GallerySection({ navLabels, sectionText, language }) {
           tag={sectionText.gallery.sectionTag}
           title={navLabels.gallery}
           subtitle="Hackathons, build sessions, and moments along the journey."
-          number="07"
+          number="06"
         />
 
-        <div className="mb-7 flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`rounded-full border px-4 py-2 text-xs font-semibold transition ${
-                activeCategory === category
-                  ? 'border-[var(--accent)] bg-[color:color-mix(in_srgb,var(--accent)_18%,transparent)] text-[var(--text)]'
-                  : 'border-[var(--border)] text-[var(--text-muted)]'
-              }`}
-            >
-              {category === 'All' ? sectionText.gallery.all : categoryLabels[category]}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {visibleImages.map((item, index) => (
+        {/* One row of photos; a swipeable strip on narrow screens */}
+        <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-2 @xl:mx-0 @xl:grid @xl:grid-cols-3 @xl:overflow-visible @xl:px-0 @xl:pb-0">
+          {galleryImages.map((item, index) => (
             <motion.figure
-              key={`${item.title}-${item.image}`}
-              initial={{ opacity: 0, y: 18 }}
+              key={`${item.title.EN}-${item.image}`}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: index * 0.04 }}
-              className="card-surface group relative overflow-hidden rounded-2xl"
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className="group relative w-[78%] shrink-0 snap-start overflow-hidden rounded-2xl border border-[var(--border)] @xl:w-auto"
             >
-              <img
-                src={item.image}
-                alt={item.title[language] ?? item.title.EN}
-                loading="lazy"
-                decoding="async"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              <button
+                type="button"
                 onClick={() => setActiveImage(item)}
-                className="aspect-[4/3] w-full cursor-zoom-in object-cover transition duration-300 hover:scale-110"
-              />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-3">
-                <p className="text-xs font-semibold text-white">{item.title[language] ?? item.title.EN}</p>
-                <div className="mt-1 flex items-center justify-between">
-                  <span className="rounded-full border border-white/35 px-2 py-0.5 text-[10px] uppercase tracking-wide text-white/85">
-                    {categoryLabels[item.category]}
-                  </span>
-                  <span className="rounded-full border border-white/35 bg-black/20 p-1 text-white/90 opacity-0 transition group-hover:opacity-100">
-                    <FiMaximize2 size={12} />
-                  </span>
-                </div>
-              </div>
+                aria-label={`Open photo: ${item.title[language] ?? item.title.EN}`}
+                className="block w-full cursor-zoom-in"
+              >
+                <img
+                  src={item.image}
+                  alt={item.title[language] ?? item.title.EN}
+                  loading="lazy"
+                  decoding="async"
+                  className="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                />
+              </button>
+              <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent p-4 pt-12">
+                <span className="block font-mono text-xs uppercase tracking-wider text-white/70">
+                  {categoryLabels[item.category]}
+                </span>
+                <span className="mt-0.5 block text-sm font-semibold text-white">{item.title[language] ?? item.title.EN}</span>
+              </figcaption>
             </motion.figure>
           ))}
         </div>
@@ -86,7 +74,7 @@ export default function GallerySection({ navLabels, sectionText, language }) {
             >
               <button
                 onClick={() => setActiveImage(null)}
-                className="card-surface absolute right-6 top-6 rounded-full p-2 text-xl"
+                className="card-surface absolute right-6 top-6 flex h-11 w-11 items-center justify-center rounded-full text-xl"
                 aria-label="Close image preview"
               >
                 <HiXMark />

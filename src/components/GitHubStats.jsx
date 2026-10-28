@@ -57,7 +57,7 @@ function StatTile({ icon: Icon, value, label }) {
     <div className="flex flex-col items-center gap-1 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-3">
       <Icon size={15} className="text-[var(--accent)]" />
       <span className="text-lg font-black tracking-tight text-[var(--text)]">{value}</span>
-      <span className="text-[9px] uppercase tracking-[0.18em] text-[var(--text-muted)]">{label}</span>
+      <span className="text-xs uppercase tracking-[0.18em] text-[var(--text-muted)]">{label}</span>
     </div>
   )
 }
@@ -89,7 +89,7 @@ export default function GitHubStats() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.55 }}
-      className="card-surface mt-5 rounded-2xl p-5"
+      className="card-surface rounded-2xl p-5"
     >
       <div className="mb-4 flex items-center justify-between">
         <p className="text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]">Live GitHub Stats</p>
@@ -97,7 +97,7 @@ export default function GitHubStats() {
           href={`https://github.com/${USERNAME}`}
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1 text-[10px] font-medium text-[var(--text-muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          className="flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1 text-xs font-medium text-[var(--text-muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--success)]" style={{ boxShadow: '0 0 6px var(--success)' }} />
           @{USERNAME}
@@ -123,7 +123,7 @@ export default function GitHubStats() {
           {/* Language bar */}
           {data.topLanguages.length > 0 && (
             <div className="mt-5">
-              <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">Top Languages</p>
+              <p className="mb-2 text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]">Top Languages</p>
               <div className="flex h-2 w-full overflow-hidden rounded-full bg-[var(--surface)]">
                 {data.topLanguages.map((l) => (
                   <div key={l.lang} style={{ width: `${l.pct}%`, background: colorFor(l.lang) }} title={`${l.lang} · ${l.pct}%`} />
@@ -131,7 +131,7 @@ export default function GitHubStats() {
               </div>
               <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
                 {data.topLanguages.map((l) => (
-                  <span key={l.lang} className="flex items-center gap-1.5 text-[11px] text-[var(--text-muted)]">
+                  <span key={l.lang} className="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
                     <span className="h-2 w-2 rounded-full" style={{ background: colorFor(l.lang) }} />
                     {l.lang} <span className="text-[var(--text-muted)] opacity-60">{l.pct}%</span>
                   </span>
@@ -143,8 +143,8 @@ export default function GitHubStats() {
           {/* Top repos */}
           {data.topRepos.length > 0 && (
             <div className="mt-5">
-              <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">Most Notable Repositories</p>
-              <div className="grid gap-2 sm:grid-cols-2">
+              <p className="mb-2 text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]">Most Notable Repositories</p>
+              <div className="grid gap-2 @xl:grid-cols-2">
                 {data.topRepos.map((r) => (
                   <a
                     key={r.name}
@@ -155,14 +155,14 @@ export default function GitHubStats() {
                   >
                     <span className="flex items-center justify-between gap-2">
                       <span className="truncate text-[13px] font-semibold text-[var(--text)] group-hover:text-[var(--accent)]">{r.name}</span>
-                      <span className="flex shrink-0 items-center gap-2 text-[10px] text-[var(--text-muted)]">
+                      <span className="flex shrink-0 items-center gap-2 text-xs text-[var(--text-muted)]">
                         {r.stars > 0 && <span className="flex items-center gap-0.5"><FiStar size={10} /> {r.stars}</span>}
                         <FiExternalLink size={10} className="opacity-0 transition group-hover:opacity-60" />
                       </span>
                     </span>
-                    {r.desc && <span className="mt-0.5 line-clamp-1 text-[11px] text-[var(--text-muted)]">{r.desc}</span>}
+                    {r.desc && <span className="mt-0.5 line-clamp-1 text-xs text-[var(--text-muted)]">{r.desc}</span>}
                     {r.lang && (
-                      <span className="mt-1.5 flex items-center gap-1.5 text-[10px] text-[var(--text-muted)]">
+                      <span className="mt-1.5 flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
                         <span className="h-2 w-2 rounded-full" style={{ background: colorFor(r.lang) }} />
                         {r.lang}
                       </span>

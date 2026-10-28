@@ -1,163 +1,106 @@
 import { motion } from 'framer-motion'
-import { FiCompass, FiFeather, FiTarget, FiCode, FiLayers, FiCpu } from 'react-icons/fi'
+import { FiCompass, FiFeather, FiTarget } from 'react-icons/fi'
 import SectionReveal from '../components/SectionReveal'
 import SectionHeader from '../components/SectionHeader'
 import { aboutContent, portfolioData } from '../assets/data'
 
 const traitIcons = [FiTarget, FiCompass, FiFeather]
+
+/* Counts a reader can check on this page, not self-ratings */
 const statItems = [
-  { icon: FiCode,   label: 'Projects',  value: '21+' },
-  { icon: FiLayers, label: 'Systems',   value: '10+' },
-  { icon: FiCpu,    label: 'AI Focus',  value: '100%' },
+  { label: 'Case studies', value: portfolioData.projects.length },
+  { label: 'Hackathons',   value: portfolioData.stats.hackathons },
+  { label: 'Certificates', value: portfolioData.stats.certificates },
 ]
+
+const rise = (delay = 0) => ({
+  initial: { opacity: 0, y: 18 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.5, delay },
+})
 
 export default function AboutSection({ language, navLabels, sectionText }) {
   const aboutText = sectionText.about
   const traitLabels = [aboutText.trait1, aboutText.trait2, aboutText.trait3]
+  const journey = portfolioData.personal.journey[language]
 
   return (
     <SectionReveal id="about" className="section-gap">
       <div className="container-shell">
+        <SectionHeader
+          tag={aboutText.sectionTag}
+          title={navLabels.about}
+          titleContext=" Nsengimana Olivier, full-stack software engineer in Kigali, Rwanda"
+          number="01"
+        />
 
-        {/* ── Header ── */}
-        <div className="mb-10">
-          <SectionHeader
-            tag={aboutText.sectionTag}
-            title={navLabels.about}
-            titleContext=" Nsengimana Olivier, full-stack software engineer in Kigali, Rwanda"
-            number="02"
-          />
-        </div>
-
-        {/* ── Main grid ── */}
-        <div className="grid gap-6 lg:grid-cols-[1.35fr_0.65fr]">
-
-          {/* LEFT — story card */}
-          <div className="card-surface card-shimmer card-hover relative overflow-hidden rounded-3xl p-5 sm:p-8 lg:p-10">
-            <span className="pointer-events-none absolute -top-4 right-6 select-none text-[10rem] font-black leading-none text-[var(--accent)] opacity-[0.04]">"</span>
-
+        <div className="grid gap-4 @3xl:grid-cols-3">
+          {/* Story + journey */}
+          <motion.article {...rise()} className="bento-card group rounded-3xl p-7 @xl:p-10 @3xl:col-span-2 @3xl:row-span-2">
             <motion.p
               key={language}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 0.35 }}
-              className="relative text-[15px] leading-[2] text-[var(--text-muted)] sm:text-base"
+              className="relative z-10 max-w-2xl text-lg leading-relaxed text-[var(--text)] @xl:text-xl"
             >
               {aboutContent[language]}
             </motion.p>
 
-            {/* Journey steps */}
-            <div className="relative mt-8 border-t border-[var(--border)] pt-6">
-              <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">
-                {aboutText.journeyTitle}
-              </p>
-              <ul className="space-y-4">
-                {portfolioData.personal.journey[language].map((item, i) => (
-                  <motion.li
-                    key={item}
-                    initial={{ opacity: 0, x: -14 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.08 }}
-                    className="flex items-start gap-4"
-                  >
-                    <span
-                      className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white"
-                      style={{
-                        background: 'var(--accent)',
-                        boxShadow: '0 0 10px -2px color-mix(in srgb,var(--accent) 50%,transparent)',
-                      }}
-                    >
-                      {i + 1}
-                    </span>
-                    <span className="text-sm leading-7 text-[var(--text-muted)]">{item}</span>
+            <div className="relative z-10 mt-10">
+              <p className="section-eyebrow mb-6">{aboutText.journeyTitle}</p>
+              <ol className="relative grid gap-6 @xl:grid-cols-3 @xl:gap-5">
+                {/* Rail joining the three steps on wide screens */}
+                <span
+                  aria-hidden="true"
+                  className="absolute left-5 right-5 top-5 hidden h-px @xl:block"
+                  style={{ background: 'linear-gradient(90deg, var(--accent), var(--border) 60%, transparent)' }}
+                />
+                {journey.map((item, i) => (
+                  <motion.li key={item} {...rise(0.1 + i * 0.08)} className="relative">
+                    <span className="flow-node">{String(i + 1).padStart(2, '0')}</span>
+                    <p className="mt-4 text-sm leading-relaxed text-[var(--text-muted)]">{item}</p>
                   </motion.li>
                 ))}
-              </ul>
+              </ol>
             </div>
+          </motion.article>
 
-            {/* Stat strip */}
-            <div className="relative mt-8 grid grid-cols-3 gap-3 border-t border-[var(--border)] pt-6">
-              {statItems.map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex flex-col items-center gap-1.5 text-center">
-                  <Icon size={16} className="text-[var(--accent)]" />
-                  <span className="text-xl font-black text-[var(--text)]">{value}</span>
-                  <span className="text-[10px] uppercase tracking-wide text-[var(--text-muted)]">{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* RIGHT — philosophy + traits */}
-          <div className="flex flex-col gap-5">
-
-            {/* Philosophy card */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="card-surface relative overflow-hidden rounded-3xl p-7"
-            >
-              <div className="pointer-events-none absolute -right-12 -top-12 h-44 w-44 rounded-full bg-[color:color-mix(in_srgb,var(--accent)_18%,transparent)] blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-10 -left-10 h-36 w-36 rounded-full bg-[color:color-mix(in_srgb,var(--accent)_10%,transparent)] blur-2xl" />
-
-              <p className="relative text-[9px] font-semibold uppercase tracking-[0.26em] text-[var(--accent)]">
-                {aboutText.signatureTag}
-              </p>
-              <p className="relative mt-4 text-sm font-medium leading-[1.9] text-[var(--text)]">
-                "{portfolioData.personal.philosophy[language]}"
-              </p>
-
-              <div className="relative mt-6 flex items-center gap-3 border-t border-[var(--border)] pt-4">
-                <div
-                  className="h-9 w-9 shrink-0 overflow-hidden rounded-xl"
-                  style={{ border: '1px solid color-mix(in srgb,var(--accent) 30%,var(--border))' }}
-                >
-                  <img
-                    src="/olivier_avatar.webp"
-                    alt="NSENGIMANA Olivier"
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-[var(--text)]">NSENGIMANA Olivier</p>
-                  <p className="text-[11px] text-[var(--accent)]">{aboutText.fullStackLabel}</p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Trait cards */}
-            <div className="space-y-3">
+          {/* Philosophy + how I work */}
+          <motion.figure {...rise(0.08)} className="bento-card bento-card--featured group rounded-3xl p-7">
+            <blockquote className="relative z-10 text-base font-medium leading-relaxed text-[var(--text)]">
+              “{portfolioData.personal.philosophy[language]}”
+            </blockquote>
+            <figcaption className="relative z-10 mt-3 text-xs text-[var(--text-muted)]">
+              NSENGIMANA Olivier · {aboutText.fullStackLabel}
+            </figcaption>
+            <ul className="relative z-10 mt-6 space-y-3 border-t border-[var(--border)] pt-5">
               {traitLabels.map((trait, i) => {
                 const Icon = traitIcons[i]
                 return (
-                  <motion.div
-                    key={trait}
-                    initial={{ opacity: 0, x: 18 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.15 + i * 0.09 }}
-                    className="card-surface card-hover flex items-center gap-4 rounded-2xl border border-[var(--border)] px-5 py-4"
-                  >
-                    <span
-                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
-                      style={{
-                        background: 'linear-gradient(135deg, color-mix(in srgb,var(--accent) 18%,var(--surface)), color-mix(in srgb,var(--accent-purple) 14%,var(--surface)))',
-                        border: '1px solid color-mix(in srgb,var(--accent) 22%,var(--border))',
-                        color: 'var(--accent)',
-                      }}
-                    >
-                      <Icon size={15} />
-                    </span>
-                    <span className="text-sm font-medium text-[var(--text-muted)]">{trait}</span>
-                  </motion.div>
+                  <li key={trait} className="flex items-center gap-3 text-sm text-[var(--text)]">
+                    <Icon size={15} className="shrink-0 text-[var(--accent)]" />
+                    {trait}
+                  </li>
                 )
               })}
-            </div>
-          </div>
+            </ul>
+          </motion.figure>
+
+          {/* Stats */}
+          <motion.div {...rise(0.14)} className="bento-card group grid grid-cols-3 rounded-3xl p-7">
+            {statItems.map(({ label, value }, i) => (
+              <div
+                key={label}
+                className={`relative z-10 flex flex-col gap-2 ${i > 0 ? 'border-l border-[var(--border)] pl-4' : ''}`}
+              >
+                <span className="stat-figure">{value}</span>
+                <span className="text-xs text-[var(--text-muted)]">{label}</span>
+              </div>
+            ))}
+          </motion.div>
+
         </div>
       </div>
     </SectionReveal>
