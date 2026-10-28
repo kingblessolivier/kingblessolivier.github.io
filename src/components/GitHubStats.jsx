@@ -54,7 +54,7 @@ async function fetchStats() {
 
 function StatTile({ icon: Icon, value, label }) {
   return (
-    <div className="flex flex-col items-center gap-1 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-3">
+    <div className="flex flex-col items-center gap-1 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-3">
       <Icon size={15} className="text-[var(--accent)]" />
       <span className="text-lg font-black tracking-tight text-[var(--text)]">{value}</span>
       <span className="text-xs uppercase tracking-[0.18em] text-[var(--text-muted)]">{label}</span>
@@ -89,7 +89,7 @@ export default function GitHubStats() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.55 }}
-      className="card-surface rounded-2xl p-5"
+      className="card-surface rounded-xl p-5"
     >
       <div className="mb-4 flex items-center justify-between">
         <p className="text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]">Live GitHub Stats</p>
@@ -107,7 +107,7 @@ export default function GitHubStats() {
       {state === 'loading' || !data ? (
         <div className="grid grid-cols-4 gap-2">
           {[0, 1, 2, 3].map((i) => (
-            <div key={i} className="h-[78px] animate-pulse rounded-xl border border-[var(--border)] bg-[var(--surface)]" />
+            <div key={i} className="h-[78px] animate-pulse rounded-lg border border-[var(--border)] bg-[var(--surface)]" />
           ))}
         </div>
       ) : (
@@ -151,7 +151,7 @@ export default function GitHubStats() {
                     href={r.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="group flex flex-col rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2.5 transition hover:border-[var(--accent)]"
+                    className="group flex flex-col rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2.5 transition hover:border-[var(--accent)]"
                   >
                     <span className="flex items-center justify-between gap-2">
                       <span className="truncate text-[13px] font-semibold text-[var(--text)] group-hover:text-[var(--accent)]">{r.name}</span>

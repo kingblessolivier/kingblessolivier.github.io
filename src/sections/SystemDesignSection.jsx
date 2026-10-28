@@ -24,7 +24,7 @@ export default function SystemDesignSection({ sectionText }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45 }}
-          className="bento-card group rounded-2xl"
+          className="bento-card group"
         >
           <div className="relative z-10 grid divide-y divide-[var(--border)] @3xl:grid-cols-3 @3xl:divide-x @3xl:divide-y-0">
             {layers.map(({ title, items }, i) => {

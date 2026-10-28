@@ -79,19 +79,6 @@ export default function App() {
 
   const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
 
-  /* ── Cursor spotlight: one listener feeds --mx/--my to whichever card is hovered ── */
-  useEffect(() => {
-    const onMove = (event) => {
-      const card = event.target.closest?.('.bento-card')
-      if (!card) return
-      const rect = card.getBoundingClientRect()
-      card.style.setProperty('--mx', `${event.clientX - rect.left}px`)
-      card.style.setProperty('--my', `${event.clientY - rect.top}px`)
-    }
-    window.addEventListener('pointermove', onMove, { passive: true })
-    return () => window.removeEventListener('pointermove', onMove)
-  }, [])
-
   /* ── Keyboard shortcut: Ctrl+` to open terminal ── */
   useEffect(() => {
     const handler = (e) => {

@@ -37,10 +37,10 @@ export default function AwardsSection({ navLabels, sectionText, language, onOpen
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bento-card bento-card--featured beam group flex flex-col rounded-3xl p-7 @xl:p-8"
+            className="bento-card bento-card--featured group flex flex-col p-7 @xl:p-8"
           >
             <div className="relative z-10 flex items-start justify-between gap-4">
-              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--accent)] text-2xl text-[var(--accent-contrast)] shadow-lg">
+              <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-[var(--accent)] text-2xl text-[var(--accent-contrast)] shadow-lg">
                 <HiOutlineTrophy />
               </span>
               <span className="font-mono text-sm text-[var(--text-muted)]">{featured.year}</span>
@@ -77,7 +77,7 @@ export default function AwardsSection({ navLabels, sectionText, language, onOpen
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, delay: 0.06 }}
-            className="bento-card group flex rounded-3xl"
+            className="bento-card group flex"
           >
             <ul className="relative z-10 flex w-full flex-col divide-y divide-[var(--border)]">
               {rest.map((award) => (

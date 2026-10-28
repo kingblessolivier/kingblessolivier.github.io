@@ -74,7 +74,7 @@ export default function SkillsSection({ navLabels, sectionText }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45 }}
-          className="bento-card group mb-6 rounded-2xl"
+          className="bento-card group mb-6"
         >
           <dl className="relative z-10 divide-y divide-[var(--border)]">
             {ordered.map(([category, list]) => {

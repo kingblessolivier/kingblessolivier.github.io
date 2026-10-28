@@ -103,7 +103,7 @@ export default function ContactSection({ navLabels, sectionText }) {
   }
 
   const inputClass = (field) =>
-    `mt-2 w-full rounded-xl border bg-[var(--bg)] px-4 py-3 text-sm outline-none transition ${
+    `mt-2 w-full rounded-lg border bg-[var(--bg)] px-4 py-3 text-sm outline-none transition ${
       focusedField === field
         ? 'border-[var(--accent)] ring-2 ring-[color:color-mix(in_srgb,var(--accent)_22%,transparent)]'
         : errors[field]
@@ -124,7 +124,7 @@ export default function ContactSection({ navLabels, sectionText }) {
 
         <div className="grid gap-6 @3xl:grid-cols-5">
           {/* Info panel */}
-          <div className="bento-card group relative overflow-hidden rounded-3xl p-7 @3xl:col-span-2">
+          <div className="bento-card group relative overflow-hidden p-7 @3xl:col-span-2">
             <h3 className="relative mb-5 text-xl font-semibold">{text.directTitle}</h3>
 
             <div className="relative space-y-4 text-sm text-[var(--text-muted)]">
@@ -132,10 +132,10 @@ export default function ContactSection({ navLabels, sectionText }) {
               <button
                 onClick={copyEmail}
                 aria-label={`Copy email address ${contactInfo.email}`}
-                className="group flex min-h-11 w-full items-center gap-3 rounded-xl p-1 text-left transition hover:text-[var(--text)]"
+                className="group flex min-h-11 w-full items-center gap-3 rounded-lg p-1 text-left transition hover:text-[var(--text)]"
               >
                 <span
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
                   style={{
                     background: 'color-mix(in srgb, var(--accent) 10%, var(--surface))',
                     color: 'var(--accent)',
@@ -144,7 +144,7 @@ export default function ContactSection({ navLabels, sectionText }) {
                 >
                   {copied ? <FiCheckCircle size={14} className="text-emerald-400" /> : <FiMail size={14} />}
                 </span>
-                <span className="flex-1 truncate">{contactInfo.email}</span>
+                <span className="min-w-0 flex-1 break-all">{contactInfo.email}</span>
                 <span className="opacity-0 transition group-hover:opacity-100">
                   {copied
                     ? <FiCheckCircle size={12} className="text-emerald-400" />
@@ -162,10 +162,10 @@ export default function ContactSection({ navLabels, sectionText }) {
                   href={href}
                   target={key === 'whatsapp' ? '_blank' : undefined}
                   rel={key === 'whatsapp' ? 'noreferrer' : undefined}
-                  className="flex min-h-11 items-center gap-3 rounded-xl p-1 transition hover:text-[var(--text)]"
+                  className="flex min-h-11 items-center gap-3 rounded-lg p-1 transition hover:text-[var(--text)]"
                 >
                   <span
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
                     style={{
                       background: 'color-mix(in srgb, var(--accent) 10%, var(--surface))',
                       color: 'var(--accent)',
@@ -191,7 +191,7 @@ export default function ContactSection({ navLabels, sectionText }) {
                     href={item.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[var(--border)] px-4 font-medium text-[var(--text)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                    className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-[var(--border)] px-4 font-medium text-[var(--text)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                   >
                     {item.label}
                     <FiArrowUpRight size={14} />
@@ -202,7 +202,7 @@ export default function ContactSection({ navLabels, sectionText }) {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} noValidate className="bento-card beam rounded-3xl p-7 @3xl:col-span-3">
+          <form onSubmit={handleSubmit} noValidate className="bento-card p-7 @3xl:col-span-3">
             <div className="relative grid gap-4">
               {[
                 { field: 'name', label: text.name, type: 'text', placeholder: text.namePlaceholder },
@@ -263,7 +263,7 @@ export default function ContactSection({ navLabels, sectionText }) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="glow-btn relative mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-75 @xl:w-auto @xl:justify-start"
+              className="glow-btn relative mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-75 @xl:w-auto @xl:justify-start"
             >
               {isSubmitting && (
                 <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/90 border-t-transparent" />
@@ -279,7 +279,7 @@ export default function ContactSection({ navLabels, sectionText }) {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 8, scale: 0.97 }}
                   transition={{ duration: 0.25 }}
-                  className="fixed bottom-6 left-6 z-[90] flex items-center gap-2.5 rounded-xl border border-sky-500/30 bg-sky-500/15 px-4 py-3 text-sm text-sky-400 shadow-2xl backdrop-blur"
+                  className="fixed bottom-6 left-6 z-[90] flex items-center gap-2.5 rounded-lg border border-sky-500/30 bg-sky-500/15 px-4 py-3 text-sm text-sky-400 shadow-2xl backdrop-blur"
                 >
                   <FiCopy size={14} />
                   Email copied to clipboard
@@ -295,7 +295,7 @@ export default function ContactSection({ navLabels, sectionText }) {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 8, scale: 0.97 }}
                   transition={{ duration: 0.3 }}
-                  className="fixed bottom-6 right-6 z-[90] flex items-center gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/15 px-4 py-3 text-sm text-emerald-400 shadow-2xl backdrop-blur"
+                  className="fixed bottom-6 right-6 z-[90] flex items-center gap-3 rounded-lg border border-emerald-500/30 bg-emerald-500/15 px-4 py-3 text-sm text-emerald-400 shadow-2xl backdrop-blur"
                 >
                   <FiCheckCircle size={16} />
                   <div>

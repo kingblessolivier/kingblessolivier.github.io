@@ -101,7 +101,7 @@ export default function ProjectsSection({
                 transition={{ duration: 0.45, delay: index * 0.06 }}
                 className={lead ? '@xl:col-span-2' : ''}
               >
-                <div className={`bento-card bento-card--featured group flex h-full flex-col rounded-2xl ${lead ? 'beam p-7 @xl:p-8' : 'p-6'}`}>
+                <div className={`bento-card bento-card--featured group flex h-full flex-col ${lead ? 'p-7 @xl:p-8' : 'p-6'}`}>
                   <div className="relative z-10 mb-4 flex items-start justify-between gap-3">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="chip chip--accent">
@@ -132,7 +132,7 @@ export default function ProjectsSection({
                         {architecture.map((step, i) => (
                           <li
                             key={step}
-                            className="flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface-2)] px-3.5 py-2.5 text-sm text-[var(--text)]"
+                            className="flex items-center gap-3 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] px-3.5 py-2.5 text-sm text-[var(--text)]"
                           >
                             <span className="font-mono text-xs text-[var(--accent)]">{String(i + 1).padStart(2, '0')}</span>
                             {step}
@@ -231,7 +231,7 @@ export default function ProjectsSection({
               exit={{ opacity: 0, y: 16, scale: 0.97 }}
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="scrollbar-thin card-surface mt-2 max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-2xl p-4 sm:mt-6 sm:max-h-[90vh] sm:p-8"
+              className="scrollbar-thin card-surface mt-2 max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-xl p-4 sm:mt-6 sm:max-h-[90vh] sm:p-8"
             >
               <div className="mb-6 flex items-start justify-between gap-3">
                 <div>

@@ -28,14 +28,14 @@ function CompanyGroup({ group, index, language }) {
       className="relative pl-16"
     >
       {/* Company mark sits on the rail */}
-      <span className="absolute left-0 top-0 flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--card)] font-mono text-xs font-medium text-[var(--accent)] shadow-sm">
+      <span className="absolute left-0 top-0 flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--card)] font-mono text-xs font-medium text-[var(--accent)] shadow-sm">
         {initials(group.company)}
       </span>
 
       <p className="pt-2.5 text-sm font-semibold text-[var(--text)]">{group.company}</p>
 
       {/* All roles at one company share a card */}
-      <div className="bento-card group mt-3 rounded-2xl">
+      <div className="bento-card group mt-3">
         <div className="relative z-10 divide-y divide-[var(--border)]">
           {group.roles.map((role) => (
             <article key={role.role.EN} className="px-5 py-4 @xl:px-6">
@@ -66,10 +66,10 @@ function EducationCard({ item, language, text }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: 0.1 }}
-      className="bento-card bento-card--featured group rounded-3xl p-7"
+      className="bento-card bento-card--featured group p-7"
     >
       <div className="relative z-10 flex items-center justify-between">
-        <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--accent)] text-[var(--accent-contrast)]">
+        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--accent)] text-[var(--accent-contrast)]">
           <FiBookOpen size={20} />
         </span>
         <span className="section-eyebrow">{text.educationTitle}</span>
