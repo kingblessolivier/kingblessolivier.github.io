@@ -7,7 +7,7 @@ import {
   FiHome, FiUser, FiFolder, FiCpu, FiZap,
   FiAward, FiImage, FiBriefcase, FiMail,
   FiSun, FiMoon, FiX, FiMenu, FiArrowUpRight,
-  FiGithub, FiLinkedin, FiArrowRight,
+  FiGithub, FiLinkedin, FiArrowRight, FiTerminal,
 } from 'react-icons/fi'
 import { FaWhatsapp } from 'react-icons/fa'
 
@@ -23,6 +23,10 @@ const NAV_ITEMS = [
   { id: 'contact',  icon: FiMail,      label: 'Contact' },
 ]
 
+/* The bar carries the five places people actually look for; the logo is Home
+   and the drawer and command palette still reach every section. */
+const PRIMARY_NAV = ['about', 'projects', 'skills', 'work', 'contact']
+
 const SOCIAL_LINKS = [
   { icon: FiGithub,   label: 'GitHub',   href: portfolioData.social?.github },
   { icon: FiLinkedin, label: 'LinkedIn', href: portfolioData.social?.linkedin },
@@ -30,7 +34,7 @@ const SOCIAL_LINKS = [
   { icon: FaWhatsapp, label: 'WhatsApp', href: `https://wa.me/${(portfolioData.personal?.whatsapp || '').replace(/[^0-9]/g, '')}` },
 ].filter((s) => s.href)
 
-export default function Navbar({ navLabels, language, setLanguage, toggleTheme, theme }) {
+export default function Navbar({ navLabels, language, setLanguage, toggleTheme, theme, onOpenTerminal }) {
   const [menuOpen, setMenuOpen]             = useState(false)
   const [activeSection, setActiveSection]   = useState('home')
   const [scrolled, setScrolled]             = useState(false)
@@ -143,14 +147,14 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                 <span className="block text-[12px] font-bold tracking-tight text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">
                   Olivier
                 </span>
-                <span className="block text-[8px] uppercase tracking-[0.28em] text-[var(--text-muted)]">
+                <span className="block text-xs uppercase tracking-[0.28em] text-[var(--text-muted)]">
                   portfolio
                 </span>
               </div>
             </button>
 
             {/* ── Desktop nav ── */}
-            <nav className="hidden xl:flex items-center" role="navigation">
+            <nav className="hidden lg:flex items-center" role="navigation">
               {/* Pill container */}
               <div
                 className="flex items-center gap-0.5 rounded-full p-1"
@@ -161,13 +165,14 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                   border: scrolled ? 'none' : '1px solid var(--border)',
                 }}
               >
-                {NAV_ITEMS.map(({ id, icon: Icon }) => {
+                {PRIMARY_NAV.map((id) => {
                   const active = activeSection === id
                   return (
                     <button
                       key={id}
                       onClick={() => scrollTo(id)}
-                      className="relative flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors duration-150"
+                      aria-current={active ? 'true' : undefined}
+                      className="relative flex min-h-9 items-center rounded-full px-4 text-sm font-medium transition-colors duration-150 hover:text-[var(--text)]"
                       style={{ color: active ? 'var(--text)' : 'var(--text-muted)' }}
                     >
                       {active && (
@@ -175,22 +180,13 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                           layoutId="nav-bg"
                           className="absolute inset-0 rounded-full"
                           style={{
-                            background: 'color-mix(in srgb, var(--accent) 12%, var(--card))',
-                            border: '1px solid color-mix(in srgb,var(--accent) 22%,var(--border))',
+                            background: 'color-mix(in srgb, var(--accent) 10%, var(--card))',
+                            border: '1px solid color-mix(in srgb,var(--accent) 20%,var(--border))',
                           }}
                           transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                         />
                       )}
-                      <Icon size={11} className="relative z-10 shrink-0" />
                       <span className="relative z-10">{labelOf(id)}</span>
-                      {active && (
-                        <motion.span
-                          layoutId="nav-dot"
-                          className="relative z-10 h-1 w-1 rounded-full"
-                          style={{ background: 'var(--accent)', boxShadow: '0 0 5px var(--accent)' }}
-                          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                        />
-                      )}
                     </button>
                   )
                 })}
@@ -199,7 +195,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
 
             {/* ── Desktop controls ── */}
             <div
-              className="hidden xl:flex items-center gap-1.5 rounded-full p-1"
+              className="hidden lg:flex items-center gap-1.5 rounded-full p-1"
               style={{
                 background: scrolled ? 'transparent' : 'color-mix(in srgb, var(--surface) 60%, transparent)',
                 border: scrolled ? 'none' : '1px solid var(--border)',
@@ -223,10 +219,20 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
               {/* Contact CTA */}
               <button
                 onClick={() => scrollTo('contact')}
-                className="navbar-cta hidden items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[11px] font-semibold 2xl:flex"
+                className="navbar-cta hidden items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold 2xl:flex"
               >
                 {labelOf('contact')}
                 <FiArrowRight size={12} />
+              </button>
+
+              {/* Terminal — lives in the bar instead of floating over the page */}
+              <button
+                onClick={onOpenTerminal}
+                aria-label="Open portfolio terminal"
+                title="Portfolio terminal (Ctrl + `)"
+                className="navbar-theme-btn"
+              >
+                <FiTerminal size={14} />
               </button>
 
               {/* Theme toggle */}
@@ -247,7 +253,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
             </div>
 
             {/* ── Mobile right controls ── */}
-            <div className="flex xl:hidden items-center gap-2">
+            <div className="flex lg:hidden items-center gap-2">
               {/* Mobile theme toggle */}
               <button
                 onClick={toggleTheme}
@@ -294,7 +300,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.22 }}
-              className="fixed inset-0 z-[190] bg-black/50 backdrop-blur-sm xl:hidden"
+              className="fixed inset-0 z-[190] bg-black/50 backdrop-blur-sm lg:hidden"
               onClick={() => setMenuOpen(false)}
             />
 
@@ -305,7 +311,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
-              className="navbar-drawer fixed inset-y-0 right-0 z-[200] flex w-[min(90vw,360px)] flex-col xl:hidden"
+              className="navbar-drawer fixed inset-y-0 right-0 z-[200] flex w-[min(90vw,360px)] flex-col lg:hidden"
             >
               {/* ── Drawer header ── */}
               <div className="relative shrink-0 px-5 pb-4 pt-[calc(env(safe-area-inset-top,0px)+1.1rem)]">
@@ -319,7 +325,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                       }}
                     >
                       <img
-                        src="/olivier_avatar.webp"
+                        src="/logo-128.webp"
                         alt="NSENGIMANA Olivier"
                         className="h-full w-full object-cover"
                         loading="lazy"
@@ -332,8 +338,8 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                     </div>
                     <div>
                       <p className="text-sm font-bold leading-tight text-[var(--text)]">NSENGIMANA Olivier</p>
-                      <p className="mt-0.5 text-[10px] text-[var(--text-muted)]">Full-Stack &amp; AI Engineer</p>
-                      <span className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-[color:color-mix(in_srgb,var(--success)_35%,var(--border))] bg-[color:color-mix(in_srgb,var(--success)_10%,transparent)] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-[var(--success)]">
+                      <p className="mt-0.5 text-xs text-[var(--text-muted)]">Full-Stack &amp; AI Engineer</p>
+                      <span className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-[color:color-mix(in_srgb,var(--success)_35%,var(--border))] bg-[color:color-mix(in_srgb,var(--success)_10%,transparent)] px-2 py-0.5 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--success)]">
                         <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-[var(--success)]" />
                         Available for work
                       </span>
@@ -353,7 +359,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
 
               {/* ── Nav items ── */}
               <nav className="scrollbar-thin flex-1 overflow-y-auto px-3 py-4">
-                <p className="mb-2 px-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--text-muted)]">
+                <p className="mb-2 px-3 text-xs font-bold uppercase tracking-[0.28em] text-[var(--text-muted)]">
                   Navigate
                 </p>
                 <div className="space-y-1">
@@ -392,7 +398,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                           {labelOf(id)}
                         </span>
                         <span
-                          className="ml-auto font-mono text-[10px] tabular-nums"
+                          className="ml-auto font-mono text-xs tabular-nums"
                           style={{ color: active ? 'var(--accent)' : 'color-mix(in srgb,var(--text-muted) 60%,transparent)' }}
                         >
                           {String(i + 1).padStart(2, '0')}
@@ -414,7 +420,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                 {/* Connect */}
                 {SOCIAL_LINKS.length > 0 && (
                   <>
-                    <p className="mb-2 mt-5 px-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--text-muted)]">
+                    <p className="mb-2 mt-5 px-3 text-xs font-bold uppercase tracking-[0.28em] text-[var(--text-muted)]">
                       Connect
                     </p>
                     <div className="flex gap-2 px-1">

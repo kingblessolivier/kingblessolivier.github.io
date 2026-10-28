@@ -1,46 +1,39 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FiCpu, FiGithub, FiGlobe, FiArrowUpRight, FiExternalLink } from 'react-icons/fi'
 import { HiXMark } from 'react-icons/hi2'
 import SectionReveal from '../components/SectionReveal'
 import SectionHeader from '../components/SectionHeader'
-import TiltCard from '../components/TiltCard'
 import { projectPath, routedProjects } from '../lib/projectRoutes'
 
-function SpotlightCard({ children, className }) {
-  const cardRef = useRef(null)
-  const [spotlight, setSpotlight] = useState({ x: 50, y: 50, show: false })
-
-  const handleMove = (e) => {
-    const rect = cardRef.current?.getBoundingClientRect()
-    if (!rect) return
-    const x = ((e.clientX - rect.left) / rect.width) * 100
-    const y = ((e.clientY - rect.top) / rect.height) * 100
-    setSpotlight({ x, y, show: true })
-  }
-
+/* Live demo first where there is one — a running app is stronger evidence than a repo */
+function ProjectLinks({ project }) {
   return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMove}
-      onMouseLeave={() => setSpotlight((s) => ({ ...s, show: false }))}
-      className={`relative overflow-hidden ${className}`}
-      style={{
-        '--sx': `${spotlight.x}%`,
-        '--sy': `${spotlight.y}%`,
-      }}
-    >
-      {/* Spotlight overlay */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 rounded-2xl transition-opacity duration-300"
-        style={{
-          opacity: spotlight.show ? 1 : 0,
-          background: `radial-gradient(180px circle at ${spotlight.x}% ${spotlight.y}%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 80%)`,
-        }}
-      />
-      {children}
-    </div>
+    <span className="flex shrink-0 items-center gap-1.5">
+      {project.demo && (
+        <a
+          href={project.demo}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`${project.name} live demo`}
+          title={`${project.name} live demo`}
+          className="icon-btn relative z-10"
+        >
+          <FiExternalLink size={15} />
+        </a>
+      )}
+      <a
+        href={project.link}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`${project.name} on GitHub`}
+        title={`${project.name} on GitHub`}
+        className="icon-btn relative z-10"
+      >
+        <FiGithub size={15} />
+      </a>
+    </span>
   )
 }
 
@@ -53,6 +46,8 @@ export default function ProjectsSection({
   onCloseProject,
 }) {
   const text = sectionText.projects
+  const featured = routedProjects.slice(0, 3)
+  const others = routedProjects.slice(3)
   const categoryIcon = (category) => (category === 'AI' ? <FiCpu size={13} /> : <FiGlobe size={13} />)
 
   /* Escape closes the case study, and the page behind it should not scroll. */
@@ -87,124 +82,129 @@ export default function ProjectsSection({
             title={navLabels.projects}
             titleContext=" built by Nsengimana Olivier"
             subtitle={text.intro}
-            number="03"
+            number="02"
           />
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {routedProjects.map((project, index) => (
-            <motion.article
-              key={project.name}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (index % 6) * 0.06 }}
-            >
-              <SpotlightCard className="card-surface card-shimmer group h-full rounded-2xl border border-[var(--border)] transition-all duration-300 hover:-translate-y-2 hover:border-[color:color-mix(in_srgb,var(--accent)_30%,var(--border))] hover:shadow-[0_24px_60px_-24px_color-mix(in_srgb,var(--accent)_28%,rgba(0,0,0,0.2))]">
-                <TiltCard className="relative z-10 flex h-full flex-col rounded-2xl p-6">
-
-                  {/* Project number watermark */}
-                  <span className="project-number">{String(index + 1).padStart(2, '0')}</span>
-
-                  {/* Top row */}
-                  <div className="mb-4 flex items-start justify-between gap-3">
+        {/* Featured: the lead project runs full width, the next two share a row */}
+        <div className="grid gap-4 @xl:grid-cols-2">
+          {featured.map((project, index) => {
+            const lead = index === 0
+            const impact = project.caseStudy?.impact?.[language]
+            const architecture = project.caseStudy?.architecture
+            return (
+              <motion.article
+                key={project.name}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: index * 0.06 }}
+                className={lead ? '@xl:col-span-2' : ''}
+              >
+                <div className={`bento-card bento-card--featured group flex h-full flex-col rounded-2xl ${lead ? 'beam p-7 @xl:p-8' : 'p-6'}`}>
+                  <div className="relative z-10 mb-4 flex items-start justify-between gap-3">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span
-                        className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide"
-                        style={{
-                          background: project.category === 'AI'
-                            ? 'color-mix(in srgb, var(--accent-purple) 14%, transparent)'
-                            : 'color-mix(in srgb, var(--accent) 12%, transparent)',
-                          color: project.category === 'AI' ? 'var(--accent-purple)' : 'var(--accent)',
-                          border: `1px solid ${project.category === 'AI' ? 'color-mix(in srgb,var(--accent-purple) 25%,transparent)' : 'color-mix(in srgb,var(--accent) 22%,transparent)'}`,
-                          fontFamily: "Arial, 'Helvetica Neue', Helvetica, sans-serif",
-                        }}
-                      >
+                      <span className="chip chip--accent">
                         {categoryIcon(project.category)}
                         {project.category}
                       </span>
-                      {index < 3 && (
-                        <span
-                          className="inline-flex items-center rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest"
-                          style={{
-                            background: 'linear-gradient(110deg, var(--accent), var(--accent-purple))',
-                            color: 'var(--accent-contrast)',
-                            fontFamily: "Arial, 'Helvetica Neue', Helvetica, sans-serif",
-                          }}
-                        >
-                          Featured
-                        </span>
+                      <span className="chip chip--solid">Featured</span>
+                    </div>
+                    <ProjectLinks project={project} />
+                  </div>
+
+                  <div className={`relative z-10 ${lead ? 'grid gap-6 @3xl:grid-cols-[1.2fr_1fr] @3xl:gap-10' : ''}`}>
+                    <div>
+                      <h3 className={`font-semibold leading-tight tracking-tight text-[var(--text)] ${lead ? 'text-2xl @xl:text-3xl' : 'text-lg'}`}>
+                        {project.name}
+                      </h3>
+                      <p className={`mt-3 text-[var(--text-muted)] ${lead ? 'text-base leading-relaxed' : 'text-sm leading-relaxed'}`}>
+                        {project.description[language]}
+                      </p>
+                      {lead && impact && (
+                        <p className="mt-5 border-l-2 border-[var(--accent)] pl-4 text-sm leading-relaxed text-[var(--text)]">{impact}</p>
                       )}
                     </div>
 
-                    <div className="flex shrink-0 items-center gap-1.5">
-                      {/* A running app is stronger evidence than a repository,
-                          so it sits first where the project has one. */}
-                      {project.demo && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noreferrer"
-                          aria-label={`${project.name} live demo`}
-                          title={`${project.name} live demo`}
-                          className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                        >
-                          <FiExternalLink size={13} />
-                        </a>
-                      )}
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`${project.name} on GitHub`}
-                        title={`${project.name} on GitHub`}
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                      >
-                        <FiGithub size={13} />
-                      </a>
+                    {/* The lead project shows how it is built */}
+                    {lead && architecture?.length > 0 && (
+                      <ol className="hidden space-y-2 self-start @xl:block">
+                        {architecture.map((step, i) => (
+                          <li
+                            key={step}
+                            className="flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface-2)] px-3.5 py-2.5 text-sm text-[var(--text)]"
+                          >
+                            <span className="font-mono text-xs text-[var(--accent)]">{String(i + 1).padStart(2, '0')}</span>
+                            {step}
+                          </li>
+                        ))}
+                      </ol>
+                    )}
+                  </div>
+
+                  <div className="flex-1" />
+
+                  <div className="relative z-10 mt-6 flex flex-wrap items-center justify-between gap-4">
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.tech.map((tag) => (
+                        <span key={`${project.name}-${tag}`} className="tech-tag">{tag}</span>
+                      ))}
                     </div>
+                    <a
+                      href={projectPath(project)}
+                      onClick={(event) => handleCaseStudyClick(event, project)}
+                      aria-label={`${text.viewCaseStudy}: ${project.name}`}
+                      className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-[var(--accent)] transition-[gap] duration-200 hover:gap-2.5"
+                    >
+                      {text.viewCaseStudy}
+                      <FiArrowUpRight size={15} />
+                    </a>
                   </div>
+                </div>
+              </motion.article>
+            )
+          })}
+        </div>
 
-                  {/* Title */}
-                  <h3 className="mb-3 text-base font-bold leading-snug text-[var(--text)]">{project.name}</h3>
-
-                  {/* Description */}
-                  <p className="flex-1 text-sm leading-[1.8] text-[var(--text-muted)]">
-                    {project.description[language]}
-                  </p>
-
-                  {/* Tech tags */}
-                  <div className="mt-5 flex flex-wrap gap-1.5">
-                    {project.tech.map((tag) => (
-                      <span
-                        key={`${project.name}-${tag}`}
-                        className="rounded-md border border-[var(--border)] bg-[var(--surface)] px-2.5 py-0.5 text-[10px] font-medium text-[var(--text-muted)] transition hover:border-[color:color-mix(in_srgb,var(--accent)_40%,var(--border))] hover:text-[var(--text)]"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Case study link — a real URL so it can be crawled and shared */}
+        {/* Everything else as a compact index — one row per project */}
+        <div className="mt-10">
+          <p className="section-eyebrow mb-3">More projects</p>
+          <ul className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
+            {others.map((project, index) => (
+              <motion.li
+                key={project.name}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: index * 0.04 }}
+                className="group relative"
+              >
+                <div className="grid items-center gap-x-6 gap-y-1 py-4 @3xl:grid-cols-[2.5rem_minmax(0,1fr)_minmax(0,1.4fr)_auto]">
+                  <span className="hidden font-mono text-xs text-[var(--text-subtle)] @3xl:block">
+                    {String(featured.length + index + 1).padStart(2, '0')}
+                  </span>
                   <a
                     href={projectPath(project)}
                     onClick={(event) => handleCaseStudyClick(event, project)}
                     aria-label={`${text.viewCaseStudy}: ${project.name}`}
-                    className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--border)] py-2.5 text-xs font-semibold text-[var(--text-muted)] transition hover:border-[var(--accent)] hover:bg-[color:color-mix(in_srgb,var(--accent)_8%,transparent)] hover:text-[var(--text)]"
+                    className="text-base font-semibold text-[var(--text)] after:absolute after:inset-0 after:content-[''] group-hover:text-[var(--accent)]"
                   >
-                    {text.viewCaseStudy}
-                    <FiArrowUpRight size={13} />
+                    {project.name}
                   </a>
-
-                  {/* Bottom glow line on hover */}
-                  <div
-                    className="absolute inset-x-0 bottom-0 h-[2px] rounded-b-2xl opacity-0 transition-all duration-300 group-hover:opacity-100"
-                    style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent-purple))' }}
-                  />
-                </TiltCard>
-              </SpotlightCard>
-            </motion.article>
-          ))}
+                  <span className="text-sm text-[var(--text-muted)]">{project.description[language]}</span>
+                  <span className="relative z-10 flex items-center gap-3">
+                    <span className="hidden font-mono text-xs text-[var(--text-subtle)] @3xl:inline">{project.tech.slice(0, 2).join(' · ')}</span>
+                    <ProjectLinks project={project} />
+                    <FiArrowUpRight
+                      size={16}
+                      className="text-[var(--text-subtle)] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--accent)]"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </div>
+              </motion.li>
+            ))}
+          </ul>
         </div>
 
       </div>

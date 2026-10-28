@@ -1,5 +1,10 @@
 import { motion } from 'framer-motion'
 
+/**
+ * One header for every section: a mono "01 / About" eyebrow, the title, and
+ * on wide screens the subtitle set to the right so the heading reads as a row
+ * rather than a stack.
+ */
 export default function SectionHeader({
   tag,
   title,
@@ -10,56 +15,43 @@ export default function SectionHeader({
    */
   titleContext,
   subtitle,
-  align = 'left',
   number,
   children,
 }) {
-  const centered = align === 'center'
   return (
-    <div className={`mb-14 ${centered ? 'text-center' : ''} relative`}>
+    <div className="mb-8 grid gap-4 @3xl:mb-10 @4xl:grid-cols-[1fr_minmax(0,22rem)] @4xl:items-end @4xl:gap-16">
+      <div>
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="section-eyebrow mb-4"
+        >
+          {number && <b>{number}</b>}
+          <i aria-hidden="true" />
+          {tag}
+        </motion.p>
 
-
-      <motion.span
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4 }}
-        className="section-tag mb-4 inline-block"
-      >
-        {tag}
-      </motion.span>
-
-      <motion.h2
-        initial={{ opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.55, delay: 0.08 }}
-        className="section-header-title"
-      >
-        {title}
-        {titleContext && <span className="sr-only">{titleContext}</span>}
-      </motion.h2>
-
-      {/* Accent rule */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.55, delay: 0.18 }}
-        className={`mt-4 h-[3px] w-12 rounded-full ${centered ? 'mx-auto' : ''}`}
-        style={{
-          transformOrigin: centered ? 'center' : 'left',
-          background: 'linear-gradient(90deg, var(--accent), var(--accent-purple))',
-        }}
-      />
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55, delay: 0.06 }}
+          className="section-header-title"
+        >
+          {title}
+          {titleContext && <span className="sr-only">{titleContext}</span>}
+        </motion.h2>
+      </div>
 
       {subtitle && (
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.45, delay: 0.22 }}
-          className={`mt-5 text-[15px] leading-[1.9] text-[var(--text-muted)] ${centered ? 'mx-auto max-w-2xl' : 'max-w-xl'}`}
+          transition={{ duration: 0.45, delay: 0.14 }}
+          className="text-base leading-relaxed text-[var(--text-muted)]"
         >
           {subtitle}
         </motion.p>

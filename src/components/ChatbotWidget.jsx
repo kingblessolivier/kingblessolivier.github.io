@@ -407,7 +407,7 @@ export default function ChatbotWidget() {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0 }}
-              className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full text-[9px] font-black text-white"
+              className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full text-[11px] font-black text-white"
               style={{ background: '#EF4444' }}
             >
               {unread}
