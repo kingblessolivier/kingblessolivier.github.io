@@ -57,7 +57,7 @@ export default function GitHubHeatmap() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.55 }}
-      className="card-surface rounded-2xl p-5"
+      className="card-surface rounded-xl p-5"
     >
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">

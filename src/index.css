@@ -41,29 +41,34 @@
   --green-400: #3DD68C;
 }
 
-/* ── Light theme ──
-   Contrast on --bg (#FFFFFF):
-     --text        gray-900 → 18.4:1
-     --text-muted  gray-600 →  6.8:1
-     --accent      blue-700 →  6.8:1                      */
+/* ── Light theme — Fluent-style layers ──
+   A soft neutral canvas (like Windows' Mica) with white surfaces lifted
+   by quiet two-part shadows, rather than borders doing all the work.
+   Contrast:
+     --text        gray-900 on canvas → 17.2:1
+     --text-muted  gray-600 on white  →  6.8:1, on canvas 6.4:1
+     --accent      blue-700 on white  →  6.8:1, on canvas 6.3:1         */
 :root {
-  --bg:             var(--gray-0);
-  --bg-subtle:      var(--gray-50);
+  --bg:             var(--gray-50);
+  --bg-subtle:      var(--gray-100);
   --surface-1:      var(--gray-0);
-  --surface-2:      var(--gray-25);
+  --surface-2:      var(--gray-50);
   --line:           var(--gray-200);
   --line-strong:    var(--gray-300);
   --text:           var(--gray-900);
   --text-muted:     var(--gray-600);
-  --text-subtle:    var(--gray-400);
+  --text-subtle:    var(--gray-500);
   --accent:         var(--blue-700);
   --accent-hover:   var(--blue-800);
   --accent-soft:    var(--blue-50);
   --accent-line:    var(--blue-200);
   --accent-contrast:var(--gray-0);
   --success:        var(--green-500);
-  --shadow:         0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.06);
-  --shadow-lg:      0 12px 32px -12px rgba(16, 24, 40, 0.14);
+  /* Fluent elevation: an ambient edge plus a short key shadow */
+  --shadow:         0 0 2px rgba(17, 24, 39, 0.06), 0 1px 3px rgba(17, 24, 39, 0.08);
+  --shadow-lg:      0 0 2px rgba(17, 24, 39, 0.08), 0 8px 24px -6px rgba(17, 24, 39, 0.14);
+  --radius-card:    12px;
+  --radius-inner:   8px;
 
   /* Aliases kept for existing components */
   --card:          var(--surface-1);
@@ -90,29 +95,30 @@
   --terminal-footer: #181825;
 }
 
-/* ── Dark theme ──
-   Contrast on --bg (gray-950):
-     --text        #EDEEF1  → 16.9:1
-     --text-muted  gray-400 →  7.4:1
-     --accent      blue-400 →  5.8:1                      */
+/* ── Dark theme — Fluent-style layers ──
+   Charcoal canvas, surfaces one step lighter, hairline strokes.
+   Contrast:
+     --text        #EDEEF1 on surface #1E2024 → 14.1:1
+     --text-muted  #A3A8B2 on surface         →  6.8:1
+     --accent      blue-400 on surface        →  4.9:1               */
 :root.dark {
-  --bg:             var(--gray-950);
-  --bg-subtle:      var(--gray-900);
-  --surface-1:      var(--gray-900);
-  --surface-2:      var(--gray-850);
-  --line:           var(--gray-800);
-  --line-strong:    var(--gray-700);
+  --bg:             #151619;
+  --bg-subtle:      #1A1C1F;
+  --surface-1:      #1E2024;
+  --surface-2:      #25272C;
+  --line:           #2D3035;
+  --line-strong:    #3A3D44;
   --text:           #EDEEF1;
-  --text-muted:     var(--gray-400);
-  --text-subtle:    var(--gray-500);
+  --text-muted:     #A3A8B2;
+  --text-subtle:    #8A909B;
   --accent:         var(--blue-400);
   --accent-hover:   var(--blue-300);
-  --accent-soft:    color-mix(in srgb, var(--blue-500) 14%, transparent);
+  --accent-soft:    color-mix(in srgb, var(--blue-500) 16%, transparent);
   --accent-line:    color-mix(in srgb, var(--blue-400) 35%, transparent);
   --accent-contrast:var(--gray-950);
   --success:        var(--green-400);
-  --shadow:         0 1px 2px rgba(0, 0, 0, 0.5);
-  --shadow-lg:      0 16px 40px -16px rgba(0, 0, 0, 0.7);
+  --shadow:         0 0 2px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.45);
+  --shadow-lg:      0 0 2px rgba(0, 0, 0, 0.5), 0 8px 24px -6px rgba(0, 0, 0, 0.6);
 
   --heatmap-0: var(--gray-850);
   --heatmap-1: color-mix(in srgb, var(--blue-400) 28%, transparent);
@@ -190,7 +196,10 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  /* Mica-style canvas: a faint brand tint at the top fading into the neutral */
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--accent) 5%, var(--bg)) 0, var(--bg) 28rem) no-repeat,
+    var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
   letter-spacing: -0.011em;
@@ -332,10 +341,10 @@ h1, h2, h3 {
 }
 
 .section-header-title {
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.04;
+  font-size: clamp(2rem, 3.4vw, 2.75rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   color: var(--text);
 }
 
@@ -344,22 +353,23 @@ h1, h2, h3 {
   letter-spacing: -0.03em;
 }
 
-/* ─── Bento project card (pattern after 21st.dev / kokonutd "Bento Grid") ─── */
+/* ─── Card: a Fluent-style surface — white on the canvas, quiet two-part
+   shadow, and on hover the shadow deepens rather than the card moving ─── */
 .bento-card {
   position: relative;
   overflow: hidden;
-  background: var(--card);
-  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface-1);
+  border: 1px solid var(--line);
   box-shadow: var(--shadow);
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .bento-card:hover {
-  transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
-  box-shadow: 0 20px 48px -24px color-mix(in srgb, var(--accent) 26%, rgba(0, 0, 0, 0.18));
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-lg);
 }
 .bento-card--featured {
-  border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
+  border-color: var(--accent-line);
 }
 
 
@@ -377,8 +387,8 @@ h1, h2, h3 {
 }
 .chip--accent {
   color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
 }
 .chip--solid {
   color: var(--accent-contrast);
@@ -386,9 +396,9 @@ h1, h2, h3 {
 }
 
 .tech-tag {
-  border-radius: 0.5rem;
-  border: 1px solid var(--border);
-  background: var(--surface);
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
   padding: 0.25rem 0.6rem;
   font-size: 0.75rem;
   font-weight: 500;
@@ -408,12 +418,13 @@ h1, h2, h3 {
   transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 .icon-btn:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+  color: var(--text);
+  background: var(--surface-2);
+  border-color: var(--line-strong);
 }
 
 /* ═══════════════════════════════════════════════════════
-   ADVANCED LAYER — one set of effects shared by every section
+   SHARED SECTION PIECES
    ═══════════════════════════════════════════════════════ */
 
 /* Section eyebrow: "01 / About" in mono */
@@ -422,7 +433,7 @@ h1, h2, h3 {
   align-items: center;
   gap: 0.6rem;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
   color: var(--text-muted);
 }
@@ -435,82 +446,28 @@ h1, h2, h3 {
   display: inline-block;
   width: 2rem;
   height: 1px;
-  background: linear-gradient(90deg, var(--accent), transparent);
+  background: var(--line-strong);
 }
-
-/* Cursor spotlight — App sets --mx/--my on the card under the pointer */
-.bento-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  background: radial-gradient(
-    22rem circle at var(--mx, 50%) var(--my, 50%),
-    color-mix(in srgb, var(--accent) 9%, transparent),
-    transparent 65%
-  );
-}
-.bento-card:hover::before { opacity: 1; }
-
-/* Border beam — a short light that travels round the card's edge */
-.beam { isolation: isolate; }
-.beam::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  border-radius: inherit;
-  padding: 1px;
-  background: conic-gradient(
-    from var(--border-angle),
-    transparent 0turn 0.78turn,
-    color-mix(in srgb, var(--accent) 80%, transparent) 0.9turn,
-    var(--brand-blue-light) 0.95turn,
-    transparent 1turn
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-  animation: beam-spin 6s linear infinite;
-}
-@keyframes beam-spin { to { --border-angle: 1turn; } }
 
 /* Big, quiet numbers */
 .stat-figure {
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 650;
   line-height: 1;
   letter-spacing: -0.04em;
   color: var(--text);
   font-variant-numeric: tabular-nums;
 }
 
-/* Request lifecycle track with a travelling pulse */
+/* Request lifecycle track */
 .flow-track {
   position: absolute;
   left: 10%;
   right: 10%;
   top: 1.25rem;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border) 8%, var(--border) 92%, transparent);
-  overflow: hidden;
+  background: var(--line);
 }
-.flow-track::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -20%;
-  width: 20%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  animation: flow-pulse 3.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-}
-@keyframes flow-pulse { to { left: 100%; } }
 
 .flow-node {
   position: relative;

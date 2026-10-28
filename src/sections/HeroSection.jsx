@@ -129,7 +129,7 @@ export default function HeroSection({ labels, language, setLanguage, theme, togg
           <button
             type="button"
             onClick={() => jumpTo('projects')}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--text)] px-5 text-sm font-semibold text-[var(--bg)] transition hover:opacity-85"
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[var(--accent)] px-5 text-sm font-semibold text-[var(--accent-contrast)] shadow-[var(--shadow)] transition hover:bg-[var(--accent-hover)]"
           >
             {labels.viewProjects}
             <FiArrowRight size={15} />
@@ -137,7 +137,7 @@ export default function HeroSection({ labels, language, setLanguage, theme, togg
           <button
             type="button"
             onClick={() => jumpTo('contact')}
-            className="inline-flex min-h-11 items-center rounded-full border border-[var(--border)] px-5 text-sm font-semibold text-[var(--text)] transition hover:border-[var(--text-muted)]"
+            className="inline-flex min-h-11 items-center rounded-lg border border-[var(--line)] bg-[var(--surface-1)] px-5 text-sm font-semibold text-[var(--text)] shadow-[var(--shadow)] transition hover:border-[var(--line-strong)] hover:bg-[var(--surface-2)]"
           >
             {labels.contactMe}
           </button>
@@ -198,7 +198,7 @@ export default function HeroSection({ labels, language, setLanguage, theme, togg
               aria-label={label}
               className="flex h-10 w-10 items-center justify-center rounded-full text-[var(--text-muted)] transition hover:bg-[var(--surface)] hover:text-[var(--text)]"
             >
-              <Icon size={17} />
+              <Icon size={17} aria-hidden="true" />
             </a>
           ))}
         </div>

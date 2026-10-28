@@ -37,7 +37,7 @@ export default function AboutSection({ language, navLabels, sectionText }) {
 
         <div className="grid gap-4 @3xl:grid-cols-3">
           {/* Story + journey */}
-          <motion.article {...rise()} className="bento-card group rounded-3xl p-7 @xl:p-10 @3xl:col-span-2 @3xl:row-span-2">
+          <motion.article {...rise()} className="bento-card group p-7 @xl:p-10 @3xl:col-span-2 @3xl:row-span-2">
             <motion.p
               key={language}
               initial={{ opacity: 0 }}
@@ -68,7 +68,7 @@ export default function AboutSection({ language, navLabels, sectionText }) {
           </motion.article>
 
           {/* Philosophy + how I work */}
-          <motion.figure {...rise(0.08)} className="bento-card bento-card--featured group rounded-3xl p-7">
+          <motion.figure {...rise(0.08)} className="bento-card bento-card--featured group p-7">
             <blockquote className="relative z-10 text-base font-medium leading-relaxed text-[var(--text)]">
               “{portfolioData.personal.philosophy[language]}”
             </blockquote>
@@ -89,7 +89,7 @@ export default function AboutSection({ language, navLabels, sectionText }) {
           </motion.figure>
 
           {/* Stats */}
-          <motion.div {...rise(0.14)} className="bento-card group grid grid-cols-3 rounded-3xl p-7">
+          <motion.div {...rise(0.14)} className="bento-card group grid grid-cols-3 p-7">
             {statItems.map(({ label, value }, i) => (
               <div
                 key={label}

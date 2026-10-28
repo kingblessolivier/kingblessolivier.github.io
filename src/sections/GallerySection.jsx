@@ -37,7 +37,7 @@ export default function GallerySection({ navLabels, sectionText, language }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="group relative w-[78%] shrink-0 snap-start overflow-hidden rounded-2xl border border-[var(--border)] @xl:w-auto"
+              className="group relative w-[78%] shrink-0 snap-start overflow-hidden rounded-xl border border-[var(--border)] @xl:w-auto"
             >
               <button
                 type="button"
@@ -94,7 +94,7 @@ export default function GallerySection({ navLabels, sectionText, language }) {
                   decoding="async"
                   fetchPriority="high"
                   sizes="100vw"
-                  className="max-h-[86vh] w-full rounded-2xl object-contain"
+                  className="max-h-[86vh] w-full rounded-xl object-contain"
                   onClick={(event) => event.stopPropagation()}
                 />
               </motion.div>
