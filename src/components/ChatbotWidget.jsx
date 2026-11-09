@@ -64,7 +64,7 @@ function BotAvatar({ size = 28 }) {
      clipped to a disc rather than drawn on a tinted one. */
   return (
     <img
-      src="/logo-128.webp"
+      src="/logo-128.webp?v=2"
       alt=""
       width={size}
       height={size}
