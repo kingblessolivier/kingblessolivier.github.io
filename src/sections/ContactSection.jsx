@@ -137,9 +137,9 @@ export default function ContactSection({ navLabels, sectionText }) {
                 <span
                   className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
                   style={{
-                    background: 'color-mix(in srgb, var(--accent) 10%, var(--surface))',
+                    background: 'var(--accent-soft)',
                     color: 'var(--accent)',
-                    border: '1px solid color-mix(in srgb, var(--accent) 18%, var(--border))',
+                    border: '1px solid var(--accent-line)',
                   }}
                 >
                   {copied ? <FiCheckCircle size={14} className="text-emerald-400" /> : <FiMail size={14} />}
@@ -167,9 +167,9 @@ export default function ContactSection({ navLabels, sectionText }) {
                   <span
                     className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
                     style={{
-                      background: 'color-mix(in srgb, var(--accent) 10%, var(--surface))',
+                      background: 'var(--accent-soft)',
                       color: 'var(--accent)',
-                      border: '1px solid color-mix(in srgb, var(--accent) 18%, var(--border))',
+                      border: '1px solid var(--accent-line)',
                     }}
                   >
                     <Icon size={14} />

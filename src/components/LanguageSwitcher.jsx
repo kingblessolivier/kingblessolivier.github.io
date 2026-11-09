@@ -62,13 +62,13 @@ export default function LanguageSwitcher({ language, setLanguage, upward = false
         className="flex min-h-11 items-center gap-2 rounded-xl border px-2.5 py-1.5 transition-[background-color,border-color,box-shadow]"
         style={{
           background: open
-            ? 'color-mix(in srgb, var(--accent) 8%, var(--surface))'
+            ? 'var(--accent-soft)'
             : 'color-mix(in srgb, var(--surface) 70%, transparent)',
           borderColor: open
-            ? 'color-mix(in srgb, var(--accent) 30%, var(--border))'
+            ? 'var(--accent-line)'
             : 'var(--border)',
           boxShadow: open
-            ? '0 0 12px -4px color-mix(in srgb,var(--accent) 20%,transparent)'
+            ? 'none'
             : 'none',
         }}
       >
@@ -103,15 +103,15 @@ export default function LanguageSwitcher({ language, setLanguage, upward = false
             }`}
             style={{
               background: 'var(--card)',
-              border: '1px solid color-mix(in srgb,var(--accent) 14%,var(--border))',
-              boxShadow: '0 20px 48px -12px rgba(0,0,20,0.4), 0 0 0 1px color-mix(in srgb,var(--accent) 5%,transparent)',
+              border: '1px solid var(--accent-line)',
+              boxShadow: 'var(--shadow-lg)',
               backdropFilter: 'blur(20px)',
             }}
           >
             {/* Top accent line */}
             <div
               className="absolute inset-x-0 top-0 h-px"
-              style={{ background: 'linear-gradient(90deg,transparent,color-mix(in srgb,var(--accent) 55%,transparent),transparent)' }}
+              style={{ background: 'var(--line)' }}
             />
 
             <div className="px-2 pb-1 pt-2">
@@ -137,10 +137,10 @@ export default function LanguageSwitcher({ language, setLanguage, upward = false
                     className="flex w-full items-center gap-3 rounded-xl px-2 py-2 text-left transition-colors"
                     style={{
                       background: active
-                        ? 'color-mix(in srgb,var(--accent) 10%,var(--surface))'
+                        ? 'var(--accent-soft)'
                         : 'transparent',
                       border: active
-                        ? '1px solid color-mix(in srgb,var(--accent) 20%,var(--border))'
+                        ? '1px solid var(--accent-line)'
                         : '1px solid transparent',
                     }}
                     onMouseEnter={(e) => {
