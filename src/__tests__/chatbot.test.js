@@ -4,7 +4,7 @@ import { getResponse } from '../components/ChatbotWidget'
 describe('chatbot getResponse', () => {
   it('answers project questions with real project names', () => {
     const reply = getResponse('show me your projects')
-    expect(reply).toMatch(/MedLink|Candidate|CineRec/)
+    expect(reply).toMatch(/TalentAI|MediLink|Urugwiro/)
   })
 
   it('answers skill questions with the stack', () => {

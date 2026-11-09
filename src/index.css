@@ -57,7 +57,7 @@
   --line-strong:    var(--gray-300);
   --text:           var(--gray-900);
   --text-muted:     var(--gray-600);
-  --text-subtle:    var(--gray-500);
+  --text-subtle:    #646A75; /* gray-500 was 4.4:1 on canvas; this is 5.1:1 */
   --accent:         var(--blue-700);
   --accent-hover:   var(--blue-800);
   --accent-soft:    var(--blue-50);
@@ -111,7 +111,7 @@
   --text:           #EDEEF1;
   --text-muted:     #A3A8B2;
   --text-subtle:    #8A909B;
-  --accent:         var(--blue-400);
+  --accent:         #5A92FF; /* blue-400 was 4.2:1 on accent-soft chips; this is 4.6:1 */
   --accent-hover:   var(--blue-300);
   --accent-soft:    color-mix(in srgb, var(--blue-500) 16%, transparent);
   --accent-line:    color-mix(in srgb, var(--blue-400) 35%, transparent);
@@ -407,8 +407,8 @@ h1, h2, h3 {
 
 .icon-btn {
   display: inline-flex;
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 2.75rem;
+  width: 2.75rem;
   align-items: center;
   justify-content: center;
   border-radius: 999px;
@@ -654,12 +654,12 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px; height: 40px;
+  width: 44px; height: 44px;
   border-radius: 50%;
   border: 1px solid var(--border);
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   color: var(--text-muted);
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   overflow: hidden;
 }
 .navbar-theme-btn:hover {
@@ -673,13 +673,13 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px; height: 36px;
-  border-radius: 10px;
+  width: 44px; height: 44px;
+  border-radius: 12px;
   border: 1px solid var(--border);
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   color: var(--text-muted);
   overflow: hidden;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 .navbar-hamburger:hover {
   color: var(--text);
@@ -728,8 +728,8 @@ h1, h2, h3 {
 
 /* Comfortable touch targets on phones / tablets (mobile controls only) */
 @media (max-width: 1279px) {
-  .navbar-theme-btn { width: 40px; height: 40px; }
-  .navbar-hamburger { width: 42px; height: 42px; }
+  .navbar-theme-btn { width: 44px; height: 44px; }
+  .navbar-hamburger { width: 44px; height: 44px; }
   
 }
 
@@ -903,7 +903,7 @@ h1, h2, h3 {
   padding: 0.65rem 0.75rem;
   font-size: 0.84rem;
   color: var(--text-muted);
-  transition: all 0.2s ease;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
 }
 .command-palette-item:hover {
   border-color: var(--border);
@@ -930,7 +930,7 @@ h1, h2, h3 {
 }
 
 .skill-tag {
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
   font-family: var(--font-sans);
 }
 .skill-tag:hover {
@@ -1044,7 +1044,7 @@ h1, h2, h3 {
 /* ═══════════════════════════════════════════════════════
    SOCIAL / INTERACTION
    ═══════════════════════════════════════════════════════ */
-.social-link { transition: all 0.25s ease; }
+.social-link { transition: color 0.2s ease, filter 0.2s ease; }
 .social-link:hover {
   color: var(--accent);
   filter: drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 55%, transparent));
@@ -1162,7 +1162,7 @@ h1, h2, h3 {
   font-family: var(--font-sans);
   letter-spacing: 0.02em;
   white-space: nowrap;
-  transition: all 0.22s ease;
+  transition: color 0.22s ease, border-color 0.22s ease, background-color 0.22s ease, box-shadow 0.22s ease;
   cursor: default;
 }
 .marquee-chip:hover {
@@ -1188,6 +1188,12 @@ h1, h2, h3 {
 
 @media (min-width: 1024px) {
   .hero-right-col { align-items: center; justify-content: center; }
+}
+
+/* Heatmap cells: transform only, and only for a real mouse */
+@media (hover: hover) and (pointer: fine) {
+  .heat-cell { transition: transform 0.15s ease-out; }
+  .heat-cell.is-hovered { transform: scale(1.25); outline: 1px solid var(--accent); }
 }
 
 @media (prefers-reduced-motion: reduce) {

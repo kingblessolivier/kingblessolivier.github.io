@@ -29,8 +29,8 @@ export function getResponse(input) {
     const list = portfolioData.workExperience.map((w) => `${w.role.EN} @ ${w.company}`).join(' · ')
     return `Experience: ${list}.`
   }
-  if (t.includes('hackathon') || t.includes('medlink') || t.includes('award')) {
-    return 'MedLink won a prize at the HATANA Hackathon (Mastercard × UR). It reduces hospital queue delays through digital appointment booking and nearby hospital discovery.'
+  if (t.includes('hackathon') || t.includes('medlink') || t.includes('medilink') || t.includes('umurava') || t.includes('award')) {
+    return 'TalentAI placed 4th (Team Recognition Winner) at the Umurava AI Hackathon, recognised for the best HR-industry context and user experience. MedLink won a prize at the HATANA Hackathon (Mastercard × UR); today it is MediLink Rwanda: patients find a facility that accepts their insurance, book or join the queue remotely and follow their turn, while facilities run the whole visit electronically.'
   }
   if (t.includes('hello') || t.includes('hi') || t.includes('hey')) {
     return "Hey there! 👋 I'm OlivierBot. Ask me anything about Olivier's work, skills, education, or how to get in touch."
@@ -292,7 +292,7 @@ export default function ChatbotWidget() {
                 <button
                   key={label}
                   onClick={() => send(label)}
-                  className="flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium transition-all"
+                  className="flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium transition-colors"
                   style={{
                     borderColor: 'var(--border)',
                     color: 'var(--text-muted)',
@@ -322,7 +322,7 @@ export default function ChatbotWidget() {
               style={{ borderColor: 'var(--border)' }}
             >
               <div
-                className="flex flex-1 items-center rounded-full px-1.5 py-1.5 transition-all"
+                className="flex flex-1 items-center rounded-full px-1.5 py-1.5 transition-[background-color,border-color,box-shadow]"
                 style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
                 onFocusCapture={(e) => { e.currentTarget.style.borderColor = 'color-mix(in srgb,var(--accent) 45%,var(--border))'; e.currentTarget.style.boxShadow = '0 0 0 3px color-mix(in srgb,var(--accent) 10%,transparent)' }}
                 onBlurCapture={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.boxShadow = 'none' }}
@@ -378,7 +378,7 @@ export default function ChatbotWidget() {
           <motion.span
             className="absolute inset-0 rounded-full"
             animate={{ scale: [1, 1.18, 1], opacity: [0.4, 0, 0.4] }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 2.4, repeat: 2, ease: 'easeInOut', delay: 1 }}
             style={{ background: 'color-mix(in srgb,var(--accent) 40%,transparent)' }}
           />
         )}
@@ -404,9 +404,9 @@ export default function ChatbotWidget() {
         <AnimatePresence>
           {!open && unread > 0 && (
             <motion.span
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
               className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full text-[11px] font-black text-white"
               style={{ background: '#EF4444' }}
             >

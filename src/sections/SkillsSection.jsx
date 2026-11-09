@@ -103,7 +103,7 @@ export default function SkillsSection({ navLabels, sectionText }) {
         </motion.div>
 
         {/* Real GitHub data only — each card hides itself if it cannot load */}
-        <div className="grid gap-6">
+        <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-6">
           <GitHubHeatmap />
           <GitHubStats />
         </div>

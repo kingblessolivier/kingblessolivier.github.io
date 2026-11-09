@@ -91,6 +91,7 @@ export default function HeroSection({ labels, language, setLanguage, theme, togg
   return (
     <section
       id="home"
+      aria-labelledby="hero-name"
       className="flex flex-col pt-28 pb-12 lg:sticky lg:top-0 lg:h-screen lg:justify-between lg:overflow-y-auto lg:py-12"
     >
       <div>
@@ -103,15 +104,16 @@ export default function HeroSection({ labels, language, setLanguage, theme, togg
         </motion.div>
 
         {/* Name — the page's only h1 */}
-        <motion.h1 {...fade(0.08)} className="mt-6 font-extrabold leading-[0.92] tracking-[-0.045em]">
+        <motion.h1 id="hero-name" {...fade(0.08)} className="mt-6 font-extrabold leading-[0.92] tracking-[-0.045em]">
           <span className="block text-[clamp(2.4rem,10vw,3.6rem)] text-[var(--text)] lg:text-[2.6rem] xl:text-[3rem]">NSENGIMANA</span>
           <span className="block text-[clamp(2.4rem,10vw,3.6rem)] text-[var(--text-muted)] lg:text-[2.6rem] xl:text-[3rem]">Olivier</span>
           <span className="sr-only"> — Full-Stack Software Engineer in Kigali, Rwanda, building AI systems</span>
         </motion.h1>
 
         <motion.p {...fade(0.16)} className="mt-5 flex min-h-6 items-center gap-2 font-mono text-sm">
-          <span className="text-[var(--accent)]">$</span>
-          <span className="text-[var(--text)]">{typedRole}</span>
+          <span className="text-[var(--accent)]" aria-hidden="true">$</span>
+          <span className="text-[var(--text)]" aria-hidden="true">{typedRole}</span>
+          <span className="sr-only">{labels.roleLines?.join(', ')}</span>
           <span className="typing-caret" aria-hidden="true" />
         </motion.p>
 
@@ -167,7 +169,7 @@ export default function HeroSection({ labels, language, setLanguage, theme, togg
                   >
                     <span className="w-5 font-mono text-xs text-[var(--text-muted)]">{String(i + 1).padStart(2, '0')}</span>
                     <span
-                      className={`h-px transition-all duration-300 ${
+                      className={`h-px transition-[width,background-color] duration-300 ${
                         isActive ? 'w-14 bg-[var(--text)]' : 'w-7 bg-[var(--border)] group-hover:w-12 group-hover:bg-[var(--text-muted)]'
                       }`}
                     />
@@ -196,7 +198,7 @@ export default function HeroSection({ labels, language, setLanguage, theme, togg
               target="_blank"
               rel="noreferrer"
               aria-label={label}
-              className="flex h-10 w-10 items-center justify-center rounded-full text-[var(--text-muted)] transition hover:bg-[var(--surface)] hover:text-[var(--text)]"
+              className="flex h-11 w-11 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:bg-[var(--surface)] hover:text-[var(--text)]"
             >
               <Icon size={17} aria-hidden="true" />
             </a>
