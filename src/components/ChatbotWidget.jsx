@@ -74,7 +74,7 @@ function BotAvatar({ size = 28 }) {
       style={{
         width: size,
         height: size,
-        border: '1px solid color-mix(in srgb,var(--brand-blue) 28%,var(--border))',
+        border: '1px solid var(--accent-line)',
       }}
     />
   )
@@ -177,8 +177,8 @@ export default function ChatbotWidget() {
             className="flex w-[min(92vw,360px)] flex-col overflow-hidden rounded-3xl"
             style={{
               background: 'var(--card)',
-              border: '1px solid color-mix(in srgb,var(--accent) 14%,var(--border))',
-              boxShadow: '0 24px 60px -16px rgba(0,0,20,0.45), 0 0 0 1px color-mix(in srgb,var(--accent) 5%,transparent)',
+              border: '1px solid var(--accent-line)',
+              boxShadow: 'var(--shadow-lg)',
               maxHeight: 'min(520px, 80vh)',
             }}
           >
@@ -186,18 +186,18 @@ export default function ChatbotWidget() {
             {/* Header */}
             <div
               className="relative flex items-center justify-between px-4 py-3.5"
-              style={{ background: 'linear-gradient(135deg, color-mix(in srgb,var(--accent) 16%,var(--card)), color-mix(in srgb,var(--accent-purple) 10%,var(--card)))' }}
+              style={{ background: 'var(--surface-2)' }}
             >
               {/* Top gradient line */}
               <div
                 className="absolute inset-x-0 top-0 h-px"
-                style={{ background: 'linear-gradient(90deg,transparent,color-mix(in srgb,var(--accent) 70%,transparent),color-mix(in srgb,var(--accent-purple) 60%,transparent),transparent)' }}
+                style={{ background: 'var(--line)' }}
               />
 
               <div className="flex items-center gap-3">
                 {/* Avatar with online ring */}
                 <div className="relative">
-                  <div className="rounded-full p-0.5" style={{ background: 'linear-gradient(135deg, var(--accent), var(--accent-purple))' }}>
+                  <div className="rounded-full p-0.5" style={{ background: 'var(--accent)' }}>
                     <div className="rounded-full p-0.5" style={{ background: 'var(--card)' }}>
                       <BotAvatar size={32} />
                     </div>
@@ -239,10 +239,10 @@ export default function ChatbotWidget() {
                     <div
                       className="max-w-[82%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-[1.75]"
                       style={msg.role === 'user' ? {
-                        background: 'linear-gradient(135deg, var(--accent), var(--accent-purple))',
+                        background: 'var(--accent)',
                         color: 'var(--accent-contrast)',
                         borderBottomRightRadius: 6,
-                        boxShadow: '0 4px 14px -4px color-mix(in srgb,var(--accent) 50%,transparent)',
+                        boxShadow: 'none',
                       } : {
                         background: 'var(--surface)',
                         color: 'var(--text-muted)',
@@ -299,9 +299,9 @@ export default function ChatbotWidget() {
                     background: 'var(--surface)',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'color-mix(in srgb,var(--accent) 35%,var(--border))'
+                    e.currentTarget.style.borderColor = 'var(--accent-line)'
                     e.currentTarget.style.color = 'var(--accent)'
-                    e.currentTarget.style.background = 'color-mix(in srgb,var(--accent) 6%,var(--surface))'
+                    e.currentTarget.style.background = 'var(--accent-soft)'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = 'var(--border)'
@@ -324,7 +324,7 @@ export default function ChatbotWidget() {
               <div
                 className="flex flex-1 items-center rounded-full px-1.5 py-1.5 transition-[background-color,border-color,box-shadow]"
                 style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
-                onFocusCapture={(e) => { e.currentTarget.style.borderColor = 'color-mix(in srgb,var(--accent) 45%,var(--border))'; e.currentTarget.style.boxShadow = '0 0 0 3px color-mix(in srgb,var(--accent) 10%,transparent)' }}
+                onFocusCapture={(e) => { e.currentTarget.style.borderColor = 'var(--accent-line)'; e.currentTarget.style.boxShadow = '0 0 0 3px var(--accent-soft)' }}
                 onBlurCapture={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.boxShadow = 'none' }}
               >
                 <input
@@ -344,10 +344,10 @@ export default function ChatbotWidget() {
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white transition"
                   style={{
                     background: input.trim()
-                      ? 'linear-gradient(135deg, var(--accent), var(--accent-purple))'
+                      ? 'var(--accent)'
                       : 'color-mix(in srgb, var(--text-muted) 18%, transparent)',
                     color: input.trim() ? 'var(--accent-contrast)' : 'var(--text-muted)',
-                    boxShadow: input.trim() ? '0 4px 14px -4px color-mix(in srgb,var(--accent) 60%,transparent)' : 'none',
+                    boxShadow: input.trim() ? 'none' : 'none',
                   }}
                 >
                   <FiSend size={13} />
@@ -367,19 +367,20 @@ export default function ChatbotWidget() {
         className="relative flex h-13 items-center gap-2.5 rounded-full px-4 py-3 text-sm font-semibold"
         style={{
           background: open
-            ? 'linear-gradient(135deg, var(--accent-purple), var(--accent))'
-            : 'linear-gradient(135deg, var(--accent), var(--accent-purple))',
+            ? 'var(--accent)'
+            : 'var(--accent)',
           color: 'var(--accent-contrast)',
-          boxShadow: '0 6px 24px -6px color-mix(in srgb,var(--accent) 65%,transparent)',
+          boxShadow: 'none',
         }}
       >
         {/* Pulse ring — only when closed */}
         {!open && (
           <motion.span
             className="absolute inset-0 rounded-full"
-            animate={{ scale: [1, 1.18, 1], opacity: [0.4, 0, 0.4] }}
+            initial={{ scale: 1, opacity: 0 }}
+            animate={{ scale: [1, 1.25], opacity: [0.5, 0] }}
             transition={{ duration: 2.4, repeat: 2, ease: 'easeInOut', delay: 1 }}
-            style={{ background: 'color-mix(in srgb,var(--accent) 40%,transparent)' }}
+            style={{ background: 'var(--accent-line)' }}
           />
         )}
 
@@ -408,7 +409,7 @@ export default function ChatbotWidget() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full text-[11px] font-black text-white"
-              style={{ background: '#EF4444' }}
+              style={{ background: 'var(--danger)' }}
             >
               {unread}
             </motion.span>

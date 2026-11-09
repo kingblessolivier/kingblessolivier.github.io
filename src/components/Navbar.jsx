@@ -99,15 +99,15 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
             background: 'color-mix(in srgb, var(--bg) 80%, transparent)',
             backdropFilter: 'blur(24px) saturate(1.8)',
             WebkitBackdropFilter: 'blur(24px) saturate(1.8)',
-            border: '1px solid color-mix(in srgb, var(--accent) 10%, var(--border))',
-            boxShadow: '0 8px 40px -12px rgba(0,0,20,0.35), 0 0 0 1px color-mix(in srgb,var(--accent) 5%,transparent)',
+            border: '1px solid var(--accent-line)',
+            boxShadow: 'var(--shadow-lg)',
           } : {}}
         >
           {/* Top accent line — only when scrolled */}
           {scrolled && (
             <div
               className="absolute inset-x-0 top-0 h-px"
-              style={{ background: 'linear-gradient(90deg,transparent,color-mix(in srgb,var(--accent) 55%,transparent) 40%,color-mix(in srgb,var(--accent-purple) 45%,transparent) 60%,transparent)' }}
+              style={{ background: 'var(--line)' }}
             />
           )}
 
@@ -120,8 +120,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                 whileTap={{ scale: 0.94 }}
                 className="relative h-9 w-9 overflow-hidden rounded-xl"
                 style={{
-                  border: '1px solid color-mix(in srgb,var(--brand-blue) 34%,var(--border))',
-                  boxShadow: '0 4px 16px -5px color-mix(in srgb,var(--brand-blue) 55%,transparent)',
+                  border: '1px solid var(--line)',
                 }}
               >
                 {/* The brand mark, not the portrait: a logo belongs in the chrome,
@@ -180,8 +179,8 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                           layoutId="nav-bg"
                           className="absolute inset-0 rounded-full"
                           style={{
-                            background: 'color-mix(in srgb, var(--accent) 10%, var(--card))',
-                            border: '1px solid color-mix(in srgb,var(--accent) 20%,var(--border))',
+                            background: 'var(--accent-soft)',
+                            border: '1px solid var(--accent-line)',
                           }}
                           transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                         />
@@ -320,8 +319,8 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                     <div
                       className="relative h-11 w-11 overflow-hidden rounded-xl"
                       style={{
-                        border: '1px solid color-mix(in srgb,var(--accent) 30%,var(--border))',
-                        boxShadow: '0 8px 22px -8px color-mix(in srgb,var(--accent) 45%,transparent)',
+                        border: '1px solid var(--accent-line)',
+                        boxShadow: 'none',
                       }}
                     >
                       <img
@@ -374,9 +373,9 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                         onClick={() => scrollTo(id)}
                         className="group flex w-full items-center gap-3 rounded-xl px-2.5 py-2.5 text-left transition-colors duration-200"
                         style={{
-                          background: active ? 'color-mix(in srgb,var(--accent) 9%,var(--surface))' : 'transparent',
+                          background: active ? 'var(--accent-soft)' : 'transparent',
                           border: active
-                            ? '1px solid color-mix(in srgb,var(--accent) 22%,var(--border))'
+                            ? '1px solid var(--accent-line)'
                             : '1px solid transparent',
                         }}
                       >
@@ -386,7 +385,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                             background: active ? 'var(--accent)' : 'var(--surface)',
                             color: active ? 'var(--accent-contrast)' : 'var(--text-muted)',
                             border: '1px solid var(--border)',
-                            boxShadow: active ? '0 6px 16px -6px color-mix(in srgb,var(--accent) 55%,transparent)' : 'none',
+                            boxShadow: active ? 'none' : 'none',
                           }}
                         >
                           <Icon size={15} />

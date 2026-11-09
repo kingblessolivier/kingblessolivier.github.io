@@ -252,7 +252,7 @@ export default function ProjectsSection({
               {/* Divider accent */}
               <div
                 className="mb-6 h-0.5 rounded-full"
-                style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent-purple), transparent)' }}
+                style={{ background: 'var(--line)' }}
               />
 
               <div className="grid gap-5 text-sm leading-7 text-[var(--text-muted)]">
