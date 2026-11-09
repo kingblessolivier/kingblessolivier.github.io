@@ -91,11 +91,12 @@ function EducationCard({ item, language, text }) {
         </div>
         <div className="h-1.5 overflow-hidden rounded-full bg-[var(--border)]">
           <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: `${progress}%` }}
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: progress / 100 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-            className="h-full rounded-full bg-[var(--accent)]"
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+            style={{ transformOrigin: 'left' }}
+            className="h-full w-full rounded-full bg-[var(--accent)]"
           />
         </div>
         <div className="mt-2 flex justify-between font-mono text-xs text-[var(--text-muted)]">

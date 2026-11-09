@@ -133,7 +133,7 @@ export default function GitHubStats() {
                 {data.topLanguages.map((l) => (
                   <span key={l.lang} className="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
                     <span className="h-2 w-2 rounded-full" style={{ background: colorFor(l.lang) }} />
-                    {l.lang} <span className="text-[var(--text-muted)] opacity-60">{l.pct}%</span>
+                    {l.lang} <span className="text-[var(--text-muted)]">{l.pct}%</span>
                   </span>
                 ))}
               </div>

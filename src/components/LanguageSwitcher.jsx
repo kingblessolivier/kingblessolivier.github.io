@@ -59,7 +59,7 @@ export default function LanguageSwitcher({ language, setLanguage, upward = false
         whileTap={{ scale: 0.95 }}
         aria-haspopup="listbox"
         aria-expanded={open}
-        className="flex items-center gap-2 rounded-xl border px-2.5 py-1.5 transition-all"
+        className="flex min-h-11 items-center gap-2 rounded-xl border px-2.5 py-1.5 transition-[background-color,border-color,box-shadow]"
         style={{
           background: open
             ? 'color-mix(in srgb, var(--accent) 8%, var(--surface))'
@@ -134,7 +134,7 @@ export default function LanguageSwitcher({ language, setLanguage, upward = false
                     role="option"
                     aria-selected={active}
                     onClick={() => select(lang.code)}
-                    className="flex w-full items-center gap-3 rounded-xl px-2 py-2 text-left transition-all"
+                    className="flex w-full items-center gap-3 rounded-xl px-2 py-2 text-left transition-colors"
                     style={{
                       background: active
                         ? 'color-mix(in srgb,var(--accent) 10%,var(--surface))'
@@ -177,8 +177,8 @@ export default function LanguageSwitcher({ language, setLanguage, upward = false
                     {/* Active check */}
                     {active && (
                       <motion.span
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
                         transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                         className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full"
                         style={{

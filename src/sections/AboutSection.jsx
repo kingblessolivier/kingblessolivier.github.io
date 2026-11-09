@@ -89,14 +89,14 @@ export default function AboutSection({ language, navLabels, sectionText }) {
           </motion.figure>
 
           {/* Stats */}
-          <motion.div {...rise(0.14)} className="bento-card group grid grid-cols-3 p-7">
+          <motion.div {...rise(0.14)} className="bento-card group grid grid-cols-[repeat(3,auto)] justify-between gap-3 p-6">
             {statItems.map(({ label, value }, i) => (
               <div
                 key={label}
-                className={`relative z-10 flex flex-col gap-2 ${i > 0 ? 'border-l border-[var(--border)] pl-4' : ''}`}
+                className={`relative z-10 flex flex-col gap-2 ${i > 0 ? 'border-l border-[var(--border)] pl-3' : ''}`}
               >
                 <span className="stat-figure">{value}</span>
-                <span className="text-xs text-[var(--text-muted)]">{label}</span>
+                <span className="max-w-[5.5rem] text-xs leading-snug text-[var(--text-muted)]">{label}</span>
               </div>
             ))}
           </motion.div>

@@ -93,9 +93,9 @@ export default function GitHubHeatmap() {
                   key={di}
                   onMouseEnter={() => setHovered(cell)}
                   onMouseLeave={() => setHovered(null)}
-                  className={`h-[10px] w-[10px] rounded-[2px] transition-all duration-150 cursor-default ${
+                  className={`heat-cell h-[10px] w-[10px] rounded-[2px] cursor-default ${
                     LEVEL_STYLE[cell.level] ?? LEVEL_STYLE[0]
-                  } ${hovered?.date === cell.date ? 'scale-125 ring-1 ring-[var(--accent)]' : ''}`}
+                  } ${hovered?.date === cell.date ? 'is-hovered' : ''}`}
                 />
               ))}
             </div>

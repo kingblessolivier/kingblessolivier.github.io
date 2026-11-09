@@ -111,10 +111,10 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
             />
           )}
 
-          <div className={`flex items-center justify-between transition-all duration-300 ${scrolled ? 'h-12 px-4' : 'h-16 container-shell'}`}>
+          <div className={`flex items-center justify-between transition-[height,padding] duration-300 ${scrolled ? 'h-12 px-4' : 'h-16 container-shell'}`}>
 
             {/* ── Logo ── */}
-            <button onClick={() => scrollTo('home')} aria-label="Home" className="group flex items-center gap-2.5 shrink-0">
+            <button onClick={() => scrollTo('home')} aria-label="Home" className="group -m-1 flex min-h-11 min-w-11 items-center justify-center gap-2.5 shrink-0 p-1">
               <motion.div
                 whileHover={{ scale: 1.06 }}
                 whileTap={{ scale: 0.94 }}
@@ -372,7 +372,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.24, delay: 0.04 + i * 0.035, ease: [0.22, 1, 0.36, 1] }}
                         onClick={() => scrollTo(id)}
-                        className="group flex w-full items-center gap-3 rounded-xl px-2.5 py-2.5 text-left transition-all duration-200"
+                        className="group flex w-full items-center gap-3 rounded-xl px-2.5 py-2.5 text-left transition-colors duration-200"
                         style={{
                           background: active ? 'color-mix(in srgb,var(--accent) 9%,var(--surface))' : 'transparent',
                           border: active
@@ -381,7 +381,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                         }}
                       >
                         <span
-                          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-all duration-200"
+                          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-colors duration-200"
                           style={{
                             background: active ? 'var(--accent)' : 'var(--surface)',
                             color: active ? 'var(--accent-contrast)' : 'var(--text-muted)',

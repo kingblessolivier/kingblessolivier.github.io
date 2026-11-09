@@ -19,10 +19,10 @@ architecture, engineering role, challenges and impact written out.
 
 | Project | What it does | Stack |
 | --- | --- | --- |
+| [TalentAI](https://nsolivier.me/projects/talentai/) | AI hiring platform that screens, ranks and answers candidates with a Gemini pipeline | Next.js, TypeScript, Node.js, MongoDB, Google Gemini |
 | [FrameAfrica](https://nsolivier.me/projects/frameafrica/) | Digital newspaper platform delivering AI-assisted news coverage across Rwanda and Africa | Next.js, NestJS, PostgreSQL, Redis, Kubernetes |
-| [MedLink System](https://nsolivier.me/projects/medlink-system/) | Lets patients book doctor appointments and find nearby hospitals without queueing | React, Django, PostgreSQL, Maps API |
-| [Candidate Screening System](https://nsolivier.me/projects/candidate-screening-system/) | AI-powered HR recruitment automation and candidate evaluation | Python, Django, AI/ML |
-| [AI Profile Screening System](https://nsolivier.me/projects/ai-profile-screening-system/) | Machine learning system that analyses and ranks candidate profiles | Python, Machine Learning |
+| [MediLink Rwanda](https://nsolivier.me/projects/medilink-rwanda/) | Find a facility that accepts your insurance, book or join the queue remotely, and follow your turn; facilities run the whole visit electronically | Django REST, PostgreSQL, React, TypeScript, Flutter |
+| [Urugwiro](https://nsolivier.me/projects/urugwiro/) | Real-estate platform: property discovery, sellers, CRM, finances and private document signing, with an AI assistant | Django REST, React, TypeScript, PostgreSQL |
 | [CineRec](https://nsolivier.me/projects/cinerec/) | Movie recommendation system with machine learning and dashboards | Python, Django, ML |
 | [Property Management System](https://nsolivier.me/projects/property-management-system/) | Manages tenants, rent and property records | Django, PostgreSQL |
 | [Citizen Engagement System](https://nsolivier.me/projects/citizen-engagement-system/) | Connects citizens with public services and feedback channels | Django, REST API |

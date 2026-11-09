@@ -27,8 +27,9 @@ them — with React, Next.js, Django, NestJS and machine learning.
 | Project | What it does |
 | --- | --- |
 | **[FrameAfrica](https://nsolivier.me/projects/frameafrica/)** | Digital newspaper platform delivering AI-assisted news coverage across Rwanda and Africa. Next.js, NestJS, PostgreSQL, Redis, Kubernetes. |
-| **[MedLink System](https://nsolivier.me/projects/medlink-system/)** | Patients book doctor appointments and find nearby hospitals without queueing. React, Django, PostgreSQL, Maps API. |
-| **[Candidate Screening System](https://nsolivier.me/projects/candidate-screening-system/)** | AI-powered HR recruitment automation and candidate evaluation. Python, Django, ML. |
+| **[MediLink Rwanda](https://nsolivier.me/projects/medilink-rwanda/)** | Find a facility that accepts your insurance, book or join the queue remotely, follow your turn. Django, PostgreSQL, React, Flutter. |
+| **[TalentAI](https://nsolivier.me/projects/talentai/)** | AI hiring platform that screens and ranks candidates with a Gemini pipeline. Next.js, TypeScript, MongoDB. |
+| **[Urugwiro](https://nsolivier.me/projects/urugwiro/)** | Real-estate platform with CRM, private document signing and an AI assistant. Django, React, TypeScript. |
 | **[CineRec](https://nsolivier.me/projects/cinerec/)** | Movie recommendation engine with dashboards. Python, Django, ML. |
 
 Every project on the portfolio is written up as a case study — the problem, the

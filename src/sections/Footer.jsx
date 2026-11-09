@@ -33,7 +33,7 @@ export default function Footer() {
               target="_blank"
               rel="noreferrer"
               aria-label={label}
-              className="flex h-10 w-10 items-center justify-center rounded-full text-[var(--text-muted)] transition hover:bg-[var(--surface)] hover:text-[var(--text)]"
+              className="flex h-11 w-11 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:bg-[var(--surface)] hover:text-[var(--text)]"
             >
               <Icon size={16} aria-hidden="true" />
             </a>
@@ -41,7 +41,7 @@ export default function Footer() {
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="ml-2 inline-flex min-h-10 items-center gap-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface-1)] px-4 text-sm font-medium text-[var(--text-muted)] transition hover:border-[var(--line-strong)] hover:text-[var(--text)]"
+            className="ml-2 inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface-1)] px-4 text-sm font-medium text-[var(--text-muted)] transition hover:border-[var(--line-strong)] hover:text-[var(--text)]"
           >
             <FiArrowUp size={14} />
             Top
