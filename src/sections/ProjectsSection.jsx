@@ -95,10 +95,10 @@ export default function ProjectsSection({
             return (
               <motion.article
                 key={project.name}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: index * 0.06 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.06 }}
                 className={lead ? '@xl:col-span-2' : ''}
               >
                 <div className={`bento-card bento-card--featured group flex h-full flex-col ${lead ? 'p-7 @xl:p-8' : 'p-6'}`}>
@@ -176,7 +176,7 @@ export default function ProjectsSection({
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: index * 0.04 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.04 }}
                 className="group relative"
               >
                 <div className="grid items-center gap-x-6 gap-y-1 py-4 @3xl:grid-cols-[2.5rem_minmax(0,1fr)_minmax(0,1.4fr)_auto]">

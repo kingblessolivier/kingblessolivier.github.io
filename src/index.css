@@ -367,6 +367,14 @@ h1, h2, h3 {
   font-family: var(--font-sans);
 }
 
+.section-header-mask {
+  /* Clips the title while it rises into place; the small bottom pad keeps
+     descenders (g, j, p) from being cut once it has settled. */
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
 .section-header-title {
   font-size: clamp(2rem, 3.4vw, 2.75rem);
   font-weight: 650;
@@ -706,6 +714,37 @@ h1, h2, h3 {
   background: var(--accent);
   box-shadow: none;
   transition: width 0.1s linear;
+}
+/* Where the browser can tie an animation to the scroll position, the bar is
+   driven by it directly — no scroll listener, no re-render per frame, and it
+   tracks the scrollbar exactly. Elsewhere ScrollProgress sets the width. */
+@supports (animation-timeline: scroll()) {
+  .scroll-progress-bar.is-scroll-driven {
+    width: 100% !important;
+    transform-origin: 0 50%;
+    transition: none;
+    animation: scroll-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes scroll-progress {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  /* The dot grid drifts a little slower than the content: a quiet sense of
+     depth as the page moves, not a parallax effect you notice as such. */
+  body::before {
+    bottom: -160px;
+    animation: grid-drift linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes grid-drift {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(0, -160px, 0); }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; bottom: 0; }
 }
 
 /* ═══════════════════════════════════════════════════════

@@ -37,10 +37,10 @@ export default function AwardsSection({ navLabels, sectionText, language, onOpen
               return (
                 <motion.article
                   key={award.title.EN}
-                  initial={{ opacity: 0, y: 18 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.06 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.06 }}
                   className="bento-card bento-card--featured group flex flex-col p-7 @xl:p-8"
                 >
                   <div className="relative z-10 flex items-start justify-between gap-4">
@@ -80,10 +80,10 @@ export default function AwardsSection({ navLabels, sectionText, language, onOpen
 
           {/* Certificates — one row each */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: 0.06 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.06 }}
             className="bento-card group flex @3xl:self-start"
           >
             <ul className="relative z-10 flex w-full flex-col divide-y divide-[var(--border)]">

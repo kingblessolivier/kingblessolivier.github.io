@@ -33,10 +33,10 @@ export default function GallerySection({ navLabels, sectionText, language }) {
           {galleryImages.map((item, index) => (
             <motion.figure
               key={`${item.title.EN}-${item.image}`}
-              initial={{ opacity: 0, y: 14 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.05 }}
               className="group relative w-[78%] shrink-0 snap-start overflow-hidden rounded-xl border border-[var(--border)] @xl:w-auto"
             >
               <button

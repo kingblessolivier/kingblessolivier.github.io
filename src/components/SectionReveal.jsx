@@ -1,16 +1,12 @@
-import { motion } from 'framer-motion'
-
+/**
+ * A plain section. The section itself no longer fades in: its header and its
+ * cards each reveal on their own, and fading the whole block as well stacked
+ * two or three entrances on the same pixels.
+ */
 export default function SectionReveal({ id, children, className = '' }) {
   return (
-    <motion.section
-      id={id}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
-    >
+    <section id={id} className={className}>
       {children}
-    </motion.section>
+    </section>
   )
 }
