@@ -4,10 +4,11 @@ import SectionHeader from '../components/SectionHeader'
 import GitHubHeatmap from '../components/GitHubHeatmap'
 import GitHubStats from '../components/GitHubStats'
 import { skills } from '../assets/data'
-import { FiCode, FiServer, FiDatabase, FiCpu, FiPackage, FiTool, FiUsers } from 'react-icons/fi'
+import { FiCode, FiServer, FiDatabase, FiCpu, FiPackage, FiTool, FiUsers, FiSmartphone } from 'react-icons/fi'
 import {
   SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiPython, SiDjango,
   SiPostgresql, SiMysql, SiMongodb, SiGithub, SiVercel, SiDotnet, SiGnubash,
+  SiFlutter, SiDart,
 } from 'react-icons/si'
 
 /* Category order, icon and one-line description */
@@ -17,6 +18,7 @@ const CATEGORY_META = {
   'AI/ML':      { icon: FiCpu,      desc: 'Screening, ranking and recommendation models' },
   Database:     { icon: FiDatabase, desc: 'Modelling, querying and storage' },
   DevOps:       { icon: FiPackage,  desc: 'Shipping and running it' },
+  Mobile:       { icon: FiSmartphone, desc: 'Cross-platform apps' },
   Other:        { icon: FiTool,     desc: 'Languages and scripting' },
   Professional: { icon: FiUsers,    desc: 'How I work with people' },
 }
@@ -34,7 +36,9 @@ const SKILL_ICONS = {
   MongoDB: SiMongodb,
   'Git/GitHub': SiGithub,
   'Vercel/Render': SiVercel,
-  'C#': SiDotnet,
+  '.NET': SiDotnet,
+  Flutter: SiFlutter,
+  Dart: SiDart,
   Batchfile: SiGnubash,
 }
 

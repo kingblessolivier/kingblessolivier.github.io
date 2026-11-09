@@ -507,8 +507,13 @@ export const portfolioData = {
       { name: 'Vercel/Render', level: 84 },
       { name: 'AWS Fundamentals', level: 70 },
     ],
+    mobile: [
+      { name: 'Flutter', level: 76 },
+      { name: 'Dart', level: 74 },
+    ],
     other: [
       { name: 'C#', level: 72 },
+      { name: '.NET', level: 70 },
       { name: 'PowerShell', level: 74 },
       { name: 'Batchfile', level: 68 },
     ],
@@ -1038,6 +1043,7 @@ export const skills = {
   Database: portfolioData.skills.databases,
   'AI/ML': portfolioData.skills.ai_ml,
   DevOps: portfolioData.skills.devops,
+  Mobile: portfolioData.skills.mobile,
   Other: portfolioData.skills.other,
   Professional: portfolioData.skills.professional,
 }
