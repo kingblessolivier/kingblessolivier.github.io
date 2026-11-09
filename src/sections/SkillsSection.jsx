@@ -74,10 +74,10 @@ export default function SkillsSection({ navLabels, sectionText }) {
 
         {/* One card, a row per category */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.45 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="bento-card group mb-6"
         >
           <dl className="relative z-10 divide-y divide-[var(--border)]">

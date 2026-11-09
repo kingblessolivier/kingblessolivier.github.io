@@ -128,7 +128,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                     own dark field, so it is set as a tile rather than a free
                     glyph — that way it reads on the light theme too. */}
                 <img
-                  src="/logo-128.webp"
+                  src="/logo-128.webp?v=2"
                   alt="Nsengimana Olivier"
                   className="h-full w-full object-cover"
                   width="36"
@@ -324,7 +324,7 @@ export default function Navbar({ navLabels, language, setLanguage, toggleTheme, 
                       }}
                     >
                       <img
-                        src="/logo-128.webp"
+                        src="/logo-128.webp?v=2"
                         alt="NSENGIMANA Olivier"
                         className="h-full w-full object-cover"
                         loading="lazy"

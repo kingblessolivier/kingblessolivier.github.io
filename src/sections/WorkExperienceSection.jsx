@@ -21,10 +21,10 @@ function initials(name) {
 function CompanyGroup({ group, index, language }) {
   return (
     <motion.li
-      initial={{ opacity: 0, y: 18 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.45, delay: index * 0.08 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
       className="relative pl-16"
     >
       {/* Company mark sits on the rail */}
@@ -62,10 +62,10 @@ function EducationCard({ item, language, text }) {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 18 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: 0.1 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
       className="bento-card bento-card--featured group p-7"
     >
       <div className="relative z-10 flex items-center justify-between">

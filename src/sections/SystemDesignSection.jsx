@@ -20,10 +20,10 @@ export default function SystemDesignSection({ sectionText }) {
 
         {/* One card: the three layers on top, the request lifecycle beneath */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.45 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="bento-card group"
         >
           <div className="relative z-10 grid divide-y divide-[var(--border)] @3xl:grid-cols-3 @3xl:divide-x @3xl:divide-y-0">
